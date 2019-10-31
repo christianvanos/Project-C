@@ -1,8 +1,8 @@
-@php
+{{-- @php
     if ($pageSlug ?? '' == '') {
         $pageSlug = 'dashboard';
     }
-@endphp
+@endphp --}}
 
 <div class="sidebar" data="blue">
     <div class="sidebar-wrapper">
@@ -21,6 +21,24 @@
                 <a href="{{ route('pages.scrumboard') }}">
                     <i class="tim-icons icon-components"></i>
                     <p>{{ __('Scrumboard') }}</p>
+                </a>
+            </li>
+            <li>
+                <a href="/projects">
+                    <i class="tim-icons icon-bullet-list-67"></i>
+                    <p> {{ __('Projects') }}</p>
+                </a>
+            </li>
+            <li>
+                <a href="/userprojects">
+                    <i class="tim-icons icon-image-02"></i>
+                    <p> {{ __('Users Projects') }}</p>
+                </a>
+            </li>
+            <li>
+                <a href="/charts">
+                    <i class="tim-icons icon-chart-pie-36"></i>
+                    <p> {{ __('Chart') }}</p>
                 </a>
             </li>
             <li>
@@ -47,7 +65,7 @@
                     </ul>
                 </div>
             </li>
-            <li @if ($pageSlug == 'icons') class="active " @endif>
+            {{-- <li @if ($pageSlug == 'icons') class="active " @endif>
                 <a href="{{ route('pages.icons') }}">
                     <i class="tim-icons icon-atom"></i>
                     <p>{{ __('Icons') }}</p>
@@ -88,7 +106,7 @@
                     <i class="tim-icons icon-spaceship"></i>
                     <p>{{ __('Upgrade to PRO') }}</p>
                 </a>
-            </li>
+            </li> --}}
         </ul>
     </div>
 </div>
