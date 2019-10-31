@@ -1,0 +1,75 @@
+.task-board {
+    background: #2c7cbc;
+    font-family: Arial;
+    display: inline-block;
+    padding: 12px;
+    border-radius: 3px;
+    white-space: nowrap;
+    min-height: 300px;
+    width: 100%;
+    min-height: 150px;
+    overflow-x: auto;
+}
+.status-card {
+    width: 250px;
+    margin-right: 8px;
+    background: #e2e4e6;
+    border-radius: 3px;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 0.9em;
+}
+.status-card .card-header .card-title {
+    font-size: 1.2em;
+    color: black;
+}
+
+.status-card .card-footer .card-title {
+    color :#5e6c84;
+    font-size: 1em;
+    margin-bottom: 0px;
+}
+
+.status-card .card-footer .card-title button {
+    color :#5e6c84;
+    font-size: 1em;
+}
+
+
+.status-card .card-footer {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0px;
+        padding-bottom: 0px;
+}
+ul.sortable li:last-child {
+    margin-bottom: 0px;
+}
+ul.sortable {
+    padding-bottom: 15px;
+}
+
+.text-row {
+    padding: 15px 10px;
+    margin: 10px;
+    margin-bottom: 10px;
+    color: black;
+    background: #fff;
+    box-sizing: border-box;
+    border-radius: 3px;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+    font-size: 1em;
+    white-space: normal;
+    line-height: 20px;
+}
+
+.modal.show .modal-dialog {
+    transform: none;
+    -webkit-transform: none;
+}
