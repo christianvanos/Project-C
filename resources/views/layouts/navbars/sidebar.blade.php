@@ -1,6 +1,6 @@
 {{-- @php
-    if ($pageSlug ?? '' == '') {
-        $pageSlug = 'dashboard';
+    if (!isset($pageSlug)) {
+        $pageSlug = '';
     }
 @endphp --}}
 

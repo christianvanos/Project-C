@@ -23,8 +23,8 @@ class UserstoriesTableSeeder extends Seeder
 
         DB::table('userstories')->insert([
             'id' => 2,
-            'description' => 'foo bar',
-            'acceptance_criteria' => ' foo bar',
+            'description' => 'foo bar1',
+            'acceptance_criteria' => ' foo bar1',
             'status' => 'testing',
             'projects_id' => App\Projects::find(1)->id,
             'created_at' => now(),
@@ -33,8 +33,8 @@ class UserstoriesTableSeeder extends Seeder
 
         DB::table('userstories')->insert([
             'id' => 3,
-            'description' => 'foo bar',
-            'acceptance_criteria' => ' foo bar',
+            'description' => 'foo bar2',
+            'acceptance_criteria' => ' foo bar2',
             'status' => 'doing',
             'projects_id' => App\Projects::find(1)->id,
             'created_at' => now(),
