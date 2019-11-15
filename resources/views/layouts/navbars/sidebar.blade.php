@@ -18,7 +18,7 @@
                 </a>
             </li>
             <li @if ($pageSlug == 'scrumboard') class="active" @endif>
-                <a href="{{ route('pages.scrumboard') }}">
+                <a href="/scrumboard">
                     <i class="tim-icons icon-components"></i>
                     <p>{{ __('Scrumboard') }}</p>
                 </a>

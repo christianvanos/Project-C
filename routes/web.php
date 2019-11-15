@@ -24,6 +24,7 @@ Route::get('/dashboard', 'HomeController@index')->name('home')
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 
 Route::group(['middleware' => 'auth'], function () {
+	Route::get('scrumboard/{project_id?}/{sprint_id?}', 'ScrumboardController@scrumboard_page')->middleware('project');
 	Route::post('/scrumboard/itemmoved', 'ScrumboardController@userstory_item_moved');
 	Route::post('/scrumboard/itemadded', 'ScrumboardController@userstory_item_added');
 	Route::post('/scrumboard/backlogmoved', 'ScrumboardController@backlog_moved')->middleware('backlog');
@@ -42,7 +43,6 @@ Route::delete('/projects/{project}', 'ProjectsController@destroy');
 
 Route::group(['middleware' => 'auth'], function () {
 		Route::get('icons', ['as' => 'pages.icons', 'uses' => 'PageController@icons']);
-		Route::get('scrumboard/{project_id?}/{sprint_id?}', ['as' => 'pages.scrumboard', 'uses' => 'PageController@scrumboard'])->middleware('project');
 		Route::get('maps', ['as' => 'pages.maps', 'uses' => 'PageController@maps']);
 		Route::get('notifications', ['as' => 'pages.notifications', 'uses' => 'PageController@notifications']);
 		Route::get('rtl', ['as' => 'pages.rtl', 'uses' => 'PageController@rtl']);

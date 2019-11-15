@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Backlogs;
+use App\Project_Members;
+use App\Sprints;
+use App\Projects;
+use App\Userstories;
 use App\Userstory_Items;
 
 class ScrumboardController extends Controller
@@ -47,5 +51,26 @@ class ScrumboardController extends Controller
         $item->definition_of_done = $request->definition_of_done;
         $item->backlog_id = $request->backlog_id;
         $item->save();
+    }
+
+    public function scrumboard_page($project_id = null, $sprint_id = null) {
+        if (!$project_id) { $project_id = Project_Members::where('user_id', '=', auth()->user()->id)->pluck('projects_id')->first(); }         
+        if (!$sprint_id) { $sprint_id = Sprints::where('projects_id', '=', $project_id)->pluck('id')->first(); }
+
+        $backlogs = Backlogs::where('sprints_id', $sprint_id)->orderBy('order')->get();
+        $userstory_items = Userstory_Items::whereIn('backlog_id', $backlogs->pluck('id'))->get();
+
+        $project = Projects::find($project_id);
+        $sprint = Sprints::find($sprint_id);
+        $all_sprints = Sprints::where('projects_id', '=', $project_id)->get();
+        $all_userstories = Userstories::where('projects_id', '=', $project_id)->get();
+
+        return view('pages.scrumboard', 
+                    ['backlogs' => $backlogs, 
+                    'userstory_items' => $userstory_items, 
+                    "project" => $project, 
+                    "current_sprint" => $sprint,
+                    "all_sprints" => $all_sprints,
+                    "userstories" => $all_userstories]);
     }
 }
