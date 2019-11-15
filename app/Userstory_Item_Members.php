@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Userstory_Item_tasks extends Model
+class Userstory_Item_Members extends Model
 {
-    protected $table = "userstory_item_tasks";
+    protected $table = "userstory_item_members";
 
     public function userstory_item()
     {

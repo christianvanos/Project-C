@@ -17,7 +17,6 @@ class CreateUserstoryItemsTable extends Migration
             $table->increments('id');
             $table->text('description');
             $table->string('moscow');
-            $table->string('status');
             $table->text('definition_of_done');
             $table->integer('story_points');
             $table->integer('backlog_id')->unsigned();

@@ -13,15 +13,13 @@ class CreateUserstoryItemTasksTable extends Migration
      */
     public function up()
     {
-        Schema::create('userstory_item_tasks', function (Blueprint $table) {
+        Schema::create('userstory_item_members', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->text('description');
-            $table->string('status');
             $table->integer('member_id')->unsigned();
+            $table->integer('userstory_item_id')->unsigned();
             $table->timestamps();
             $table->foreign('member_id')->references('id')->on('project_members')
             ->onDelete('cascade');
-            $table->integer('userstory_item_id')->unsigned();
             $table->foreign('userstory_item_id')->references('id')->on('userstory_items')
             ->onDelete('cascade');
         });
@@ -34,6 +32,6 @@ class CreateUserstoryItemTasksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('userstory_item_tasks');
+        Schema::dropIfExists('userstory_item_members');
     }
 }

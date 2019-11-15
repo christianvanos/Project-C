@@ -30,7 +30,7 @@
                         @foreach($backlogs as $backlog)
                             <div class="status-card ui-sortable-handle" style="cursor: pointer;" data-backlog-id="{{ $backlog->id }}">
                                 <div class="card-header">
-                                    <h5 class="card-title">{{ $backlog->name }}</h5>                                    
+                                <h5 class="card-title">{{ $backlog->name }} <span class="badge @if($backlog->label == "todo") badge-danger @elseif($backlog->label == "done") badge-success @else badge-info @endif ">{{ $backlog->label }}</span></h5>                                    
                                 </div>
                                 <ul class="backlog sortable ui-sortable" id="sort_item">
                                     @foreach ($userstory_items as $item)
@@ -38,7 +38,7 @@
                                             <li class="text-row ui-sortable-handle" data-item-id="{{$item->id}}">
                                                 <fieldset>
                                                     <legend>{{ $item->description }}</legend>
-                                                    Test data
+                                                    {{$item->story_points}} story-points
                                                 </fieldset>
                                             </li>
                                         @endif

@@ -16,7 +16,6 @@ class CreateUserstoriesTable extends Migration
         Schema::create('userstories', function (Blueprint $table) {
             $table->increments('id');
             $table->text('acceptance_criteria');
-            $table->string('status');
             $table->string('description');
             $table->integer('projects_id')->unsigned();
             $table->timestamps();

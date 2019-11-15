@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             ProjectMembersRolesTableSeeder::class,
             UserstoriesTableSeeder::class,
             UserstoryItemsTableSeeder::class,
-            UserstoryItemTasksTableSeeder::class,
+            UserstoryItemMembers::class,
             SprintMeetingPresentTableSeeder::class,
             SprintMeetingTableSeeder::class,
         ]);

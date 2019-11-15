@@ -18,18 +18,18 @@ class ScrumboardController extends Controller
         $sprint_id = $request->sprint_id;
         $new_index = $request->index;
         $order = null;
-
+        
         $max_index = Backlogs::where('sprints_id', $sprint_id)->orderBy('order')->count() - 1;
 
         if ($new_index == 0) {
-            $backlogs = Backlogs::where('sprints_id', $sprint_id)->orderBy('order')->first();
-            $order = $backlogs->order / 2;
+            $backlog = Backlogs::where('sprints_id', $sprint_id)->where('id', '!=', $backlog_id)->orderBy('order')->first();
+            $order = $backlog->order / 2;
         } elseif ($new_index == $max_index) { 
-            $backlogs = Backlogs::where('sprints_id', $sprint_id)->orderBy('order', 'desc')->first();
-            $order = $backlogs->order + 1;
+            $backlog = Backlogs::where('sprints_id', $sprint_id)->where('id', '!=', $backlog_id)->orderBy('order', 'desc')->first();
+            $order = $backlog->order + 1;
         } else {
-            $backlogs = Backlogs::where('sprints_id', $sprint_id)->orderBy('order')->skip($new_index - 1)->take(2)->get();
-            $order = array_sum($backlogs->pluck('order')->toArray()) / 2;
+            $backlogs = Backlogs::where('sprints_id', $sprint_id)->where('id', '!=', $backlog_id)->orderBy('order')->skip($new_index - 1)->take(2)->get();
+            $order = (array_sum($backlogs->pluck('order')->toArray()) / 2);
         }
 
         Backlogs::where('id', $backlog_id)->update(['order' => $order]);
@@ -46,7 +46,6 @@ class ScrumboardController extends Controller
         $item->description = $request->description;
         $item->moscow = $request->moscow;
         $item->userstory_id = $request->userstory_id;
-        $item->status = "to do";
         $item->story_points = $request->points;
         $item->definition_of_done = $request->definition_of_done;
         $item->backlog_id = $request->backlog_id;

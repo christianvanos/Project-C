@@ -18,8 +18,8 @@ class Userstory_Items extends Model
         return $this->belongsTo(Userstories::class);
     }
 
-    public function userstory_item_tasks()
+    public function userstory_item_members()
     {
-        return $this->hasMany(Userstory_Item_tasks::class);
+        return $this->hasMany(Userstory_Item_members::class);
     }    
 }

@@ -59,6 +59,10 @@ ul.sortable {
     padding-bottom: 15px;
 }
 
+span.badge {
+    float: right;
+}
+
 .text-row {
     padding: 15px 10px;
     margin: 10px;
