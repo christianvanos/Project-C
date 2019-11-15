@@ -16,10 +16,7 @@ class PageController extends Controller
         if (!$project_id) { $project_id = Project_Members::where('user_id', '=', auth()->user()->id)->pluck('projects_id')->first(); }         
         if (!$sprint_id) { $sprint_id = Sprints::where('projects_id', '=', $project_id)->pluck('id')->first(); }
 
-        $backlogs = \App\Backlogs::whereHas('sprints', function($query) use($sprint_id) {
-            $query->where('id', '=', $sprint_id);
-        })->get();
-
+        $backlogs = \App\Backlogs::where('sprints_id', $sprint_id)->orderBy('order')->get();
         $userstory_items = Userstory_Items::whereIn('backlog_id', $backlogs->pluck('id'))->get();
 
         $project = Projects::find($project_id);

@@ -1,10 +1,10 @@
 $( function() {
     var url = '/scrumboard/itemmoved';
-    $('ul[id^="sort"]').sortable({
-        connectWith: ".sortable",
+    $('ul#sort_item').sortable({
+        connectWith: ".backlog",
         receive: function (e, ui) {
-            var status_id = $(ui.item).parent(".sortable").data("status-id");
-            var task_id = $(ui.item).data("task-id");
+            var backlog_id = $(ui.item).parent().parent().data("backlog-id");
+            var item_id = $(ui.item).data("item-id");
             
             $.ajaxSetup({
                 headers: {
@@ -13,10 +13,10 @@ $( function() {
             });
 
             $.post(url, {
-                backlog_id: status_id,
-                user_story_id: task_id
+                backlog_id: backlog_id,
+                user_story_id: item_id
             });
             }
     
     }).disableSelection();
-    } );
+} );

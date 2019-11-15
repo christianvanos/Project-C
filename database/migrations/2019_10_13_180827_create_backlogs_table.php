@@ -17,6 +17,8 @@ class CreateBacklogsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->boolean('is_product_backlog');
+            $table->double('order');
+            $table->string('label');
             $table->integer('sprints_id')->unsigned();
             $table->timestamps();
             $table->foreign('sprints_id')->references('id')->on('sprints')

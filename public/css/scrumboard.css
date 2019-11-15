@@ -41,11 +41,16 @@
     padding-bottom: 0px;
 }
 
+legend {
+    font-size: initial;
+    margin-bottom: initial;
+}
+
 ul {
     list-style: none;
     margin: 0;
     padding: 0px;
-        padding-bottom: 0px;
+    padding-bottom: 0px;
 }
 ul.sortable li:last-child {
     margin-bottom: 0px;

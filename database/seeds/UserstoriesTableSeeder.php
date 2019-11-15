@@ -13,8 +13,8 @@ class UserstoriesTableSeeder extends Seeder
     {
         DB::table('userstories')->insert([
             'id' => 1,
-            'description' => 'foo bar',
-            'acceptance_criteria' => ' foo bar',
+            'description' => 'Userstorie 1',
+            'acceptance_criteria' => ' acceptencriterea die daarbij horen',
             'status' => 'done',
             'projects_id' => App\Projects::find(1)->id,
             'created_at' => now(),
@@ -23,8 +23,8 @@ class UserstoriesTableSeeder extends Seeder
 
         DB::table('userstories')->insert([
             'id' => 2,
-            'description' => 'foo bar1',
-            'acceptance_criteria' => ' foo bar1',
+            'description' => 'Userstorie 2',
+            'acceptance_criteria' => ' accepentence criterea die daarbij hoort1',
             'status' => 'testing',
             'projects_id' => App\Projects::find(1)->id,
             'created_at' => now(),
@@ -33,8 +33,8 @@ class UserstoriesTableSeeder extends Seeder
 
         DB::table('userstories')->insert([
             'id' => 3,
-            'description' => 'foo bar2',
-            'acceptance_criteria' => ' foo bar2',
+            'description' => 'Userstorie 3',
+            'acceptance_criteria' => ' accepentence criterea die daarbij hoort2',
             'status' => 'doing',
             'projects_id' => App\Projects::find(1)->id,
             'created_at' => now(),
@@ -43,8 +43,8 @@ class UserstoriesTableSeeder extends Seeder
 
         DB::table('userstories')->insert([
             'id' => 4,
-            'description' => 'foo bar',
-            'acceptance_criteria' => ' foo bar',
+            'description' => 'Userstorie 1',
+            'acceptance_criteria' => ' accepentence criterea die daarbij hoort',
             'status' => 'done',
             'projects_id' => App\Projects::find(2)->id,
             'created_at' => now(),
@@ -53,8 +53,8 @@ class UserstoriesTableSeeder extends Seeder
 
         DB::table('userstories')->insert([
             'id' => 5,
-            'description' => 'foo bar',
-            'acceptance_criteria' => ' foo bar',
+            'description' => 'Userstorie 2',
+            'acceptance_criteria' => ' accepentence criterea die daarbij hoort',
             'status' => 'testing',
             'projects_id' => App\Projects::find(2)->id,
             'created_at' => now(),
@@ -63,8 +63,8 @@ class UserstoriesTableSeeder extends Seeder
 
         DB::table('userstories')->insert([
             'id' => 6,
-            'description' => 'foo bar',
-            'acceptance_criteria' => ' foo bar',
+            'description' => 'Userstorie 3',
+            'acceptance_criteria' => ' accepentence criterea die daarbij hoort',
             'status' => 'doing',
             'projects_id' => App\Projects::find(2)->id,
             'created_at' => now(),
@@ -73,8 +73,8 @@ class UserstoriesTableSeeder extends Seeder
 
         DB::table('userstories')->insert([
             'id' => 7,
-            'description' => 'foo bar',
-            'acceptance_criteria' => ' foo bar',
+            'description' => 'Userstorie 1',
+            'acceptance_criteria' => ' accepentence criterea die daarbij hoort',
             'status' => 'done',
             'projects_id' => App\Projects::find(3)->id,
             'created_at' => now(),
@@ -83,8 +83,8 @@ class UserstoriesTableSeeder extends Seeder
 
         DB::table('userstories')->insert([
             'id' => 8,
-            'description' => 'foo bar',
-            'acceptance_criteria' => ' foo bar',
+            'description' => 'Userstorie 2',
+            'acceptance_criteria' => ' accepentence criterea die daarbij hoort',
             'status' => 'testing',
             'projects_id' => App\Projects::find(3)->id,
             'created_at' => now(),
@@ -93,8 +93,8 @@ class UserstoriesTableSeeder extends Seeder
 
         DB::table('userstories')->insert([
             'id' => 9,
-            'description' => 'foo bar',
-            'acceptance_criteria' => ' foo bar',
+            'description' => 'Userstorie 3',
+            'acceptance_criteria' => ' accepentence criterea die daarbij hoort',
             'status' => 'doing',
             'projects_id' => App\Projects::find(3)->id,
             'created_at' => now(),

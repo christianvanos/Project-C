@@ -1,8 +1,8 @@
-{{-- @php
+@php
     if (!isset($pageSlug)) {
         $pageSlug = '';
     }
-@endphp --}}
+@endphp
 
 <div class="sidebar" data="blue">
     <div class="sidebar-wrapper">

@@ -16,6 +16,8 @@ class BacklogsTableSeeder extends Seeder
             'name' => 'Sprint Backlog',
             'sprints_id' => App\Sprints::find(1)->id,
             'created_at' => now(),
+            'order' => 1,
+            'label' => 'todo',
             'is_product_backlog' => False,
             'updated_at' => now()
         ]);
@@ -24,6 +26,8 @@ class BacklogsTableSeeder extends Seeder
             'name' => 'Doing',
             'sprints_id' => App\Sprints::find(1)->id,
             'created_at' => now(),
+            'order' => 2,
+            'label' => 'doing',
             'is_product_backlog' => False,
             'updated_at' => now()
         ]);
@@ -32,6 +36,8 @@ class BacklogsTableSeeder extends Seeder
             'name' => 'Testing',
             'sprints_id' => App\Sprints::find(1)->id,
             'created_at' => now(),
+            'order' => 3,
+            'label' => 'doing',
             'is_product_backlog' => False,
             'updated_at' => now()
         ]);
@@ -40,6 +46,8 @@ class BacklogsTableSeeder extends Seeder
             'name' => 'Done',
             'sprints_id' => App\Sprints::find(1)->id,
             'created_at' => now(),
+            'order' => 4,
+            'label' => 'done',
             'is_product_backlog' => False,
             'updated_at' => now()
         ]);
@@ -49,6 +57,8 @@ class BacklogsTableSeeder extends Seeder
             'name' => 'Sprint Backlog',
             'sprints_id' => App\Sprints::find(2)->id,
             'created_at' => now(),
+            'order' => 1,
+            'label' => 'todo',
             'is_product_backlog' => False,
             'updated_at' => now()
         ]);
@@ -57,6 +67,8 @@ class BacklogsTableSeeder extends Seeder
             'name' => 'Doing',
             'sprints_id' => App\Sprints::find(2)->id,
             'created_at' => now(),
+            'order' => 2,
+            'label' => 'doing',
             'is_product_backlog' => False,
             'updated_at' => now()
         ]);
@@ -65,6 +77,8 @@ class BacklogsTableSeeder extends Seeder
             'name' => 'Testing',
             'sprints_id' => App\Sprints::find(2)->id,
             'created_at' => now(),
+            'order' => 3,
+            'label' => 'doing',
             'is_product_backlog' => False,
             'updated_at' => now()
             
@@ -74,6 +88,8 @@ class BacklogsTableSeeder extends Seeder
             'name' => 'Done',
             'sprints_id' => App\Sprints::find(2)->id,
             'created_at' => now(),
+            'order' => 4,
+            'label' => 'done',
             'is_product_backlog' => False,
             'updated_at' => now()
         ]);
@@ -83,6 +99,8 @@ class BacklogsTableSeeder extends Seeder
             'name' => 'Sprint Backlog',
             'sprints_id' => App\Sprints::find(3)->id,
             'created_at' => now(),
+            'order' => 1,
+            'label' => 'todo',
             'is_product_backlog' => False,
             'updated_at' => now()
         ]);
@@ -91,6 +109,8 @@ class BacklogsTableSeeder extends Seeder
             'name' => 'Doing',
             'sprints_id' => App\Sprints::find(3)->id,
             'created_at' => now(),
+            'order' => 2,
+            'label' => 'doing',
             'is_product_backlog' => False,
             'updated_at' => now()
         ]);
@@ -99,6 +119,8 @@ class BacklogsTableSeeder extends Seeder
             'name' => 'Testing',
             'sprints_id' => App\Sprints::find(3)->id,
             'created_at' => now(),
+            'order' => 3,
+            'label' => 'doing',
             'is_product_backlog' => False,
             'updated_at' => now()
         ]);
@@ -106,6 +128,8 @@ class BacklogsTableSeeder extends Seeder
             'id' => 12,
             'name' => 'Done',
             'is_product_backlog' => False,
+            'order' => 4,
+            'label' => 'done',
             'sprints_id' => App\Sprints::find(3)->id,
             'created_at' => now(),
             'updated_at' => now()
@@ -114,6 +138,8 @@ class BacklogsTableSeeder extends Seeder
             'id' => 13,
             'name' => 'Product Backlog',
             'is_product_backlog' => True,
+            'order' => 0.5,
+            'label' => 'todo',
             'sprints_id' => App\Sprints::find(1)->id,
             'created_at' => now(),
             'updated_at' => now()
@@ -122,6 +148,8 @@ class BacklogsTableSeeder extends Seeder
             'id' => 14,
             'name' => 'Product Backlog',
             'is_product_backlog' => True,
+            'order' => 0.5,
+            'label' => 'todo',
             'sprints_id' => App\Sprints::find(2)->id,
             'created_at' => now(),
             'updated_at' => now()
@@ -129,6 +157,8 @@ class BacklogsTableSeeder extends Seeder
         DB::table('backlogs')->insert([
             'id' => 15,
             'name' => 'Product Backlog',
+            'order' => 0.5,
+            'label' => 'todo',
             'is_product_backlog' => True,
             'sprints_id' => App\Sprints::find(3)->id,
             'created_at' => now(),

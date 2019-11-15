@@ -35,13 +35,11 @@ class Project
         if (Project_Members::where('projects_id', '=', $project_id)->where('user_id', '=', auth()->user()->id)->first()) {
             return true;
         } 
-        return false;
     }
 
     public function projectAndSprintExists($project_id, $sprint_id) {
         if ((Projects::find($project_id)) and (Sprints::where('id', '=', $sprint_id)->where('projects_id', '=', $project_id)->first())) {
             return true;
         }
-        return false;
     }
 }

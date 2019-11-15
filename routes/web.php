@@ -22,8 +22,13 @@ Route::get('/dashboard', 'HomeController@index')->name('home')
     ->name('admin');
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
-Route::post('/scrumboard/itemmoved', 'PostController@scrumboard_item_moved');
-Route::post('/scrumboard/itemadded', 'PostController@scrumboard_item_added');
+
+Route::group(['middleware' => 'auth'], function () {
+	Route::post('/scrumboard/itemmoved', 'ScrumboardController@userstory_item_moved');
+	Route::post('/scrumboard/itemadded', 'ScrumboardController@userstory_item_added');
+	Route::post('/scrumboard/backlogmoved', 'ScrumboardController@backlog_moved')->middleware('backlog');
+});
+
 Route::get('insert','AdduserprojectController@insertform');
 Route::post('create','AdduserprojectController@insert'); 
 Route::get('/projects', 'ProjectsController@index');
