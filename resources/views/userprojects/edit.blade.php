@@ -13,8 +13,10 @@
             <label class="label" for="projects_id">Project</label>
 
 			<div class="control">
-				<input type="text" class="input" name="user_id" placeholder="Number" value="{{$Project_Member->user_id}}">
-                <input type="text" class="input" name="projects_id" placeholder="Number" value="{{$Project_Member->projects_id}}">
+				<input type="text" class="input" name="user_id" placeholder="user_id" value="{{$Project_Member->user_id}}">
+				</div>
+				<div class="control">
+                <input type="text" class="input" name="projects_id" placeholder="projects_id" value="{{$Project_Member->projects_id}}">
 			</div>
 		</div>
 

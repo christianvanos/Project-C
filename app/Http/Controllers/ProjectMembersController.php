@@ -35,7 +35,7 @@ class ProjectMembersController extends Controller
     public function update(Request $request, $id)
     {
         $project_Member = Project_Members::findOrFail($id);
-        $project_Member->user_id = request('User_id');
+        $project_Member->user_id = request('user_id');
         $project_Member->projects_id = request('projects_id');
     	$project_Member->save();
     	return redirect("/userprojects");
