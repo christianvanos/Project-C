@@ -25,7 +25,7 @@
                                 <tr>
                                     <td>{{ $project[0] }}</td>
                                     <td>
-                                    <a href="{{ url('/user?id='. $project[1]) }}" class="btn btn-default">View</a>
+                                    <a href="{{ url('/user?id='. $project[1]) }}" class="btn btn-info">View</a>
                                     </td>
                                 </tr>
                             @endforeach

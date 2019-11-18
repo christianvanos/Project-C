@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Http\RedirectResponse;
 
 
 class UserController extends Controller
@@ -27,10 +28,23 @@ class UserController extends Controller
         $users = collect();
         foreach($projectMembers as $projectMember) {
             $userData = $projectMember->user()->first();
-            $users->push([$userData->name,$userData->email,$userData->created_at]);
+            $users->push([$userData->name,$userData->email,$userData->created_at,$userData->getId()]);
         }
 
         return view('users.index', ['users' => $users]);
+    }
+
+    public function admin(Request $request){
+        if (Auth::user()->isAdmin())
+        {
+            $userID = $request->input('id');
+            $user = User::find($userID);
+            $user->type = 'admin';
+            $user->save();
+            return redirect('usersprojects');
+        } else{
+             return redirect('usersprojects');
+        }
     }
 
     /**

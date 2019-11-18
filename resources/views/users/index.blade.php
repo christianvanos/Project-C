@@ -23,7 +23,9 @@
                                 <th scope="col">{{ __('Name') }}</th>
                                 <th scope="col">{{ __('Email') }}</th>
                                 <th scope="col">{{ __('Creation Date') }}</th>
-                                <th scope="col"></th>
+                                @if (Auth::user()->isAdmin())
+                                <th scope="col">Actions</th>
+                                @endif
                             </thead>
                             <tbody>
                                 @foreach ($users as $user)
@@ -33,6 +35,12 @@
                                             <a href="mailto:{{ $user[1] }}">{{ $user[1] }}</a>
                                         </td>
                                         <td>{{ $user[2]->format('d/m/Y H:i') }}</td>
+                                        @if (Auth::user()->isAdmin())
+                                        <td>
+                                            <a href="{{ url('/admin_edit?id=' . $user[3]) }}" class="btn btn-info">Edit</a>
+                                            <a href="{{ url('/user_admin?id=' . $user[3]) }}" class="btn btn-info">Make admin</a>
+                                        </td>
+                                    @endif
                                     </tr>
                                 @endforeach
                             </tbody>
