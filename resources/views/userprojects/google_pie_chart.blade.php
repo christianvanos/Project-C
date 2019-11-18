@@ -15,7 +15,7 @@
    {
     var data = google.visualization.arrayToDataTable(analytics);
     var options = {
-     title : 'Percentage of name backlog'
+     title : 'Progress of backlog items'
     };
     var chart = new google.visualization.PieChart(document.getElementById('pie_chart'));
     chart.draw(data, options);
