@@ -14,7 +14,7 @@
     <script>
         var pieData = [
             {
-                value: 20,
+                value:10,
                 color:"#878BB6"
             },
             {
