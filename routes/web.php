@@ -39,6 +39,7 @@ Route::get('/projects/{project}/edit','ProjectsController@edit');
 Route::post('/projects', 'ProjectsController@store');
 Route::patch('/projects/{project}', 'ProjectsController@update');
 Route::delete('/projects/{project}', 'ProjectsController@destroy');
+Route::get('/usersprojects', 'UserProjectsController@index');
 
 
 Route::group(['middleware' => 'auth'], function () {

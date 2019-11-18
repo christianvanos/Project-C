@@ -3,8 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Project_Members;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
+
 
 class UserController extends Controller
 {
@@ -14,9 +20,17 @@ class UserController extends Controller
      * @param  \App\User  $model
      * @return \Illuminate\View\View
      */
-    public function index(User $model)
+    public function index(Request $request)
     {
-        return view('users.index', ['users' => $model->paginate(15)]);
+        $projectID = $request->input('id');
+        $projectMembers = Project_Members::where('projects_id', $projectID)->get();
+        $users = collect();
+        foreach($projectMembers as $projectMember) {
+            $userData = $projectMember->user()->first();
+            $users->push([$userData->name,$userData->email,$userData->created_at]);
+        }
+
+        return view('users.index', ['users' => $users]);
     }
 
     /**
