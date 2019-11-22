@@ -10,7 +10,7 @@ class Userstory_Items extends Model
   
     public function backlogs()
     {
-        return $this->belongsTo(Backlogs::class);
+        return $this->belongsTo(Backlogs::class, 'backlog_id');
     }
 
     public function userstory()

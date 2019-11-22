@@ -69,10 +69,11 @@ class ScrumboardController extends Controller
         if (!$sprint_id) { $sprint_id = Sprints::where('projects_id', '=', $project_id)->pluck('id')->first(); }
         $all_sprints = Sprints::where('projects_id', '=', $project_id)->get();
         $all_userstories = Userstories::where('projects_id', '=', $project_id)->get();
+        $all_backlogs = Backlogs::whereIn('sprints_id', $all_sprints->pluck('id'))->orderBy('order')->get();
 
         $backlogs = Backlogs::where('sprints_id', $sprint_id)->orderBy('order')->get();
-        $userstory_items = Userstory_Items::whereIn('backlog_id', $backlogs->pluck('id'))->get();
-
+        $userstory_items = Userstory_Items::whereIn('backlog_id', $all_backlogs->pluck('id'))->get();
+        
         $project = Projects::find($project_id);
         $sprint = Sprints::find($sprint_id);
 
