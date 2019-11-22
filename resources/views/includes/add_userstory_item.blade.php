@@ -1,4 +1,4 @@
-<div class="modal modal-black fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal modal-black fade" id="add_userstoryitemModal" tabindex="-1" role="dialog" aria-labelledby="add_userstoryitemModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header justify-content-center">

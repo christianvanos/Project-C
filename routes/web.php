@@ -25,6 +25,7 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('scrumboard/{project_id?}/{sprint_id?}', 'ScrumboardController@scrumboard_page')->middleware('project');
+	Route::post('scrumboard/backlogadded', 'ScrumboardController@backlog_added');
 	Route::post('/scrumboard/itemmoved', 'ScrumboardController@userstory_item_moved');
 	Route::post('/scrumboard/itemadded', 'ScrumboardController@userstory_item_added');
 	Route::post('/scrumboard/backlogmoved', 'ScrumboardController@backlog_moved')->middleware('backlog');

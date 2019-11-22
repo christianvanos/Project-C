@@ -30,7 +30,7 @@
                         @foreach($backlogs as $backlog)
                             <div class="status-card ui-sortable-handle" style="cursor: pointer;" data-backlog-id="{{ $backlog->id }}">
                                 <div class="card-header">
-                                <h5 class="card-title">{{ $backlog->name }} <span class="badge @if($backlog->label == "todo") badge-danger @elseif($backlog->label == "done") badge-success @else badge-info @endif ">{{ $backlog->label }}</span></h5>                                    
+                                <h5 class="card-title">{{ $backlog->name }} <span class="badge @if($backlog->label == "todo") badge-danger @elseif($backlog->label == "done") badge-warning @else badge-info @endif ">{{ $backlog->label }}</span></h5>                                    
                                 </div>
                                 <ul class="backlog sortable ui-sortable" id="sort_item">
                                     @foreach ($userstory_items as $item)
@@ -47,16 +47,24 @@
                                 <div class="card-footer">
                                     <h5 class="card-title">
                                         <i class="tim-icons icon-simple-add"></i>
-                                        <button type="button" class="btn btn-link" data-toggle="modal" data-target="#exampleModal" data-backlog-id="{{ $backlog->id }}">
+                                        <button type="button" class="btn btn-link" data-toggle="modal" data-target="#add_userstoryitemModal" data-backlog-id="{{ $backlog->id }}">
                                             Add an item
                                         </button>
                                     </h5>
                                 </div>
                             </div>
                         @endforeach
+                        <div class="status-card" style="cursor: pointer; border-style: dotted;">
+                            <div class="card-foorter" style="margin-left: 15px;">
+                                <i class="tim-icons icon-simple-add"></i>
+                                <button type="button" class="btn btn-link" data-toggle="modal" data-target="#add_backlogModal" data-sprint-id="{{ $current_sprint->id }}">Add Backlog</button>
+                            </div>
+                        </div>
                     </div>
                     
+
                     @include('includes.add_userstory_item')
+                    @include('includes.add_backlog')
                     
                     <script src="{{ asset('js/scrumboard') }}/userstory_item_move.js"></script>
                     <script src="{{ asset('js/scrumboard') }}/backlog_move.js"></script>
