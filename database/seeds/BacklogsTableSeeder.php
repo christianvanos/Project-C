@@ -14,7 +14,7 @@ class BacklogsTableSeeder extends Seeder
         DB::table('backlogs')->insert([
             'id' => 1,
             'name' => 'Sprint Backlog',
-            'sprints_id' => App\Sprints::find(1)->id,
+            'sprint_id' => App\Sprints::find(1)->id,
             'created_at' => now(),
             'order' => 1,
             'label' => 'todo',
@@ -24,7 +24,7 @@ class BacklogsTableSeeder extends Seeder
         DB::table('backlogs')->insert([
             'id' => 2,
             'name' => 'Doing',
-            'sprints_id' => App\Sprints::find(1)->id,
+            'sprint_id' => App\Sprints::find(1)->id,
             'created_at' => now(),
             'order' => 2,
             'label' => 'doing',
@@ -34,7 +34,7 @@ class BacklogsTableSeeder extends Seeder
         DB::table('backlogs')->insert([
             'id' => 3,
             'name' => 'Testing',
-            'sprints_id' => App\Sprints::find(1)->id,
+            'sprint_id' => App\Sprints::find(1)->id,
             'created_at' => now(),
             'order' => 3,
             'label' => 'doing',
@@ -44,7 +44,7 @@ class BacklogsTableSeeder extends Seeder
         DB::table('backlogs')->insert([
             'id' => 4,
             'name' => 'Done',
-            'sprints_id' => App\Sprints::find(1)->id,
+            'sprint_id' => App\Sprints::find(1)->id,
             'created_at' => now(),
             'order' => 4,
             'label' => 'done',
@@ -55,7 +55,7 @@ class BacklogsTableSeeder extends Seeder
         DB::table('backlogs')->insert([
             'id' => 5,
             'name' => 'Sprint Backlog',
-            'sprints_id' => App\Sprints::find(2)->id,
+            'sprint_id' => App\Sprints::find(2)->id,
             'created_at' => now(),
             'order' => 1,
             'label' => 'todo',
@@ -65,7 +65,7 @@ class BacklogsTableSeeder extends Seeder
         DB::table('backlogs')->insert([
             'id' => 6,
             'name' => 'Doing',
-            'sprints_id' => App\Sprints::find(2)->id,
+            'sprint_id' => App\Sprints::find(2)->id,
             'created_at' => now(),
             'order' => 2,
             'label' => 'doing',
@@ -75,7 +75,7 @@ class BacklogsTableSeeder extends Seeder
         DB::table('backlogs')->insert([
             'id' => 7,
             'name' => 'Testing',
-            'sprints_id' => App\Sprints::find(2)->id,
+            'sprint_id' => App\Sprints::find(2)->id,
             'created_at' => now(),
             'order' => 3,
             'label' => 'doing',
@@ -86,7 +86,7 @@ class BacklogsTableSeeder extends Seeder
         DB::table('backlogs')->insert([
             'id' => 8,
             'name' => 'Done',
-            'sprints_id' => App\Sprints::find(2)->id,
+            'sprint_id' => App\Sprints::find(2)->id,
             'created_at' => now(),
             'order' => 4,
             'label' => 'done',
@@ -97,7 +97,7 @@ class BacklogsTableSeeder extends Seeder
         DB::table('backlogs')->insert([
             'id' => 9,
             'name' => 'Sprint Backlog',
-            'sprints_id' => App\Sprints::find(3)->id,
+            'sprint_id' => App\Sprints::find(3)->id,
             'created_at' => now(),
             'order' => 1,
             'label' => 'todo',
@@ -107,7 +107,7 @@ class BacklogsTableSeeder extends Seeder
         DB::table('backlogs')->insert([
             'id' => 10,
             'name' => 'Doing',
-            'sprints_id' => App\Sprints::find(3)->id,
+            'sprint_id' => App\Sprints::find(3)->id,
             'created_at' => now(),
             'order' => 2,
             'label' => 'doing',
@@ -117,7 +117,7 @@ class BacklogsTableSeeder extends Seeder
         DB::table('backlogs')->insert([
             'id' => 11,
             'name' => 'Testing',
-            'sprints_id' => App\Sprints::find(3)->id,
+            'sprint_id' => App\Sprints::find(3)->id,
             'created_at' => now(),
             'order' => 3,
             'label' => 'doing',
@@ -130,7 +130,7 @@ class BacklogsTableSeeder extends Seeder
             'is_product_backlog' => False,
             'order' => 4,
             'label' => 'done',
-            'sprints_id' => App\Sprints::find(3)->id,
+            'sprint_id' => App\Sprints::find(3)->id,
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -140,7 +140,7 @@ class BacklogsTableSeeder extends Seeder
             'is_product_backlog' => True,
             'order' => 0.5,
             'label' => 'todo',
-            'sprints_id' => App\Sprints::find(1)->id,
+            'sprint_id' => App\Sprints::find(1)->id,
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -150,7 +150,7 @@ class BacklogsTableSeeder extends Seeder
             'is_product_backlog' => True,
             'order' => 0.5,
             'label' => 'todo',
-            'sprints_id' => App\Sprints::find(2)->id,
+            'sprint_id' => App\Sprints::find(2)->id,
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -160,7 +160,7 @@ class BacklogsTableSeeder extends Seeder
             'order' => 0.5,
             'label' => 'todo',
             'is_product_backlog' => True,
-            'sprints_id' => App\Sprints::find(3)->id,
+            'sprint_id' => App\Sprints::find(3)->id,
             'created_at' => now(),
             'updated_at' => now()
         ]);

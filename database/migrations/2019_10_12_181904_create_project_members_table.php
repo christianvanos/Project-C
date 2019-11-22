@@ -19,8 +19,8 @@ class CreateProjectMembersTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')
             ->onDelete('cascade');
-            $table->integer('projects_id')->unsigned();
-            $table->foreign('projects_id')->references('id')->on('projects')
+            $table->integer('project_id')->unsigned();
+            $table->foreign('project_id')->references('id')->on('projects')
             ->onDelete('cascade');
         });
     }

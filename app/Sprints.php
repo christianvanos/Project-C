@@ -8,24 +8,24 @@ class Sprints extends Model
 {
     protected $table = "sprints";
 
-    public function projects()
+    public function project()
     {
-        return $this->belongsTo(Projects::class);
+        return $this->belongsTo('App\Projects', 'projects_id');
     }
 
     public function backlogs()
     {
-        return $this->hasMany(Backlogs::class);
+        return $this->hasMany('App\Backlogs', 'sprint_id');
     }
 
-    public function daily_scrums()
+    public function dailyscrums()
     {
-        return $this->hasMany(Daily_Scrums::class);
+        return $this->hasMany('App\DailyScrums', 'sprint_id');
     }
 
-    public function sprint_meetings()
+    public function meetings()
     {
-        return $this->hasMany(Sprint_Meeting::class);
+        return $this->hasMany('App\SprintMeetings', 'sprint_id');
     }
 
 }

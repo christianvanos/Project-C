@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Backlogs;
-use App\Project_Members;
+use App\ProjectMembers;
 use App\Sprints;
 use App\Projects;
 use App\Userstories;
-use App\Userstory_Items;
+use App\UserstoryItems;
 
 class ScrumboardController extends Controller
 {
@@ -19,16 +19,16 @@ class ScrumboardController extends Controller
         $new_index = $request->index;
         $order = null;
         
-        $max_index = Backlogs::where('sprints_id', $sprint_id)->orderBy('order')->count() - 1;
+        $max_index = Backlogs::where('sprint_id', $sprint_id)->orderBy('order')->count() - 1;
 
         if ($new_index == 0) {
-            $backlog = Backlogs::where('sprints_id', $sprint_id)->where('id', '!=', $backlog_id)->orderBy('order')->first();
+            $backlog = Backlogs::where('sprint_id', $sprint_id)->where('id', '!=', $backlog_id)->orderBy('order')->first();
             $order = $backlog->order / 2;
         } elseif ($new_index == $max_index) { 
-            $backlog = Backlogs::where('sprints_id', $sprint_id)->where('id', '!=', $backlog_id)->orderBy('order', 'desc')->first();
+            $backlog = Backlogs::where('sprint_id', $sprint_id)->where('id', '!=', $backlog_id)->orderBy('order', 'desc')->first();
             $order = $backlog->order + 1;
         } else {
-            $backlogs = Backlogs::where('sprints_id', $sprint_id)->where('id', '!=', $backlog_id)->orderBy('order')->skip($new_index - 1)->take(2)->get();
+            $backlogs = Backlogs::where('sprint_id', $sprint_id)->where('id', '!=', $backlog_id)->orderBy('order')->skip($new_index - 1)->take(2)->get();
             $order = (array_sum($backlogs->pluck('order')->toArray()) / 2);
         }
 
@@ -38,11 +38,11 @@ class ScrumboardController extends Controller
     public function userstory_item_moved(Request $request) {
         $item_id = $request->user_story_id;
         $backlog_id = $request->backlog_id;
-        Userstory_Items::where('id', $item_id)->update(['backlog_id' => $backlog_id]);
+        UserstoryItems::where('id', $item_id)->update(['backlog_id' => $backlog_id]);
     }
 
     public function userstory_item_added(Request $request) {
-        $item = new Userstory_Items;
+        $item = new UserstoryItems;
         $item->description = $request->description;
         $item->moscow = $request->moscow;
         $item->userstory_id = $request->userstory_id;
@@ -53,26 +53,25 @@ class ScrumboardController extends Controller
     }
 
     public function backlog_added(Request $request) {
-        $order = Backlogs::where('sprints_id', $request->sprints_id)->orderBy('order', 'desc')->first()->order + 1;
+        $order = Backlogs::where('sprint_id', $request->sprint_id)->orderBy('order', 'desc')->first()->order + 1;
         
         $backlog = new Backlogs;
         $backlog->name = $request->name;
         $backlog->is_product_backlog = False;
         $backlog->order = $order;
         $backlog->label = $request->label;
-        $backlog->sprints_id = $request->sprints_id;
+        $backlog->sprint_id = $request->sprint_id;
         $backlog->save();
     }
 
     public function scrumboard_page($project_id = null, $sprint_id = null) {
-        if (!$project_id) { $project_id = Project_Members::where('user_id', '=', auth()->user()->id)->pluck('projects_id')->first(); }         
-        if (!$sprint_id) { $sprint_id = Sprints::where('projects_id', '=', $project_id)->pluck('id')->first(); }
-        $all_sprints = Sprints::where('projects_id', '=', $project_id)->get();
-        $all_userstories = Userstories::where('projects_id', '=', $project_id)->get();
-        $all_backlogs = Backlogs::whereIn('sprints_id', $all_sprints->pluck('id'))->orderBy('order')->get();
-
-        $backlogs = Backlogs::where('sprints_id', $sprint_id)->orderBy('order')->get();
-        $userstory_items = Userstory_Items::whereIn('backlog_id', $all_backlogs->pluck('id'))->get();
+        if (!$project_id) { $project_id = ProjectMembers::where('user_id', '=', auth()->user()->id)->pluck('project_id')->first(); }         
+        if (!$sprint_id) { $sprint_id = Sprints::where('project_id', '=', $project_id)->pluck('id')->first(); }
+        $all_sprints = Sprints::where('project_id', '=', $project_id)->get();
+        $all_userstories = Userstories::where('project_id', '=', $project_id)->get();
+        $all_backlogs = Backlogs::whereIn('sprint_id', $all_sprints->pluck('id'))->orderBy('order')->get();
+        $backlogs = Backlogs::where('sprint_id', $sprint_id)->orderBy('order')->get();
+        $userstory_items = UserstoryItems::whereIn('backlog_id', $all_backlogs->pluck('id'))->get();
         
         $project = Projects::find($project_id);
         $sprint = Sprints::find($sprint_id);
@@ -83,6 +82,7 @@ class ScrumboardController extends Controller
                     "project" => $project, 
                     "current_sprint" => $sprint,
                     "all_sprints" => $all_sprints,
-                    "userstories" => $all_userstories]);
+                    "userstories" => $all_userstories,
+                    "all_projects" => $all_projects]);
     }
 }

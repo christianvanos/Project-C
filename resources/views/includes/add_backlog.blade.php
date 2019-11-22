@@ -21,7 +21,7 @@
                             <option>done</option>
                         </select>
                     </div>
-                    <input type="hidden" id="input_sprint_id" name="sprints_id" class="form-control">
+                    <input type="hidden" id="input_sprint_id" name="sprint_id" class="form-control">
                     <button type="submit" class="btn btn-default">Send</button>
                     <button type="button" style="float: right" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </form>

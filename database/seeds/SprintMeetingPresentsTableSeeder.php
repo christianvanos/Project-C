@@ -11,27 +11,27 @@ class SprintMeetingPresentTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('sprint_meeting_present')->insert([
+        DB::table('sprint_meeting_presents')->insert([
             'id' => 1,
-            'members_id' => App\Project_members::find(1)->id,
+            'member_id' => App\ProjectMembers::find(1)->id,
             'created_at' => now(),
             'updated_at' => now()
         ]);
-        DB::table('sprint_meeting_present')->insert([
+        DB::table('sprint_meeting_presents')->insert([
             'id' => 2,
-            'members_id' => App\Project_members::find(2)->id,
+            'member_id' => App\ProjectMembers::find(2)->id,
             'created_at' => now(),
             'updated_at' => now()
         ]);
-        DB::table('sprint_meeting_present')->insert([
+        DB::table('sprint_meeting_presents')->insert([
             'id' => 3,
-            'members_id' => App\Project_members::find(3)->id,
+            'member_id' => App\ProjectMembers::find(3)->id,
             'created_at' => now(),
             'updated_at' => now()
         ]);
-        DB::table('sprint_meeting_present')->insert([
+        DB::table('sprint_meeting_presents')->insert([
             'id' => 4,
-            'members_id' => App\Project_members::find(4)->id,
+            'member_id' => App\ProjectMembers::find(4)->id,
             'created_at' => now(),
             'updated_at' => now()
         ]);

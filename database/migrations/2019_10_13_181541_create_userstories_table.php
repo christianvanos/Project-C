@@ -17,9 +17,9 @@ class CreateUserstoriesTable extends Migration
             $table->increments('id');
             $table->text('acceptance_criteria');
             $table->string('description');
-            $table->integer('projects_id')->unsigned();
+            $table->integer('project_id')->unsigned();
             $table->timestamps();
-            $table->foreign('projects_id')->references('id')->on('projects')
+            $table->foreign('project_id')->references('id')->on('projects')
             ->onDelete('cascade');
         });
     }

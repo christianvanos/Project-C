@@ -34,11 +34,14 @@
                                 </div>
                                 <ul class="backlog sortable ui-sortable" id="sort_item">
                                     @foreach ($userstory_items as $item)
-                                        @if($item->backlog_id == $backlog->id or ($item->backlogs->is_product_backlog and $backlog->is_product_backlog))
+                                        @if($item->backlog_id == $backlog->id or ($item->backlog->is_product_backlog and $backlog->is_product_backlog))
                                             <li class="text-row ui-sortable-handle" data-item-id="{{$item->id}}">
                                                 <fieldset>
                                                     <legend>{{ $item->description }}</legend>
-                                                    {{$item->story_points}} story-points 
+                                                    {{ $item->story_points }} story-points 
+                                                    @foreach ($item->members as $member)
+                                                        {{ $member->member->user->name }}
+                                                    @endforeach
                                                 </fieldset>
                                             </li>
                                         @endif
