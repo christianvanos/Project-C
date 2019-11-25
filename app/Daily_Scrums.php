@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Daily_Scrums extends Model
 {
-    protected $table = "dialy_scrums";
+    protected $table = "daily_scrums";
 
     public function members()
     {
