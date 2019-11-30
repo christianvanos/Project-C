@@ -18,12 +18,12 @@ class CreateDailyScrumsTable extends Migration
             $table->string('is_doing');
             $table->string('has_done');
             $table->string('errors');
-            $table->integer('sprints_id')->unsigned();
-            $table->integer('members_id')->unsigned();
+            $table->integer('sprint_id')->unsigned();
+            $table->integer('member_id')->unsigned();
             $table->timestamps();
-            $table->foreign('sprints_id')->references('id')->on('sprints')
+            $table->foreign('sprint_id')->references('id')->on('sprints')
             ->onDelete('cascade');
-            $table->foreign('members_id')->references('id')->on('project_members')
+            $table->foreign('member_id')->references('id')->on('project_members')
             ->onDelete('cascade');
         });
     }

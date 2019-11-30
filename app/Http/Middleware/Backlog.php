@@ -19,7 +19,7 @@ class Backlog
         $sprint_id = $request->sprint_id;
         $backlog_id = $request->backlog_id;
         
-        if (Backlogs::where('sprints_id', $sprint_id)->where('id', $backlog_id)->first()) {
+        if (Backlogs::where('sprint_id', $sprint_id)->where('id', $backlog_id)->first()) {
             return $next($request);
         } else {
             abort(404);

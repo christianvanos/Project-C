@@ -16,6 +16,7 @@ class UsersTableSeeder extends Seeder
             'id' => 1,
             'name' => 'Admin Admin',
             'email' => 'admin@gmail.com',
+            'type' => 'admin',
             'email_verified_at' => now(),
             'password' => Hash::make('secret'),
             'created_at' => now(),

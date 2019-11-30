@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UsersTableSeeder::class,
             ProjectsTableSeeder::class,
-            Sprints_Table_Seeder::class,
+            SprintsTableSeeder::class,
             BacklogsTableSeeder::class,
             ProjectMembersTableSeeder::class,
             DailyScrumsTableSeeder::class,
@@ -22,8 +22,8 @@ class DatabaseSeeder extends Seeder
             UserstoriesTableSeeder::class,
             UserstoryItemsTableSeeder::class,
             UserstoryItemMembers::class,
-            SprintMeetingPresentTableSeeder::class,
             SprintMeetingTableSeeder::class,
+            SprintMeetingPresentTableSeeder::class,
         ]);
     }
 }

@@ -46,13 +46,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function getId()
+    public function members()
     {
-        return $this->id;
-    }
-
-    public function project_members()
-    {
-        return $this->hasMany(Project_Members::class);
+        return $this->hasMany('App\ProjectMembers', 'user_id');
     }
 }
