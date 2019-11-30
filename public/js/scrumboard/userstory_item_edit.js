@@ -32,8 +32,8 @@ $(function () {
         if ($(this).attr("value") == "delete") {
             $('#input_submit').val("delete")
         } 
-        if ($(this).attr("value") == "send") {
-            $('#input_submit').val("send")
+        if ($(this).attr("value") == "update") {
+            $('#input_submit').val("update")
         }
 
         $.ajax({

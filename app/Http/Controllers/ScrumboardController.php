@@ -63,7 +63,7 @@ class ScrumboardController extends Controller
             case 'delete':
                     UserstoryItems::find($request->item_id)->delete();
                 break;
-            case 'save':
+            case 'update':
                 $item = UserstoryItems::find($request->item_id);
                 $item->description = $request->description;
                 $item->moscow = $request->moscow;
@@ -90,6 +90,19 @@ class ScrumboardController extends Controller
         $backlog->label = $request->label;
         $backlog->sprint_id = $request->sprint_id;
         $backlog->save();
+    }
+
+    public function backlog_edited(Request $request) {
+        switch ($request->input('submit')) {
+            case 'delete':
+                Backlogs::find($request->backlog_id)->delete();
+                break;
+            case 'update':
+                $backlog = Backlogs::find($request->backlog_id);
+                $backlog->name = $request->name;
+                $backlog->label = $request->label;
+                $backlog->save();
+        }
     }
 
     public function scrumboard_page($project_id = null, $sprint_id = null) {

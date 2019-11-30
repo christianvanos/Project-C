@@ -48,7 +48,7 @@
                     </div>
                     <input type="hidden" id="input_item_id" name="item_id" class="form-control">
                     <input type="hidden" id="input_submit" name="submit" class="form-control">
-                    <button type="submit" value="send" name="submit" class="btn btn-default">Send</button>
+                    <button type="submit" value="update" name="submit" class="btn btn-default">Update</button>
                     <button type="submit" value="delete" name="submit" style="float: right" class="btn btn-danger" class="btn btn-default">Delete</button>
                 </form>
             </div>
