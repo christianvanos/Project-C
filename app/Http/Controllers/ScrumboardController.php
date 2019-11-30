@@ -59,18 +59,25 @@ class ScrumboardController extends Controller
     }
 
     public function userstory_item_edited(Request $request) {
-        $item = UserstoryItems::find($request->item_id);
-        $item->description = $request->description;
-        $item->moscow = $request->moscow;
-        $item->userstory_id = $request->userstory_id;
-        $item->story_points = $request->points;
-        $item->definition_of_done = $request->definition_of_done;
-        $item->save();
+        switch ($request->input('submit')) {
+            case 'delete':
+                    UserstoryItems::find($request->item_id)->delete();
+                break;
+            case 'save':
+                $item = UserstoryItems::find($request->item_id);
+                $item->description = $request->description;
+                $item->moscow = $request->moscow;
+                $item->userstory_id = $request->userstory_id;
+                $item->story_points = $request->points;
+                $item->definition_of_done = $request->definition_of_done;
+                $item->save();
 
-        $item_member = UserstoryItemMembers::updateOrCreate(
-            ['item_id' => $request->item_id], 
-            ['member_id' => $request->member_id, 'item_id' => $request->item_id]
-        );
+                $item_member = UserstoryItemMembers::updateOrCreate(
+                    ['item_id' => $request->item_id], 
+                    ['member_id' => $request->member_id, 'item_id' => $request->item_id]
+                );
+                break;
+        }
     }
 
     public function backlog_added(Request $request) {

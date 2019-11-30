@@ -20,7 +20,7 @@ $('#edit_userstoryitemModal').on('show.bs.modal', function (event) {
 });
 
 $(function () {
-    $('#editItemForm').on('submit', function(e) {
+    $('#editItemForm button').click(function(e) {
         e.preventDefault();
 
         $.ajaxSetup({
@@ -28,6 +28,13 @@ $(function () {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+
+        if ($(this).attr("value") == "delete") {
+            $('#input_submit').val("delete")
+        } 
+        if ($(this).attr("value") == "send") {
+            $('#input_submit').val("send")
+        }
 
         $.ajax({
             type: 'post',

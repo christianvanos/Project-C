@@ -47,8 +47,9 @@
                         <textarea class="form-control" name="definition_of_done" id="edit_defenition_of_done_textarea" required></textarea>
                     </div>
                     <input type="hidden" id="input_item_id" name="item_id" class="form-control">
-                    <button type="submit" class="btn btn-default">Send</button>
-                    <button type="button" style="float: right" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <input type="hidden" id="input_submit" name="submit" class="form-control">
+                    <button type="submit" value="send" name="submit" class="btn btn-default">Send</button>
+                    <button type="submit" value="delete" name="submit" style="float: right" class="btn btn-danger" class="btn btn-default">Delete</button>
                 </form>
             </div>
         </div>
