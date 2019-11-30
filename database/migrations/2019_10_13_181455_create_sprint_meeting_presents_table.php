@@ -15,9 +15,12 @@ class CreateSprintMeetingPresentsTable extends Migration
     {
         Schema::create('sprint_meeting_presents', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
             $table->integer('member_id')->unsigned();
+            $table->integer('meeting_id')->unsigned();
+            $table->timestamps();
             $table->foreign('member_id')->references('id')->on('project_members')
+            ->onDelete('cascade');
+            $table->foreign('meeting_id')->references('id')->on('sprint_meetings')
             ->onDelete('cascade');
         });
     }

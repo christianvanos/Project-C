@@ -10,7 +10,7 @@ class Sprints extends Model
 
     public function project()
     {
-        return $this->belongsTo('App\Projects', 'projects_id');
+        return $this->belongsTo('App\Projects', 'project_id');
     }
 
     public function backlogs()

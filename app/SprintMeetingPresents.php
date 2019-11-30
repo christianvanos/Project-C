@@ -8,13 +8,13 @@ class SprintMeetingPresents extends Model
 {
     protected $table = "sprint_meeting_presents";
 
-    public function meetings()
+    public function meeting()
     {
-        return $this->hasMany('App\SprintMeetings', 'present_id');
+        return $this->belongsTo('App\SprintMeetings', 'meeting_id');
     }
 
     public function member()
     {
-        return $this->belongsTo('App\ProjectMembers', 'members_id');
+        return $this->belongsTo('App\ProjectMembers', 'member_id');
     }
 }

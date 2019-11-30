@@ -22,8 +22,8 @@ class DatabaseSeeder extends Seeder
             UserstoriesTableSeeder::class,
             UserstoryItemsTableSeeder::class,
             UserstoryItemMembers::class,
-            SprintMeetingPresentTableSeeder::class,
             SprintMeetingTableSeeder::class,
+            SprintMeetingPresentTableSeeder::class,
         ]);
     }
 }

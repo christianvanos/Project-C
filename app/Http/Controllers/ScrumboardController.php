@@ -10,6 +10,7 @@ use App\Sprints;
 use App\Projects;
 use App\Userstories;
 use App\UserstoryItems;
+use App\UserstoryItemMembers;
 
 class ScrumboardController extends Controller
 {
@@ -50,6 +51,26 @@ class ScrumboardController extends Controller
         $item->definition_of_done = $request->definition_of_done;
         $item->backlog_id = $request->backlog_id;
         $item->save();
+
+        $item_member = new UserstoryItemMembers;
+        $item_member->member_id = $request->member_id;
+        $item_member->item_id = $item->id;
+        $item_member->save();
+    }
+
+    public function userstory_item_edited(Request $request) {
+        $item = UserstoryItems::find($request->item_id);
+        $item->description = $request->description;
+        $item->moscow = $request->moscow;
+        $item->userstory_id = $request->userstory_id;
+        $item->story_points = $request->points;
+        $item->definition_of_done = $request->definition_of_done;
+        $item->save();
+
+        $item_member = UserstoryItemMembers::updateOrCreate(
+            ['item_id' => $request->item_id], 
+            ['member_id' => $request->member_id, 'item_id' => $request->item_id]
+        );
     }
 
     public function backlog_added(Request $request) {
@@ -79,10 +100,10 @@ class ScrumboardController extends Controller
         return view('pages.scrumboard', 
                     ['backlogs' => $backlogs, 
                     'userstory_items' => $userstory_items, 
+                    "current_project" => $project->id, 
                     "project" => $project, 
                     "current_sprint" => $sprint,
                     "all_sprints" => $all_sprints,
-                    "userstories" => $all_userstories,
-                    "all_projects" => $all_projects]);
+                    "userstories" => $all_userstories]);
     }
 }

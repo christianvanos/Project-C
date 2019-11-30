@@ -20,10 +20,10 @@ class CreateUserstoryItemsTable extends Migration
             $table->text('definition_of_done');
             $table->integer('story_points');
             $table->integer('backlog_id')->unsigned();
+            $table->integer('userstory_id')->unsigned();
             $table->timestamps();
             $table->foreign('backlog_id')->references('id')->on('backlogs')
             ->onDelete('cascade');            
-            $table->integer('userstory_id')->unsigned();
             $table->foreign('userstory_id')->references('id')->on('userstories')
             ->onDelete('cascade');
         });

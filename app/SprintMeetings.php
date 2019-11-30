@@ -15,6 +15,6 @@ class SprintMeetings extends Model
 
     public function present()
     {
-        return $this->belongsTo('App\SprintMeetingPresents', 'present_id');
+        return $this->hasMany('App\SprintMeetingPresents', 'meeting_id');
     }
 }

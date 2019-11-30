@@ -16,7 +16,6 @@ class SprintMeetingTableSeeder extends Seeder
             'type' => 'sprint planning',
             'description' => 'Weinig beloven veel doen',
             'sprint_id' => App\Sprints::find(1)->id,
-            'present_id' => App\SprintMeetingPresents::find(1)->id,
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -25,7 +24,6 @@ class SprintMeetingTableSeeder extends Seeder
             'type' => 'sprint retro',
             'description' => 'Betere communicatie',
             'sprint_id' => App\Sprints::find(2)->id,
-            'present_id' => App\SprintMeetingPresents::find(1)->id,
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -34,7 +32,6 @@ class SprintMeetingTableSeeder extends Seeder
             'type' => 'sprint planning',
             'description' => 'Alles combineeren',
             'sprint_id' => App\Sprints::find(3)->id,
-            'present_id' => App\SprintMeetingPresents::find(1)->id,
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -43,7 +40,6 @@ class SprintMeetingTableSeeder extends Seeder
             'type' => 'sprint review',
             'description' => 'Meer complexiteit',
             'sprint_id' => App\Sprints::find(4)->id,
-            'present_id' => App\SprintMeetingPresents::find(2)->id,
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -52,7 +48,6 @@ class SprintMeetingTableSeeder extends Seeder
             'type' => 'sprint planning',
             'description' => 'Meer complexiteit toevoegen',
             'sprint_id' => App\Sprints::find(5)->id,
-            'present_id' => App\SprintMeetingPresents::find(2)->id,
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -61,7 +56,6 @@ class SprintMeetingTableSeeder extends Seeder
             'type' => 'sprint retro',
             'description' => 'Sneler opelkaar reageren',
             'sprint_id' => App\Sprints::find(6)->id,
-            'present_id' => App\SprintMeetingPresents::find(2)->id,
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -70,7 +64,6 @@ class SprintMeetingTableSeeder extends Seeder
             'type' => 'sprint review',
             'description' => 'Nog meer complexiteit',
             'sprint_id' => App\Sprints::find(7)->id,
-            'present_id' => App\SprintMeetingPresents::find(4)->id,
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -79,7 +72,6 @@ class SprintMeetingTableSeeder extends Seeder
             'type' => 'sprint retro',
             'description' => 'Meer samenwerken',
             'sprint_id' => App\Sprints::find(8)->id,
-            'present_id' => App\SprintMeetingPresents::find(3)->id,
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -88,7 +80,6 @@ class SprintMeetingTableSeeder extends Seeder
             'type' => 'sprint review',
             'description' => 'Even centraal graag::: meer complexiteit mannen',
             'sprint_id' => App\Sprints::find(9)->id,
-            'present_id' => App\SprintMeetingPresents::find(4)->id,
             'created_at' => now(),
             'updated_at' => now()
         ]);

@@ -1,10 +1,9 @@
-@extends('layouts.app', ['page' => __('Scrumboard'), 'pageSlug' => 'scrumboard'])
+@extends('layouts.app', ['page' => __('Scrumboard'), 'pageSlug' => 'scrumboard_' . $project->id])
 
 @push('head')
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="sprint-id" content="{{ $current_sprint->id }}">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    
     <link rel="stylesheet" href="{{ asset('css') }}/scrumboard.css">
 @endpush
 
@@ -35,12 +34,12 @@
                                 <ul class="backlog sortable ui-sortable" id="sort_item">
                                     @foreach ($userstory_items as $item)
                                         @if($item->backlog_id == $backlog->id or ($item->backlog->is_product_backlog and $backlog->is_product_backlog))
-                                            <li class="text-row ui-sortable-handle" data-item-id="{{$item->id}}">
+                                            <li class="text-row ui-sortable-handle" data-item-id="{{$item->id}}" data-item-description="{{$item->description}}" data-item-story-points="{{$item->story_points}}" data-item-moscow="{{$item->moscow}}" data-item-userstory-id="{{$item->userstory->id}}" @foreach($item->members as $member) data-item-member-id="{{$member->member_id}}" @break @endforeach data-item-definition-of-done="{{ $item->definition_of_done }}" data-toggle="modal" data-target="#edit_userstoryitemModal">
                                                 <fieldset>
                                                     <legend>{{ $item->description }}</legend>
                                                     {{ $item->story_points }} story-points 
                                                     @foreach ($item->members as $member)
-                                                        {{ $member->member->user->name }}
+                                                        <i>{{ $member->member->user->name }}</i> <br/>
                                                     @endforeach
                                                 </fieldset>
                                             </li>
@@ -68,6 +67,7 @@
 
                     @include('includes.add_userstory_item')
                     @include('includes.add_backlog')
+                    @include('includes.edit_userstory_item')
                     
                     <script src="{{ asset('js/scrumboard') }}/userstory_item_move.js"></script>
                     <script src="{{ asset('js/scrumboard') }}/backlog_move.js"></script>
