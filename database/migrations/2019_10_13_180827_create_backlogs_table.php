@@ -17,9 +17,11 @@ class CreateBacklogsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->boolean('is_product_backlog');
-            $table->integer('sprints_id')->unsigned();
+            $table->double('order');
+            $table->string('label');
+            $table->integer('sprint_id')->unsigned();
             $table->timestamps();
-            $table->foreign('sprints_id')->references('id')->on('sprints')
+            $table->foreign('sprint_id')->references('id')->on('sprints')
             ->onDelete('cascade');
         });
     }

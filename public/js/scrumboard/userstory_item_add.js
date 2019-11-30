@@ -1,4 +1,4 @@
-$('#exampleModal').on('show.bs.modal', function (event) {
+$('#add_userstoryitemModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget) // Button that triggered the modal
     var backlog_id = button.data('backlog-id') // Extract info from data-* attributes
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
@@ -20,9 +20,9 @@ $(function () {
         $.ajax({
             type: 'post',
             url: '/scrumboard/itemadded',
-            data: $('form').serialize(),
+            data: $('form#addItemForm').serialize(),
             success: function () {
-                $('#exampleModal').modal('hide');
+                $('#add_userstoryitemModal').modal('hide');
                 location.reload();
             }
         });
