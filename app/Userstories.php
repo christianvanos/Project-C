@@ -8,13 +8,13 @@ class Userstories extends Model
 {
     protected $table = "userstories";
 
-    public function projects()
+    public function project()
     {
-        return $this->belongsTo(Projects::class);
+        return $this->belongsTo('App\Projects', 'project_id');
     }
 
-    public function userstory_items()
+    public function items()
     {
-        return $this->hasMany(Userstory_Items::class);
+        return $this->hasMany('App\UserstoryItems', 'userstory_id');
     }
 }

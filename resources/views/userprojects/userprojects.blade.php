@@ -35,7 +35,7 @@
             <td><input type='text' name='user_id' /></td>
                <tr>
                <td>Projects Id</td>
-               <td><input type="text" name='projects_id'/></td>
+               <td><input type="text" name='project_id'/></td>
                </tr>
             </tr>
             <tr>

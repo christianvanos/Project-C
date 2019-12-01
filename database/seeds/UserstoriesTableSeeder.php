@@ -15,7 +15,7 @@ class UserstoriesTableSeeder extends Seeder
             'id' => 1,
             'description' => 'Userstorie 1',
             'acceptance_criteria' => ' acceptencriterea die daarbij horen',
-            'projects_id' => App\Projects::find(1)->id,
+            'project_id' => App\Projects::find(1)->id,
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -24,7 +24,7 @@ class UserstoriesTableSeeder extends Seeder
             'id' => 2,
             'description' => 'Userstorie 2',
             'acceptance_criteria' => ' accepentence criterea die daarbij hoort1',
-            'projects_id' => App\Projects::find(1)->id,
+            'project_id' => App\Projects::find(1)->id,
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -33,7 +33,7 @@ class UserstoriesTableSeeder extends Seeder
             'id' => 3,
             'description' => 'Userstorie 3',
             'acceptance_criteria' => ' accepentence criterea die daarbij hoort2',
-            'projects_id' => App\Projects::find(1)->id,
+            'project_id' => App\Projects::find(1)->id,
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -42,7 +42,7 @@ class UserstoriesTableSeeder extends Seeder
             'id' => 4,
             'description' => 'Userstorie 1',
             'acceptance_criteria' => ' accepentence criterea die daarbij hoort',
-            'projects_id' => App\Projects::find(2)->id,
+            'project_id' => App\Projects::find(2)->id,
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -51,7 +51,7 @@ class UserstoriesTableSeeder extends Seeder
             'id' => 5,
             'description' => 'Userstorie 2',
             'acceptance_criteria' => ' accepentence criterea die daarbij hoort',
-            'projects_id' => App\Projects::find(2)->id,
+            'project_id' => App\Projects::find(2)->id,
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -60,7 +60,7 @@ class UserstoriesTableSeeder extends Seeder
             'id' => 6,
             'description' => 'Userstorie 3',
             'acceptance_criteria' => ' accepentence criterea die daarbij hoort',
-            'projects_id' => App\Projects::find(2)->id,
+            'project_id' => App\Projects::find(2)->id,
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -69,7 +69,7 @@ class UserstoriesTableSeeder extends Seeder
             'id' => 7,
             'description' => 'Userstorie 1',
             'acceptance_criteria' => ' accepentence criterea die daarbij hoort',
-            'projects_id' => App\Projects::find(3)->id,
+            'project_id' => App\Projects::find(3)->id,
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -78,7 +78,7 @@ class UserstoriesTableSeeder extends Seeder
             'id' => 8,
             'description' => 'Userstorie 2',
             'acceptance_criteria' => ' accepentence criterea die daarbij hoort',
-            'projects_id' => App\Projects::find(3)->id,
+            'project_id' => App\Projects::find(3)->id,
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -87,7 +87,7 @@ class UserstoriesTableSeeder extends Seeder
             'id' => 9,
             'description' => 'Userstorie 3',
             'acceptance_criteria' => ' accepentence criterea die daarbij hoort',
-            'projects_id' => App\Projects::find(3)->id,
+            'project_id' => App\Projects::find(3)->id,
             'created_at' => now(),
             'updated_at' => now()
         ]);

@@ -11,8 +11,8 @@ class AdduserprojectController extends Controller {
     } 
     public function insert(Request $request){
         $user_id = $request->input('user_id');
-        $projects_id = $request->input('projects_id');
-        $data=array('user_id'=>$user_id,"projects_id"=>$projects_id);
+        $projects_id = $request->input('project_id');
+        $data=array('user_id'=>$user_id,"project_id"=>$projects_id);
         DB::table('project_members')->insert($data);
         echo "Record inserted successfully.<br/>";
         echo '<a href = "/userprojects">Click Here</a> to go back.';

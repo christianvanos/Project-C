@@ -4,17 +4,17 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Backlogs extends Model
+class SprintMeetings extends Model
 {
-    protected $table = "backlogs";
+    protected $table = "sprint_meetings";
 
     public function sprint()
     {
         return $this->belongsTo('App\Sprints', 'sprints_id');
     }
 
-    public function items()
+    public function present()
     {
-        return $this->hasMany('App\UserstoryItems', 'backlog_id');
+        return $this->hasMany('App\SprintMeetingPresents', 'meeting_id');
     }
 }

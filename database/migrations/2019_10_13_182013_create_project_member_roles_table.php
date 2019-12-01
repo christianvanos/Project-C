@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSprintMeetingPresentTable extends Migration
+class CreateProjectMemberRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateSprintMeetingPresentTable extends Migration
      */
     public function up()
     {
-        Schema::create('sprint_meeting_present', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('project_member_roles', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('role');
+            $table->integer('member_id')->unsigned();
             $table->timestamps();
-            $table->integer('members_id')->unsigned();
-            $table->foreign('members_id')->references('id')->on('project_members')
+            $table->foreign('member_id')->references('id')->on('project_members')
             ->onDelete('cascade');
         });
     }
@@ -29,6 +30,6 @@ class CreateSprintMeetingPresentTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sprint_meeting_present');
+        Schema::dropIfExists('project_member_roles');
     }
 }

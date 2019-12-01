@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserstoriesTable extends Migration
+class CreateSprintMeetingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateUserstoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('userstories', function (Blueprint $table) {
+        Schema::create('sprint_meetings', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('acceptance_criteria');
-            $table->string('description');
-            $table->integer('project_id')->unsigned();
+            $table->string('type');
+            $table->text('description');
+            $table->integer('sprint_id')->unsigned();
             $table->timestamps();
-            $table->foreign('project_id')->references('id')->on('projects')
+            $table->foreign('sprint_id')->references('id')->on('sprints')
             ->onDelete('cascade');
         });
     }
@@ -31,6 +31,6 @@ class CreateUserstoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('userstories');
+        Schema::dropIfExists('sprint_meetings');
     }
 }

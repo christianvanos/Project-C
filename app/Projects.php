@@ -10,16 +10,16 @@ class Projects extends Model
 
     public function sprints()
     {
-        return $this->hasMany(Sprints::class);
+        return $this->hasMany('App\Sprints', 'project_id');
     }
 
     public function userstories()
     {
-        return $this->hasMany(Userstories::class);
+        return $this->hasMany('App\Userstories', 'project_id');
     }
 
-    public function project_members()
+    public function members()
     {
-        return $this->hasMany(Project_Members::class);
+        return $this->hasMany('App\ProjectMembers', 'project_id');
     }
 }

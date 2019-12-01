@@ -15,12 +15,12 @@ class CreateProjectMembersTable extends Migration
     {
         Schema::create('project_members', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')
             ->onDelete('cascade');
-            $table->integer('projects_id')->unsigned();
-            $table->foreign('projects_id')->references('id')->on('projects')
+            $table->integer('project_id')->unsigned();
+            $table->timestamps();
+            $table->foreign('project_id')->references('id')->on('projects')
             ->onDelete('cascade');
         });
     }

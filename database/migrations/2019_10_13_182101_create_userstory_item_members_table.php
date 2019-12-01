@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProjectMembersRolesTable extends Migration
+class CreateUserstoryItemMembersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreateProjectMembersRolesTable extends Migration
      */
     public function up()
     {
-        Schema::create('project_members_roles', function (Blueprint $table) {
+        Schema::create('userstory_item_members', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('role');
             $table->integer('member_id')->unsigned();
+            $table->integer('item_id')->unsigned();
             $table->timestamps();
             $table->foreign('member_id')->references('id')->on('project_members')
+            ->onDelete('cascade');
+            $table->foreign('item_id')->references('id')->on('userstory_items')
             ->onDelete('cascade');
         });
     }
@@ -30,6 +32,6 @@ class CreateProjectMembersRolesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('project_members_roles');
+        Schema::dropIfExists('userstory_item_members');
     }
 }
