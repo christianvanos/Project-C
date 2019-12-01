@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use App\Projects;
 use App\Sprints;
 use App\Daily_Scrums;
+use App\ProjectMembers;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 class ProjectsController extends Controller
 {
@@ -58,13 +60,22 @@ class ProjectsController extends Controller
          
     }
     public function sprint(Projects $project){
-        $sprints = $project->sprints();
-    	return view('projects.sprint', compact('project'), compact("sprints"));
+        $sprints = $project->sprints;
+    
+    	return view('projects.sprint', compact('project', "sprints"));
     }
 
-    public function nav_daily_scrums(Projects $project){
-        dump($project);
+    public function nav_daily_scrums($id){
+        $sprint = Sprints::findorfail($id);
+        $daily_scrums=$sprint->dailyscrums;
+        $projectmembers = ProjectMembers::all();
         
-    	return view('projects.daily_scrums', compact("project"));
+        
+
+        
+       
+        
+        
+    	return view('projects.daily_scrums', compact("sprint","projectmembers","daily_scrums"));
     }
 }
