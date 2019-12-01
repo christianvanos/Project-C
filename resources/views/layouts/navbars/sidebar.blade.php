@@ -49,6 +49,12 @@
                                     <p>{{ __('Sprints') }}</p>
                                 </a>
                             </li>
+                            <li @if ($pageSlug == 'sprints' . $project->id) class="active " @endif>
+                                <a href="#">
+                                    <i class="tim-icons icon-notes"></i>
+                                    <p>Retrospectives</p>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>
