@@ -62,6 +62,7 @@ Route::delete('/projects/{project}', 'ProjectsController@destroy');
 Route::get('/usersprojects', 'UserProjectsController@index');
 Route::get('/user_admin', 'UserController@admin');
 Route::get('/admin_edit', 'UserController@editUserAdmin');
+Route::get('/retrospectives', 'RetrospectiveController@index');
 
 
 Route::group(['middleware' => 'auth'], function () {

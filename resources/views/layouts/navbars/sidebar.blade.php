@@ -46,12 +46,12 @@
                             <li @if ($pageSlug == 'sprints' . $project->id) class="active " @endif>
                                     <a href="/projects/{{$project->id}}/sprint">
                                         <i class="tim-icons icon-components"></i>
-                                        <p>Sprints</p>
+                                        <p>Daily Scrums</p>
                                     </a>
                                 </a>
                             </li>
                             <li @if ($pageSlug == 'sprints' . $project->id) class="active " @endif>
-                                <a href="#">
+                            <a href="/retrospectives?id={{$project->id}}">
                                     <i class="tim-icons icon-notes"></i>
                                     <p>Retrospectives</p>
                                 </a>
