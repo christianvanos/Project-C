@@ -33,8 +33,19 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/scrumboard/backlogmoved', 'ScrumboardController@backlog_moved')->middleware('backlog');
 });
 
+Route::get('/laravel_google_chart', 'LaravelGoogleGraph@index');
+
 Route::get('insert','AdduserprojectController@insertform');
 Route::post('create','AdduserprojectController@insert'); 
+
+Route::get('/userprojects', 'ProjectMembersController@index');
+Route::get('/userprojects/create', 'ProjectMembersController@create');
+Route::get('/userprojects/{project_member}','ProjectMembersController@show');
+Route::get('/userprojects/{project_member}/edit','ProjectmembersController@edit');
+Route::post('/userprojects', 'ProjectMembersController@store');
+Route::patch('/userprojects/{project_member}', 'ProjectmembersController@update');
+Route::delete('/userprojects/{project_member}', 'ProjectMembersController@destroy');
+
 Route::get('/projects', 'ProjectsController@index');
 Route::get('/projects/create', 'ProjectsController@create'); 
 Route::get('/projects/{project}','ProjectsController@show');
@@ -52,9 +63,12 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('tables', ['as' => 'pages.tables', 'uses' => 'PageController@tables']);
 		Route::get('typography', ['as' => 'pages.typography', 'uses' => 'PageController@typography']);
 		Route::get('upgrade', ['as' => 'pages.upgrade', 'uses' => 'PageController@upgrade']);
-		Route::get('userprojects', ['as' => 'userprojects.userprojects', 'uses' => 'PageController@userprojects']);
-		Route::get('charts', ['as' => 'userprojects.charts', 'uses' => 'PageController@charts']);
+		Route::get('userprojects1', ['as' => 'userprojects.userprojects', 'uses' => 'PageController@userprojects']);
+		Route::get('chart', ['as' => 'userprojects.charts', 'uses' => 'PageController@charts']);
+		Route::get('charts', ['as' => 'userprojects.google_pie_chart', 'uses' => 'LaravelGoogleGraph@index']);
 });
+
+
 
 Route::group(['middleware' => 'auth'], function () {
 	Route::resource('user', 'UserController', ['except' => ['show']]);
