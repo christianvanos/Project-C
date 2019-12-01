@@ -8,13 +8,13 @@ class Backlogs extends Model
 {
     protected $table = "backlogs";
 
-    public function sprints()
+    public function sprint()
     {
-        return $this->belongsTo(Sprints::class);
+        return $this->belongsTo('App\Sprints', 'sprints_id');
     }
 
-    public function userstory_items()
+    public function items()
     {
-        return $this->hasMany(Userstory_Items::class);
+        return $this->hasMany('App\UserstoryItems', 'backlog_id');
     }
 }

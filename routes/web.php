@@ -10,22 +10,42 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes();
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
 
 Route::get('/dashboard', 'HomeController@index')->name('home')
     ->middleware('is_admin')    
-    ->name('admin');
-
+	->name('admin');
+	
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
-Route::post('/scrumboard/itemmoved', 'PostController@scrumboard_item_moved');
-Route::post('/scrumboard/itemadded', 'PostController@scrumboard_item_added');
+
+Route::group(['middleware' => 'auth'], function () {
+	Route::get('scrumboard/{project_id?}/{sprint_id?}', 'ScrumboardController@scrumboard_page')->middleware('project');
+	Route::post('scrumboard/backlogadded', 'ScrumboardController@backlog_added');
+	Route::post('scrumboard/backlogedited', 'ScrumboardController@backlog_edited');
+	Route::post('/scrumboard/itemmoved', 'ScrumboardController@userstory_item_moved');
+	Route::post('/scrumboard/itemadded', 'ScrumboardController@userstory_item_added');
+	Route::post('/scrumboard/itemedited', 'ScrumboardController@userstory_item_edited');
+	Route::post('/scrumboard/backlogmoved', 'ScrumboardController@backlog_moved')->middleware('backlog');
+});
+
+Route::get('/laravel_google_chart', 'LaravelGoogleGraph@index');
+
 Route::get('insert','AdduserprojectController@insertform');
 Route::post('create','AdduserprojectController@insert'); 
+
+Route::get('/userprojects', 'ProjectMembersController@index');
+Route::get('/userprojects/create', 'ProjectMembersController@create');
+Route::get('/userprojects/{project_member}','ProjectMembersController@show');
+Route::get('/userprojects/{project_member}/edit','ProjectmembersController@edit');
+Route::post('/userprojects', 'ProjectMembersController@store');
+Route::patch('/userprojects/{project_member}', 'ProjectmembersController@update');
+Route::delete('/userprojects/{project_member}', 'ProjectMembersController@destroy');
+
 Route::get('/projects', 'ProjectsController@index');
 Route::get('/projects/{project}/sprint', 'ProjectsController@sprint');
 Route::get('/projects/{project}/{sprint}/daily_scrums', 'ProjectsController@nav_daily_scrums');
@@ -43,16 +63,18 @@ Route::delete('/projects/{project}', 'ProjectsController@destroy');
 
 Route::group(['middleware' => 'auth'], function () {
 		Route::get('icons', ['as' => 'pages.icons', 'uses' => 'PageController@icons']);
-		Route::get('scrumboard/{project_id?}/{sprint_id?}', ['as' => 'pages.scrumboard', 'uses' => 'PageController@scrumboard'])->middleware('project');
 		Route::get('maps', ['as' => 'pages.maps', 'uses' => 'PageController@maps']);
 		Route::get('notifications', ['as' => 'pages.notifications', 'uses' => 'PageController@notifications']);
 		Route::get('rtl', ['as' => 'pages.rtl', 'uses' => 'PageController@rtl']);
 		Route::get('tables', ['as' => 'pages.tables', 'uses' => 'PageController@tables']);
 		Route::get('typography', ['as' => 'pages.typography', 'uses' => 'PageController@typography']);
 		Route::get('upgrade', ['as' => 'pages.upgrade', 'uses' => 'PageController@upgrade']);
-		Route::get('userprojects', ['as' => 'userprojects.userprojects', 'uses' => 'PageController@userprojects']);
-		Route::get('charts', ['as' => 'userprojects.charts', 'uses' => 'PageController@charts']);
+		Route::get('userprojects1', ['as' => 'userprojects.userprojects', 'uses' => 'PageController@userprojects']);
+		Route::get('chart', ['as' => 'userprojects.charts', 'uses' => 'PageController@charts']);
+		Route::get('charts', ['as' => 'userprojects.google_pie_chart', 'uses' => 'LaravelGoogleGraph@index']);
 });
+
+
 
 Route::group(['middleware' => 'auth'], function () {
 	Route::resource('user', 'UserController', ['except' => ['show']]);

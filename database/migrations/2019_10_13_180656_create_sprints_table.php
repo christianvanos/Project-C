@@ -17,11 +17,11 @@ class CreateSprintsTable extends Migration
             $table->increments('id');
             $table->integer('number');
             // Defines the foreign key, unsigned means that there are no negative numbers
-            $table->integer('projects_id')->unsigned();
+            $table->integer('project_id')->unsigned();
             $table->timestamps();
             // Makes the link from the Sprints table to the Projects table
             // onDelete cascade means that if you delete sprint, the relation will be deleted automatically
-            $table->foreign('projects_id')->references('id')->on('projects')
+            $table->foreign('project_id')->references('id')->on('projects')
             ->onDelete('cascade');
         });
     }

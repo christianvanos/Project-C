@@ -14,16 +14,16 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UsersTableSeeder::class,
             ProjectsTableSeeder::class,
-            Sprints_Table_Seeder::class,
+            SprintsTableSeeder::class,
             BacklogsTableSeeder::class,
             ProjectMembersTableSeeder::class,
             DailyScrumsTableSeeder::class,
             ProjectMembersRolesTableSeeder::class,
             UserstoriesTableSeeder::class,
             UserstoryItemsTableSeeder::class,
-            UserstoryItemTasksTableSeeder::class,
-            SprintMeetingPresentTableSeeder::class,
+            UserstoryItemMembers::class,
             SprintMeetingTableSeeder::class,
+            SprintMeetingPresentTableSeeder::class,
         ]);
     }
 }

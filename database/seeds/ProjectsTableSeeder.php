@@ -25,7 +25,7 @@ class ProjectsTableSeeder extends Seeder
         ]);
         DB::table('projects')->insert([
             'id' => 3,
-            'name' => 'Fooo',
+            'name' => 'Analyse 5',
             'created_at' => now(),
             'updated_at' => now()
         ]);
