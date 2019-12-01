@@ -9,6 +9,7 @@ use App\Backlogs;
 use App\Project_Members;
 use App\Projects;
 use App\Userstories;
+use App\User;
 
 class PageController extends Controller
 {
@@ -26,7 +27,10 @@ class PageController extends Controller
 
     public function userprojects() 
     {
-        return view('userprojects.userprojects');
+        $users = User::all();
+        $projects = Projects::all();
+
+        return view('userprojects.userprojects', ['users' => $users, 'projects' => $projects]);
     }
 
     public function charts() 

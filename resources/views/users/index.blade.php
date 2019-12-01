@@ -7,10 +7,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-8">
-                            <h4 class="card-title">{{ __('Users') }}</h4>
-                        </div>
-                        <div class="col-4 text-right">
-                            <a href="{{ route('user.create') }}" class="btn btn-sm btn-primary">{{ __('Add user') }}</a>
+                            <h4 class="card-title">Team Members</h4>
                         </div>
                     </div>
                 </div>
@@ -38,7 +35,11 @@
                                         @if (Auth::user()->isAdmin())
                                         <td>
                                             <a href="{{ url('/admin_edit?id=' . $user[3]) }}" class="btn btn-info">Edit</a>
-                                            <a href="{{ url('/user_admin?id=' . $user[3]) }}" class="btn btn-info">Make admin</a>
+                                            @if ($user[4] != "admin")
+                                                <a href="{{ url('/user_admin?id=' . $user[3]) }}" class="btn btn-info">Make admin</a>
+                                            @else
+                                                <a href="{{ url('/user_admin?id=' . $user[3]) }}" class="btn btn-info">Remove admin</a>
+                                            @endif
                                         </td>
                                     @endif
                                     </tr>

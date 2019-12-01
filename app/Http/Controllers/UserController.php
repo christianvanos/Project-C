@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use App\Project_Members;
+use App\ProjectMembers;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -24,11 +24,11 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $projectID = $request->input('id');
-        $projectMembers = Project_Members::where('projects_id', $projectID)->get();
+        $projectMembers = ProjectMembers::where('project_id', $projectID)->get();
         $users = collect();
         foreach($projectMembers as $projectMember) {
             $userData = $projectMember->user()->first();
-            $users->push([$userData->name,$userData->email,$userData->created_at,$userData->getId()]);
+            $users->push([$userData->name,$userData->email,$userData->created_at,$userData->getId(),$userData->type]);
         }
 
         return view('users.index', ['users' => $users]);
@@ -39,12 +39,19 @@ class UserController extends Controller
         {
             $userID = $request->input('id');
             $user = User::find($userID);
-            $user->type = 'admin';
+            if ($user->type != 'admin') {
+                $user->type = 'admin';
+            } else {
+                $user->type = 'default';
+            }
             $user->save();
-            return redirect('usersprojects');
-        } else{
-             return redirect('usersprojects');
-        }
+            return \App::make('redirect')->back();
+        }   
+    }
+
+    public function editUserAdmin(Request $request) {
+        $user = User::find($request->input('id'));
+        return view('users.edit_admin', ['user' => $user ]);
     }
 
     /**
@@ -101,7 +108,7 @@ class UserController extends Controller
                 ->except([$hasPassword ? '' : 'password']
         ));
 
-        return redirect()->route('user.index')->withStatus(__('User successfully updated.'));
+        return redirect()->back();
     }
 
     /**

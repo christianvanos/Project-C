@@ -14,16 +14,16 @@
             <a href="#" class="simple-text logo-normal">{{ __('Black Dashboard') }}</a>
         </div>
         <ul class="nav">
-            <li @if ($pageSlug == 'dashboard') class="active " @endif>
-                <a href="{{ route('home') }}">
-                    <i class="tim-icons icon-components"></i>
-                    <p>{{ __('Dashboard') }}</p>
-                </a>
-            </li>
             <li>
                 <a href="/projects">
                     <i class="tim-icons icon-bullet-list-67"></i>
                     <p> {{ __('Projects') }}</p>
+                </a>
+            </li>
+            <li>
+                <a href="/userprojects1">
+                    <i class="tim-icons icon-image-02"></i>
+                    <p>Add User to project</p>
                 </a>
             </li>
             @foreach($my_projects as $project)
@@ -46,7 +46,7 @@
                             <li @if ($pageSlug == 'sprints' . $project->id) class="active " @endif>
                                 <a href="#">
                                     <i class="tim-icons icon-components"></i>
-                                    <p>{{ __('Sprints') }}</p>
+                                    <p>Daily Scrums</p>
                                 </a>
                             </li>
                             <li @if ($pageSlug == 'sprints' . $project->id) class="active " @endif>
@@ -55,29 +55,22 @@
                                     <p>Retrospectives</p>
                                 </a>
                             </li>
+                            <li @if ($pageSlug == 'sprints' . $project->id) class="active " @endif>
+                                <a href="{{ url('/user?id='. $project->id) }}">
+                                    <i class="tim-icons icon-single-02"></i>
+                                    <p>Team Members</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/charts">
+                                    <i class="tim-icons icon-chart-pie-36"></i>
+                                    <p> {{ __('Chart') }}</p>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>
             @endforeach
-            
-            <li>
-                <a href="/userprojects">
-                    <i class="tim-icons icon-image-02"></i>
-                    <p> {{ __('Users Projects') }}</p>
-                </a>
-            </li>
-            <li>
-                <a href="/charts">
-                    <i class="tim-icons icon-chart-pie-36"></i>
-                    <p> {{ __('Chart') }}</p>
-                </a>
-            </li>
-            <li>
-                <a href="https://black-dashboard-laravel.creative-tim.com/docs/getting-started/laravel-setup.html" target="_blank">
-                    <i class="tim-icons icon-single-copy-04"></i>
-                    <p> {{ __('Documentation') }}</p>
-                </a>
-            </li>
         </ul>
     </div>
 </div>

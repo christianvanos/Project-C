@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
-use App\Project_Members;
+use App\ProjectMembers;
 use App\Projects;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Collection;
@@ -23,7 +23,7 @@ class UserProjectsController extends Controller
                 $projects->push([$project->name, $project->id]);
             }
         } else{
-            $projectMembers = Project_Members::where('user_id', $currentLoggedInUserID)->get();
+            $projectMembers = ProjectMembers::where('user_id', $currentLoggedInUserID)->get();
             foreach($projectMembers as $projectMember) {
                 $projects->push([$projectMember->projects()->first()->name, $projectMember->projects_id]);
             }
