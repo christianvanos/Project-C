@@ -50,4 +50,8 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\ProjectMembers', 'user_id');
     }
+
+    public function getId(){
+        return $this->id;
+    }
 }

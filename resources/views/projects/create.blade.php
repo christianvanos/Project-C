@@ -1,18 +1,18 @@
 @extends('layouts.app', ['page' => __('User Management'), 'pageSlug' => 'users'])
 @section('content')
 	<h1>Create new Project</h1>
-
+<div class="card">
+  <div class="card-body">
 	<form method="POST" action="/projects">
 
 		{{ csrf_field() }}
-
-
-		<div>
-			<input type="text" name="title" placeholder="Project name">
+		<div class="form-group">
+			<input type="text"  class="form-control" name="title" placeholder="Project name">
 		</div>
-
+   </div>
+</div>
 		<div>
-			<button type="submit">Create Project</button>
+			<button type="submit" class="btn btn-success btn-sm">Create Project</button>
 		</div>
 
 	</form>
