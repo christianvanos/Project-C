@@ -47,6 +47,12 @@ Route::patch('/userprojects/{project_member}', 'ProjectmembersController@update'
 Route::delete('/userprojects/{project_member}', 'ProjectMembersController@destroy');
 
 Route::get('/projects', 'ProjectsController@index');
+Route::get('/projects/{project}/sprint', 'ProjectsController@sprint');
+Route::get('/projects/{project}/{sprint}/daily_scrums', 'ProjectsController@nav_daily_scrums');
+Route::get('/projects/{project}/dScrums', 'ProjectsController@daily_scrums');
+Route::post('/projects/{project}/dScrums', 'ProjectsController@create_daily_scrum');
+Route::get('/projects/sprint', 'Projectscontroller@sprint');
+
 Route::get('/projects/create', 'ProjectsController@create'); 
 Route::get('/projects/{project}','ProjectsController@show');
 Route::get('/projects/{project}/edit','ProjectsController@edit');

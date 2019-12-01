@@ -4,9 +4,10 @@
 
 	@foreach ($projects as $project)
 		<li>{{$project->name}}</li>
-		<li>Created at: {{ date('d M Y - H:i:s', $project->created_at->timestamp) }}</li>
+		<li>Created on {{ date('d M Y', $project->created_at->timestamp) }}</li>
 
-		<button><a href="/projects/{{$project->id}}/edit" style="margin-bottom: 1em;">Edit Project</a></button>
+		<button type="button" class="btn btn-default btn-sm"><a href="/projects/{{$project->id}}/edit" style="margin-bottom: 1em;">Edit Project</a></button>
+		<button type="button" class="btn btn-default btn-sm"><a href="/projects/{{$project->id}}/sprint" style="margin-bottom: 1em;">Sprints</a></button>
 		<br>
 		<br>
 
@@ -17,6 +18,6 @@
 	<br>
 	<br>
 
-	<button><a href="/projects/create" style="margin-bottom: 1em;">Create new project
+	<button type="button" class="btn btn-default btn-sm"><a href="/projects/create" style="margin-bottom: 1em;">Create new project
 		</a></button>
 @endsection 
