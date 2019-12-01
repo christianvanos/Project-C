@@ -3,17 +3,17 @@
 <h1>Daily Scrum</h1>
 <div class="card">
   <div class="card-body">
-    <form method="POST" action='/projects/{sprint}/dScrums'>
+    <form method="POST" action='/projects/{{$project->id}}/dScrums'>
 
         {{ csrf_field() }}
 
         <div class="form-group">
-            <label for="members_id">Members ID</label>
-            <input type="text" name="members_id" class="form-control">
+            <label for="members_id">Member</label>
+            <input type="text" name="members_id" class="form-control" value="{{$user_name}}">
         </div>
         <div class="form-group">
-            <label for="sprint_id">Sprint ID</label>
-            <input type="text" name="sprint_id" class="form-control">
+            <label for="sprint_id">Sprint</label>
+            <input type="text" name="sprint_id" class="form-control" value="{{$project->sprints->last()->number}}">
         </div>
         <div class="form-group">
             <label for="has_done">What have you done since the last Daily Scrum?</label>
@@ -31,8 +31,5 @@
     </form>
   </div>
 </div>
-@foreach ($daily_scrums as $daily_scrum)
-  <li>{{$daily_scrum->id}}</li>
 
-@endforeach
 @endsection

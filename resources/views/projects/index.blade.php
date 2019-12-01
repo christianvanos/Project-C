@@ -7,6 +7,7 @@
 		<li>Created on {{ date('d M Y', $project->created_at->timestamp) }}</li>
 
 		<button type="button" class="btn btn-default btn-sm"><a href="/projects/{{$project->id}}/edit" style="margin-bottom: 1em;">Edit Project</a></button>
+		<button type="button" class="btn btn-default btn-sm"><a href="/projects/{{$project->id}}/sprint" style="margin-bottom: 1em;">Sprints</a></button>
 		<br>
 		<br>
 

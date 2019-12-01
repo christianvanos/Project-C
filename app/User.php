@@ -50,4 +50,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Project_Members::class);
     }
+
+    public function getId(){
+        return $this->id;
+    }
 }

@@ -27,9 +27,11 @@ Route::post('/scrumboard/itemadded', 'PostController@scrumboard_item_added');
 Route::get('insert','AdduserprojectController@insertform');
 Route::post('create','AdduserprojectController@insert'); 
 Route::get('/projects', 'ProjectsController@index');
-Route::get('/projects/{sprint}/dScrums', 'daily_ScrumController@index');
-Route::post('/projects/{sprint}/dScrums', 'daily_ScrumController@store');
-Route::get('/projects/sprint', 'sprintsController@index');
+Route::get('/projects/{project}/sprint', 'ProjectsController@sprint');
+Route::get('/projects/{project}/{sprint}/daily_scrums', 'ProjectsController@nav_daily_scrums');
+Route::get('/projects/{project}/dScrums', 'ProjectsController@daily_scrums');
+Route::post('/projects/{project}/dScrums', 'ProjectsController@create_daily_scrum');
+Route::get('/projects/sprint', 'Projectscontroller@sprint');
 
 Route::get('/projects/create', 'ProjectsController@create'); 
 Route::get('/projects/{project}','ProjectsController@show');
