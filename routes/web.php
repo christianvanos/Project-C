@@ -61,7 +61,7 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('typography', ['as' => 'pages.typography', 'uses' => 'PageController@typography']);
 		Route::get('upgrade', ['as' => 'pages.upgrade', 'uses' => 'PageController@upgrade']);
 		Route::get('userprojects1', ['as' => 'userprojects.userprojects', 'uses' => 'PageController@userprojects']);
-		//Route::get('charts', ['as' => 'userprojects.charts', 'uses' => 'PageController@charts']);
+		Route::get('chart', ['as' => 'userprojects.charts', 'uses' => 'PageController@charts']);
 		Route::get('charts', ['as' => 'userprojects.google_pie_chart', 'uses' => 'LaravelGoogleGraph@index']);
 });
 

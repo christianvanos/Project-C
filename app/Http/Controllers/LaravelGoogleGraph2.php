@@ -9,18 +9,18 @@ class LaravelGoogleGraph extends Controller
 {
     function index()
     {
-     $data = DB::table('backlogs')
+     $data = DB::table('userstory_item_members')
        ->select(
-        DB::raw('name as name'),
+        DB::raw('member_id as user'),
         DB::raw('count(*) as number '))
-       ->groupBy('name')
+       ->groupBy('user')
        ->get();
-     $array[] = ['Name', 'Number'];
+     $array[] = ['User', 'Number'];
      foreach($data as $key => $value)
      {
-      $array[++$key] = [$value->name, $value->number];
+      $array[++$key] = [$value->user, $value->number];
      }
-     return view('userprojects.google_pie_chart')->with('name', json_encode($array));
+     return view('userprojects.google_pie_chart')->with('user', json_encode($array));
     }
 }
 

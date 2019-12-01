@@ -28,7 +28,7 @@
     var options = {
      title : 'Progress of backlog item'
     };
-    var chart = new google.visualization.BarChart(document.getElementById('pie_chart2'));
+    var chart = new google.visualization.BarChart(document.getElementById('bar_chart2'));
     chart.draw(data, options);
    }
   </script>
@@ -42,7 +42,7 @@
     <div class="panel-body" align="left">
     <!--Draw the charts -->
      <div id="pie_chart1" style="width:550px; height:450px; float:left">
-     <div id="pie_chart2" style="width:550px; height:450px; float:center">
+     <div id="bar_chart2" style="width:550px; height:450px; float:right">
      </div>
     </div>
    </div>
@@ -53,7 +53,7 @@
    <div class="panel panel-default">
     
     <div class="panel-body" align="left">
-     <div id="pie_chart2" style="width:550px; height:450px; float:right">
+     <div id="bar_chart2" style="width:550px; height:450px; float:right">
      </div>
     </div>
    </div>
