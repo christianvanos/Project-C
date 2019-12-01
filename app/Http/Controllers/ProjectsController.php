@@ -47,8 +47,8 @@ class ProjectsController extends Controller
         $currentLoggedInUser = Auth::user();
         $daily_scrum = new Daily_Scrums();
 
-        $daily_scrum->members_id = $currentLoggedInUser->id;
-        $daily_scrum->sprints_id = $project->sprints->last()->id;
+        $daily_scrum->member_id = $currentLoggedInUser->id;
+        $daily_scrum->sprint_id = $project->sprints->last()->id;
         $daily_scrum->is_doing = request("is_doing");
         $daily_scrum->has_done = request("has_done");
         $daily_scrum->errors = request("errors");
@@ -58,7 +58,7 @@ class ProjectsController extends Controller
          
     }
     public function sprint(Projects $project){
-        $sprints = $project->sprints;
+        $sprints = $project->sprints();
     	return view('projects.sprint', compact('project'), compact("sprints"));
     }
 
