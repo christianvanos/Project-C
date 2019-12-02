@@ -4,7 +4,7 @@
 
 	@foreach ($project_members as $project_member)
 		<li><h>User id: </h>{{$project_member->user_id}}</li>
-		<li><h>Project id: </h>{{$project_member->projects_id}}</li>
+		<li><h>Project id: </h>{{$project_member->project_id}}</li>
 
 		<button><a href="/userprojects/{{$project_member->id}}/edit" style="margin-bottom: 1em;">Edit Project members</a></button>
 		<br>

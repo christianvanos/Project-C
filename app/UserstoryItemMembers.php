@@ -14,7 +14,7 @@ class UserstoryItemMembers extends Model
 
     public function item()
     {
-        return $this->belongsTo('App\Userstory_Items', 'item_id');
+        return $this->belongsTo('App\UserstoryItems', 'item_id');
     }
 
     public function member()

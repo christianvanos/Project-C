@@ -3,7 +3,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Projects;
 use App\Sprints;
-use App\Daily_Scrums;
+use App\DailyScrums;
 use Illuminate\Support\Facades\Auth;
 class ProjectsController extends Controller
 {
@@ -24,7 +24,7 @@ class ProjectsController extends Controller
     	
     	return view('projects.edit', compact('project'));
     }
-    public function update(Project $project){
+    public function update(Projects $project){
     	
     	$project->name = request('title');
     	$project->save();
@@ -45,7 +45,7 @@ class ProjectsController extends Controller
     {
 		$project = Projects::findOrFail($id);
         $currentLoggedInUser = Auth::user();
-        $daily_scrum = new Daily_Scrums();
+        $daily_scrum = new DailyScrums();
 
         $daily_scrum->member_id = $currentLoggedInUser->id;
         $daily_scrum->sprint_id = $project->sprints->last()->id;

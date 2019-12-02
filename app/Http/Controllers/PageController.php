@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
-use App\Userstory_Items;
+use App\UserstoryItems;
 use App\Sprints;
 use App\Backlogs;
-use App\Project_Members;
+use App\ProjectMembers;
 use App\Projects;
 use App\Userstories;
 
