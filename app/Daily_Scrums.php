@@ -8,7 +8,7 @@ class Daily_Scrums extends Model
 {
     protected $table = "daily_scrums";
 
-    public function members()
+    public function member()
     {
         return $this->belongsTo(Project_Members::class);
     }
