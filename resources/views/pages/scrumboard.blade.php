@@ -27,8 +27,8 @@
                 <div class="card-body">
                     <div class="task-board sortable ui-sortable" id="sort_backlog">
                         @foreach($backlogs as $backlog)
-                        	<div class="status-card ui-sortable-handle" >
-                                <div class="card-header" style="cursor: pointer;" data-backlog-name="{{ $backlog->name }}" data-backlog-label="{{ $backlog->label }}" data-backlog-id="{{ $backlog->id }}" data-toggle="modal" data-target="#edit_backlogModal">
+                    <div class="status-card ui-sortable-handle" style="cursor: pointer;" data-backlog-name="{{ $backlog->name }}" data-backlog-label="{{ $backlog->label }}" data-backlog-id="{{ $backlog->id }}" data-toggle="modal" data-target="#edit_backlogModal">
+                                <div class="card-header">
                                 <h5 class="card-title">{{ $backlog->name }} <span class="badge @if($backlog->label == "todo") badge-danger @elseif($backlog->label == "done") badge-warning @else badge-info @endif ">{{ $backlog->label }}</span></h5>                                    
                                 </div>
                                 <ul class="backlog sortable ui-sortable" id="sort_item">
