@@ -19,4 +19,11 @@ class UserstoriesController extends Controller
             "current_project" => $project->id
         ]);
     }
+
+    public function edited(Request $request) {
+        $userstory = Userstories::find($request->userstory_id);
+        $userstory->description = $request->userstory_description;
+        $userstory->acceptance_criteria = $request->userstory_ac;
+        $userstory->save();
+    }
 }
