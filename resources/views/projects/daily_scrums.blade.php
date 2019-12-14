@@ -1,12 +1,28 @@
 @extends('layouts.app', ['page' => __('User Management'), 'pageSlug' => 'users'])
 @section('content')
-<h1>Daily Scrums</h1>
-@foreach($daily_scrums as $daily_scrum)
-<li>is doing: <br> {{$daily_scrum->is_doing}}</li><br>
-<li>has done:<br>  {{$daily_scrum->has_done}}</li><br>
-<li>errors:<br>  {{$daily_scrum->errors}}</li>
-<br>
-@endforeach
+<h1>Daily Scrums, Sprint: {{$sprint->number}}</h1>
+
+<table class="table">
+		    <thead>
+				<tr>
+					<th>Name</th>
+					<th>is doing</th>
+					<th>has done</th>
+                    <th>errors</th>
+				</tr>
+			</thead>
+    <tbody>
+    @foreach($daily_scrums as $daily_scrum)
+        <tr>
+            <td>{{$members[$daily_scrum->member_id]}}</td>
+            <td>{{$daily_scrum->is_doing}}</td>
+            <td>{{$daily_scrum->has_done}}</td>
+            <td>{{$daily_scrum->errors}}</td>
+        </tr>
+        @endforeach
+    </tbody>
+    </table>    
+    
 
  
 @endsection
