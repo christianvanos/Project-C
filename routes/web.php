@@ -39,6 +39,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/userstories/{project_id}', 'UserstoriesController@userstories_page')->middleware('project');
 	
 	Route::post('/userstories/edited', 'UserstoriesController@edited');
+	Route::post('/userstories/deleted', 'UserstoriesController@deleted');
 });
 
 Route::get('/laravel_google_chart', 'LaravelGoogleGraph@index');

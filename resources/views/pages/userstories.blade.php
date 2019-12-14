@@ -27,13 +27,14 @@
                                     <td>{{$story->status()}} %</td>
                                     <td>
                                         <button type="button" class="btn btn-info" data-toggle="modal" data-target="#edit_userstoryModal" data-userstory-description="{{ $story->description }}" data-userstory-ac="{{ $story->acceptance_criteria }}" data-userstory-id="{{ $story->id }}">Edit</button>
-                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete_userstoryModal" data-userstory-description="{{ $story->description }}" data-userstory-ac="{{ $story->acceptance_criteria }}" data-userstory-id="{{ $story->id }}">Delete   </button>
+                                        <button type="button" id="delete_userstory" class="btn btn-danger" data-userstory-id="{{ $story->id }}">Delete</button>
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
                     @include('includes.edit_userstory')
+                    <script src="{{ asset('js/scrumboard') }}/userstory_delete.js"></script>
                 </div>
             </div>
         </div>

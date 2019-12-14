@@ -26,4 +26,8 @@ class UserstoriesController extends Controller
         $userstory->acceptance_criteria = $request->userstory_ac;
         $userstory->save();
     }
+
+    public function deleted(Request $request) {
+        Userstories::find($request->userstory_id)->delete();
+    }
 }
