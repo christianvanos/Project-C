@@ -19,6 +19,7 @@
                         <thead class="text-primary">
                             <th scope="col">{{__('Description')}}</th>
                             <th scope="col">{{__('Acceptence Criterea')}}</th>
+                            <th scope="col">{{__('Items')}}</th>
                             <th scope="col">{{__('Status')}}</th>
                             <th scope="col">{{__('Actions')}}</th>
                         </thead>
@@ -27,9 +28,11 @@
                                 <tr>
                                     <td>{{$story->description}}</td>
                                     <td>{{$story->acceptance_criteria}}</td>
+                                    <td>{{$story->items->count()}}</td>
                                     <td>{{$story->status()}} %</td>
                                     <td>
                                         <button type="button" class="btn btn-info" data-toggle="modal" data-target="#edit_userstoryModal" data-userstory-description="{{ $story->description }}" data-userstory-ac="{{ $story->acceptance_criteria }}" data-userstory-id="{{ $story->id }}">Edit</button>
+                                        &nbsp;&nbsp;&nbsp;
                                         <button type="button" id="delete_userstory" class="btn btn-danger" data-userstory-id="{{ $story->id }}">Delete</button>
                                     </td>
                                 </tr>
