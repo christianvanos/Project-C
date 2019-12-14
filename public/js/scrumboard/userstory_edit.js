@@ -13,7 +13,6 @@ $('#edit_userstoryModal').on('show.bs.modal', function (event) {
 
 $(function () {
     $('#edituserstory button').click(function(e) {
-        console.log("hit");
         e.preventDefault();
 
         $.ajaxSetup({

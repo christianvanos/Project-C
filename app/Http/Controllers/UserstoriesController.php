@@ -27,6 +27,14 @@ class UserstoriesController extends Controller
         $userstory->save();
     }
 
+    public function added(Request $request) {
+        $userstory = new Userstories;
+        $userstory->description = $request->add_userstory_description;
+        $userstory->acceptance_criteria = $request->add_userstory_ac;
+        $userstory->project_id = $request->add_project_id;
+        $userstory->save();
+    }
+
     public function deleted(Request $request) {
         Userstories::find($request->userstory_id)->delete();
     }

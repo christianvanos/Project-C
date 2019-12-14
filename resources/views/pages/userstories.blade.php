@@ -10,6 +10,9 @@
             <div class="card ">
                 <div class="card-header">
                     <h4 class="card-title" style="float: left">Userstories</h4>
+                    <div style="float: right">
+                        <button class="btn btn-info" type="button" data-toggle="modal" data-target="#add_userstoryModal" data-userstory-project-id={{ $project->id }}>New Userstory</button> 
+                    </div>
                 </div>
                 <div class="card-body">
                     <table class="table tablesorter">
@@ -34,6 +37,7 @@
                         </tbody>
                     </table>
                     @include('includes.edit_userstory')
+                    @include('includes.add_userstory')
                     <script src="{{ asset('js/scrumboard') }}/userstory_delete.js"></script>
                 </div>
             </div>

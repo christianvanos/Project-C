@@ -12,9 +12,7 @@
 */
 Auth::routes();
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index')->name('home')->middleware('auth');
 
 
 Route::get('/dashboard', 'HomeController@index')->name('home')
@@ -40,6 +38,7 @@ Route::group(['middleware' => 'auth'], function () {
 	
 	Route::post('/userstories/edited', 'UserstoriesController@edited');
 	Route::post('/userstories/deleted', 'UserstoriesController@deleted');
+	Route::post('/userstories/added', 'UserstoriesController@added');
 });
 
 Route::get('/laravel_google_chart', 'LaravelGoogleGraph@index');
