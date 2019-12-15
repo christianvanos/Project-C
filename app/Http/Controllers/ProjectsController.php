@@ -77,7 +77,7 @@ class ProjectsController extends Controller
             $user = User::find($user_id)->name;
             $members[$user_id]=$user;
         }
-        dump($members);
+    
 
             
     	return view('projects.daily_scrums', compact("sprint","daily_scrums","members"));

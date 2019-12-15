@@ -32,10 +32,6 @@
   </div>
 </div>
 
-		<div>
-				<button type="button" class="btn btn-success btn-sm" ><a href= "/projects/{{$project->id}}/dScrums" style="color:white"><b>Create Daily Scrum</b></a></button>
-		</div>
-
 	<form method="POST" action="/projects/{{$project->id}}" >
 		{{method_field('DELETE')}}
 		{{csrf_field()}}
