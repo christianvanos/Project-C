@@ -5,7 +5,7 @@
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" /> -->
   <script type="text/javascript">
-   var analytics = <?php echo $name; ?>
+   var analytics = <?php echo $description; ?>
 
    google.charts.load('current', {'packages':['corechart']});
 
