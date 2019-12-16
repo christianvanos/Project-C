@@ -43,20 +43,20 @@
                                     <p>{{ __('Scrumboard') }}</p>
                                 </a>
                             </li>
-                            <li @if ($pageSlug == 'sprints' . $project->id) class="active " @endif>
+                            <li @if ($pageSlug == 'daily scrums' . $project->id) class="active " @endif>
                                     <a href="/projects/{{$project->id}}/sprint">
                                         <i class="tim-icons icon-components"></i>
                                         <p>Daily Scrums</p>
                                     </a>
                                 </a>
                             </li>
-                            <li @if ($pageSlug == 'sprints' . $project->id) class="active " @endif>
+                            <li @if ($pageSlug == 'retrospectives' . $project->id) class="active " @endif>
                             <a href="/retrospectives?id={{$project->id}}">
                                     <i class="tim-icons icon-notes"></i>
                                     <p>Retrospectives</p>
                                 </a>
                             </li>
-                            <li @if ($pageSlug == 'sprints' . $project->id) class="active " @endif>
+                            <li @if ($pageSlug == 'members' . $project->id) class="active " @endif>
                                 <a href="{{ url('/user?id='. $project->id) }}">
                                     <i class="tim-icons icon-single-02"></i>
                                     <p>Team Members</p>

@@ -31,7 +31,7 @@ class UserController extends Controller
             $users->push([$userData->name,$userData->email,$userData->created_at,$userData->getId(),$userData->type]);
         }
 
-        return view('users.index', ['users' => $users]);
+        return view('users.index', ['users' => $users, 'project_id' => $projectID]);
     }
 
     public function admin(Request $request){
