@@ -66,10 +66,20 @@ class ProjectsController extends Controller
     }
 
     public function nav_daily_scrums($id){
-        $sprint = Sprints::findorfail($id);
-        $daily_scrums=$sprint->dailyscrums;
-        $projectmembers = ProjectMembers::all();
+        $sprint = Sprints::find($id);
         
-    	return view('projects.daily_scrums', compact("sprint","projectmembers","daily_scrums"));
+        $daily_scrums=$sprint->dailyscrums;
+        $members[]=[];
+        foreach($daily_scrums as $daily_scrum){
+            $members_id=$daily_scrum->member_id;
+            $member = ProjectMembers::find($members_id);
+            $user_id=$member->user_id;
+            $user = User::find($user_id)->name;
+            $members[$user_id]=$user;
+        }
+        dump($members);
+
+            
+    	return view('projects.daily_scrums', compact("sprint","daily_scrums","members"));
     }
 }

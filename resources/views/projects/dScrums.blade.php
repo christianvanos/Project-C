@@ -13,7 +13,7 @@
         </div>
         <div class="form-group">
             <label for="sprint_id">Sprint</label>
-            <input type="text" name="sprint_id" class="form-control" value="{{$project->sprints->last()->number}}">
+            <input type="text" name="sprint_id" class="form-control" value="{{$project->sprints->last()->id}}">
         </div>
         <div class="form-group">
             <label for="has_done">What have you done since the last Daily Scrum?</label>
