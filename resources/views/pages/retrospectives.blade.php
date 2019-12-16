@@ -1,4 +1,4 @@
-@extends('layouts.app', ['page' => __('Retrospectives'), 'pageSlug' => 'retro'])
+@extends('layouts.app', ['page' => __('Retrospectives'), 'pageSlug' => 'retrospectives_' . $project->id])
 
 @section('content')
     <div class="card">
@@ -41,7 +41,7 @@
                             @if($admin == true)
                             <td></td>
                             @endif
-                            <td><a href="{{ url('retrospective/create/' . $project_id) }}" class="btn btn-primary">New</a></td>
+                            <td><a href="{{ url('retrospective/create/' . $current_project) }}" class="btn btn-primary">New</a></td>
                         </tr>
                 </tbody>
             </table>

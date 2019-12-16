@@ -1,4 +1,4 @@
-@extends('layouts.app', ['page' => __('Create a Retrospective'), 'pageSlug' => 'notifications'])
+@extends('layouts.app', ['page' => __('Create a Retrospective'), 'pageSlug' => 'retrospectives_' . $project->id])
 
 @section('content')
 <div class="card">
@@ -23,7 +23,7 @@
                 @endforeach
             </select>
         </div>
-        <input type="hidden"name="invisible" value="{{$project_id}}">
+        <input type="hidden"name="invisible" value="{{$current_project}}">
         <input type="hidden"name="meeting_id" value="{{$meeting_id}}">
         <button type="submit" class="btn btn-primary">Edit</button>
       </form>

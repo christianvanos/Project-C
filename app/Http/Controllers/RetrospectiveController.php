@@ -26,7 +26,7 @@ class RetrospectiveController extends Controller
                 }
             }
         }
-        return view('pages.retrospectives', ['data' => $retroData, 'project_id' => $project->id, 'admin' => \Auth::user()->isadmin()]);
+        return view('pages.retrospectives', ['data' => $retroData, 'project' => $project, 'current_project' => $project->id, 'admin' => \Auth::user()->isadmin()]);
     }
 
     /**
@@ -56,7 +56,7 @@ class RetrospectiveController extends Controller
             $sprintNumbers->pull($retroNumber - 1);
         }
 
-        return view('pages.retrospectivecreate', ['sprintNumbers' => $sprintNumbers, 'project_id' => $project->id]);
+        return view('pages.retrospectivecreate', ['sprintNumbers' => $sprintNumbers, 'project' => $project, 'current_project' => $project->id]);
     }
 
     public function store(Request $request){
@@ -100,7 +100,7 @@ class RetrospectiveController extends Controller
             $sprintNumbers->pull($retroNumber - 1);
         }
 
-        return view('pages.retrospectiveedit', ['sprintNumbers' => $sprintNumbers, 'project_id' => $project->id, 'data' => $sprintMeeting, 'meeting_id' => $id]);
+        return view('pages.retrospectiveedit', ['sprintNumbers' => $sprintNumbers, 'project' => $project, 'current_project' => $project->id, 'data' => $sprintMeeting, 'meeting_id' => $id]);
     }
 
     public function update(Request $request){
