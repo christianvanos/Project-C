@@ -1,4 +1,4 @@
-@extends('layouts.app', ['page' => __('User Management'), 'pageSlug' => 'members' . $project_id])
+@extends('layouts.app', ['page' => __('User Management'), 'pageSlug' => 'members_' . $project->id])
 
 @section('content')
     <div class="row">
