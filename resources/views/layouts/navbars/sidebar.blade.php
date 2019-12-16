@@ -28,7 +28,7 @@
             </li>
             @foreach($my_projects as $project)
                 @php $project = $project->project; @endphp
-                <li>
+                <li @if($current_project == $project->id) class="active" @endif>
                     <a data-toggle="collapse" href="#project-{{ $project->id }}"  @if($current_project != $project->id ) aria-expanded="false" @else aria-expanded="true" @endif>
                         <i class="tim-icons icon-settings" ></i>
                         <span class="nav-link-text" >{{ $project->name }}</span>
@@ -43,7 +43,13 @@
                                     <p>{{ __('Scrumboard') }}</p>
                                 </a>
                             </li>
-                            <li @if ($pageSlug == 'daily scrums' . $project->id) class="active " @endif>
+                            <li @if ($pageSlug == ('userstories_' . $project->id)) class="active" @endif>
+                                <a href="/userstories/{{ $project->id }}">
+                                    <i class="tim-icons icon-credit-card"></i>
+                                    <p>{{ __('Userstories') }}</p>
+                                </a>
+                            </li>
+                            <li @if ($pageSlug == 'sprints' . $project->id) class="active " @endif>
                                     <a href="/projects/{{$project->id}}/sprint">
                                         <i class="tim-icons icon-components"></i>
                                         <p>Daily Scrums</p>

@@ -80,7 +80,7 @@ class ScrumboardController extends Controller
         }
     }
 
-    public function backlog_added(Request $request) {
+public function backlog_added(Request $request) {
         $order = Backlogs::where('sprint_id', $request->sprint_id)->orderBy('order', 'desc')->first()->order + 1;
         
         $backlog = new Backlogs;
