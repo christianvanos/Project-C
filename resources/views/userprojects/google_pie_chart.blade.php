@@ -17,7 +17,17 @@
    {
     var data = google.visualization.arrayToDataTable(analytics);
     var options = {
-     title : 'Progress of backlog items'
+     title : 'Progress of backlog items',
+     width: 400,
+     height: 200,
+     backgroundColor: { fill:'transparent' },
+     titleTextStyle: {
+      color: 'white'
+     },
+     legend: {
+        textStyle: { color: 'white' }
+    },
+    is3D: true
     };
     var chart = new google.visualization.PieChart(document.getElementById('pie_chart1'));
     chart.draw(data, options);
@@ -26,7 +36,14 @@
    {
     var data = google.visualization.arrayToDataTable(analytics);
     var options = {
-     title : 'Progress of backlog item'
+      title : 'Progress of backlog items',
+      width: 400,
+      height:100,
+      legend:{textStyle:{color:"white"}},
+      backgroundColor: { fill:'transparent' },
+      titleTextStyle: {
+    color: 'white'
+     }
     };
     var chart = new google.visualization.BarChart(document.getElementById('bar_chart2'));
     chart.draw(data, options);
@@ -35,29 +52,13 @@
  @endpush
  @section('content')
   <br />
-  <div class="container">
-   
-   <div class="panel panel-default">
-    
-    <div class="panel-body" align="left">
-    <!--Draw the charts -->
-     <div id="pie_chart1" style="width:550px; height:450px; float:left">
-     <div id="bar_chart2" style="width:550px; height:450px; float:right">
-     </div>
-    </div>
-   </div>
-   
-  </div>
-
-   
-   <div class="panel panel-default">
-    
-    <div class="panel-body" align="left">
-     <div id="bar_chart2" style="width:550px; height:450px; float:right">
-     </div>
-    </div>
-   </div>
-   
+  <div class="card">
+    <div class="card-body">
+        <!--Draw the charts -->
+        <div id="pie_chart1" style="float:left">
+        
+        </div>
+        </div>
   </div>
   
 @endsection 

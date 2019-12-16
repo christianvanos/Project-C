@@ -36,6 +36,8 @@ class LaravelGoogleGraph extends Controller
      {
       $array[++$key] = [$value->description, $value->number];
      }
+     $test = UserstoryItems::all()->sum("story_points");
+     dump($test);
      
      return view('userprojects.google_pie_chart')->with('description', json_encode($array));
     }
