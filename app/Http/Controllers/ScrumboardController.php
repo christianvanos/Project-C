@@ -10,6 +10,7 @@ use App\Sprints;
 use App\Projects;
 use App\Userstories;
 use App\UserstoryItems;
+use App\ItemHistory;
 use App\UserstoryItemMembers;
 
 class ScrumboardController extends Controller
@@ -40,6 +41,11 @@ class ScrumboardController extends Controller
         $item_id = $request->user_story_id;
         $backlog_id = $request->backlog_id;
         UserstoryItems::where('id', $item_id)->update(['backlog_id' => $backlog_id]);
+        
+        $history = new ItemHistory;
+        $history->label = Backlogs::find($backlog_id)->label;
+        $history->item_id = $item_id;
+        $history->save();
     }
 
     public function userstory_item_added(Request $request) {
@@ -56,6 +62,11 @@ class ScrumboardController extends Controller
         $item_member->member_id = $request->member_id;
         $item_member->item_id = $item->id;
         $item_member->save();
+
+        $history = new ItemHistory;
+        $history->label = Backlogs::find($request->backlog_id)->label;
+        $history->item_id = $item->id;
+        $history->save();
     }
 
     public function userstory_item_edited(Request $request) {
