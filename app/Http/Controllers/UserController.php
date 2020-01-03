@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Projects;
 use App\ProjectMembers;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
@@ -24,6 +25,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $projectID = $request->input('id');
+        $project = Projects::find($projectID);
         $projectMembers = ProjectMembers::where('project_id', $projectID)->get();
         $users = collect();
         foreach($projectMembers as $projectMember) {
@@ -31,7 +33,7 @@ class UserController extends Controller
             $users->push([$userData->name,$userData->email,$userData->created_at,$userData->getId(),$userData->type]);
         }
 
-        return view('users.index', ['users' => $users]);
+        return view('users.index', ['users' => $users, 'project' => $project, 'current_project' => $projectID]);
     }
 
     public function admin(Request $request){
