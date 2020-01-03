@@ -28,7 +28,6 @@ class UserProjectsController extends Controller
                 $projects->push([$projectMember->projects()->first()->name, $projectMember->projects_id]);
             }
         }
-
         return view('pages.user_projects', ['projects' => $projects]);
     }
 }

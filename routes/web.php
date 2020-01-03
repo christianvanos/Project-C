@@ -71,6 +71,18 @@ Route::get('/usersprojects', 'UserProjectsController@index');
 Route::get('/user_admin', 'UserController@admin');
 Route::get('/admin_edit', 'UserController@editUserAdmin');
 Route::get('/retrospectives', 'RetrospectiveController@index');
+Route::get('/retrospective/create/{id}', 'RetrospectiveController@create');
+Route::post('/retrospective/store','RetrospectiveController@store');
+Route::get('/retrospective/delete/{id}', 'RetrospectiveController@delete');
+Route::get('/retrospective/edit/{id}', 'RetrospectiveController@edit');
+Route::post('/retrospective/update','RetrospectiveController@update');
+Route::get('files/{file_name}', function($file_name = null)
+{
+    $path = storage_path().'/'.'app/'.$file_name;
+    if (file_exists($path)) {
+        return Response::download($path);
+    }
+});
 
 
 Route::group(['middleware' => 'auth'], function () {

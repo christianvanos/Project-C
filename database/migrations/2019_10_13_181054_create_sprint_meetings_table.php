@@ -18,6 +18,7 @@ class CreateSprintMeetingsTable extends Migration
             $table->string('type');
             $table->text('description');
             $table->integer('sprint_id')->unsigned();
+            $table->text('file')->nullable();
             $table->timestamps();
             $table->foreign('sprint_id')->references('id')->on('sprints')
             ->onDelete('cascade');
