@@ -1,5 +1,5 @@
 $(function () {
-    $('#delete_userstory').click(function(e) {
+    $('button[id^="delete_userstory"]').click(function(e) {
         var dev = $(this) // Button that triggered the modal
         var userstory_id = dev.data('userstory-id') // Extract info from data-* attributes
     
