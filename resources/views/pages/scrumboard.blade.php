@@ -17,13 +17,18 @@
                             Sprint {{ $current_sprint->number }}
                         </button>                     
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            @foreach($all_sprints as $sprint)
+                            @foreach($all_sprints->reverse() as $sprint)
                                 <a class="dropdown-item" href="/scrumboard/{{ $project->id }}/{{ $sprint->id }}">Sprint {{ $sprint->number }}</a>
                             @endforeach
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
+                    <h4 class="card-subtitle mb-2" style="float: left">{{ \Carbon\Carbon::parse($current_sprint->start_date)->format('d-m-Y')}}</h4>
+                    <h4 class="card-subtitle mb-2" style="float: right">{{ \Carbon\Carbon::parse($current_sprint->end_date)->format('d-m-Y')}}</h4>
+                    <div class="progress" style="width: 60%; margin: auto; height: 13px">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: {{ $percentage }}%"></div>
+                    </div>
                     <div class="task-board sortable ui-sortable" id="sort_backlog">
                         @foreach($backlogs as $backlog)
                             <div class="status-card ui-sortable-handle" data-backlog-id="{{ $backlog->id }}">
