@@ -10,7 +10,7 @@ class Backlogs extends Model
 
     public function sprint()
     {
-        return $this->belongsTo('App\Sprints', 'sprints_id');
+        return $this->belongsTo('App\Sprints', 'sprint_id');
     }
 
     public function items()

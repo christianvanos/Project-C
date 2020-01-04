@@ -11,136 +11,27 @@ class DailyScrumsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('daily_scrums')->insert([
-            'id' => 1,
-            'is_doing' => 'HTML',
-            'has_done' => 'CSS',
-            'errors' => 'Geen fouten',
-            'sprint_id' => App\Sprints::find(1)->id,
-            'member_id' => App\ProjectMembers::find(1)->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+        $sprint_ids = App\Sprints::pluck('id')->all();
 
-        DB::table('daily_scrums')->insert([
-            'id' => 2,
-            'is_doing' => 'PHP',
-            'has_done' => 'SQL',
-            'errors' => 'error 404',
-            'sprint_id' => App\Sprints::find(2)->id,
-            'member_id' => App\ProjectMembers::find(1)->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+        foreach ($sprint_ids as $sprint_id) {
+            $project_id = App\Sprints::find($sprint_id)->project_id;
+            
+            $project_member_no_admin_ids = App\ProjectMembers::join('users', function($join) {
+                $join->on('project_members.user_id', '=', 'users.id')
+                    ->where('users.type', '!=', 'admin');
+            })->where('project_members.project_id', $project_id)->pluck('project_members.id');
 
-        DB::table('daily_scrums')->insert([
-            'id' => 3,
-            'is_doing' => 'JavaScript',
-            'has_done' => 'Jquery',
-            'errors' => 'ERROR 403',
-            'sprint_id' => App\Sprints::find(3)->id,
-            'member_id' => App\ProjectMembers::find(1)->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-
-        DB::table('daily_scrums')->insert([
-            'id' => 4,
-            'is_doing' => 'Process',
-            'has_done' => 'Product',
-            'errors' => 'Excel error',
-            'sprint_id' => App\Sprints::find(4)->id,
-            'member_id' => App\ProjectMembers::find(2)->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-
-        DB::table('daily_scrums')->insert([
-            'id' => 5,
-            'is_doing' => 'Styling',
-            'has_done' => 'Backend',
-            'errors' => 'Geen errors',
-            'sprint_id' => App\Sprints::find(5)->id,
-            'member_id' => App\ProjectMembers::find(2)->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-
-        DB::table('daily_scrums')->insert([
-            'id' => 6,
-            'is_doing' => 'Login',
-            'has_done' => 'Registreer',
-            'errors' => 'So far so good',
-            'sprint_id' => App\Sprints::find(6)->id,
-            'member_id' => App\ProjectMembers::find(2)->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-
-        DB::table('daily_scrums')->insert([
-            'id' => 7,
-            'is_doing' => 'Language',
-            'has_done' => 'Dutch',
-            'errors' => 'Italian',
-            'sprint_id' => App\Sprints::find(7)->id,
-            'member_id' => App\ProjectMembers::find(3)->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-
-        DB::table('daily_scrums')->insert([
-            'id' => 8,
-            'is_doing' => 'Change password',
-            'has_done' => 'Change username',
-            'errors' => 'None',
-            'sprint_id' => App\Sprints::find(8)->id,
-            'member_id' => App\ProjectMembers::find(3)->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-
-        DB::table('daily_scrums')->insert([
-            'id' => 9,
-            'is_doing' => 'compatablity',
-            'has_done' => 'server setup',
-            'errors' => 'webhosting',
-            'sprint_id' => App\Sprints::find(9)->id,
-            'member_id' => App\ProjectMembers::find(3)->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-
-        DB::table('daily_scrums')->insert([
-            'id' => 10,
-            'is_doing' => 'Creating daily scrums',
-            'has_done' => 'Made 9 of them',
-            'errors' => 'Nope',
-            'sprint_id' => App\Sprints::find(7)->id,
-            'member_id' => App\ProjectMembers::find(4)->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-
-        DB::table('daily_scrums')->insert([
-            'id' => 11,
-            'is_doing' => 'Finishing',
-            'has_done' => 'A lot',
-            'errors' => 'No',
-            'sprint_id' => App\Sprints::find(8)->id,
-            'member_id' => App\ProjectMembers::find(4)->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-
-        DB::table('daily_scrums')->insert([
-            'id' => 12,
-            'is_doing' => 'Laravel',
-            'has_done' => 'Tutorials',
-            'errors' => 'Geen fouten',
-            'sprint_id' => App\Sprints::find(9)->id,
-            'member_id' => App\ProjectMembers::find(4)->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+            foreach($project_member_no_admin_ids as $member_id) {
+                DB::table('daily_scrums')->insert([
+                    'is_doing' => 'Mee bezig (dummy text)',
+                    'has_done' => 'Gedaan (dummy text)',
+                    'errors' => 'Niet gelukt (dummy text)',
+                    'sprint_id' => App\Sprints::find($sprint_id)->id,
+                    'member_id' => App\ProjectMembers::find($member_id)->id,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
+        }
     }
 }

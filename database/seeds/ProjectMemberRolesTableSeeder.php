@@ -11,33 +11,18 @@ class ProjectMembersRolesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('project_member_roles')->insert([
-            'id' => 1,
-            'role' => 'Scrum Master',
-            'member_id' => App\ProjectMembers::find(1)->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('project_member_roles')->insert([
-            'id' => 2,
-            'role' => 'Developer',
-            'member_id' => App\ProjectMembers::find(2)->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('project_member_roles')->insert([
-            'id' => 3,
-            'role' => 'Scrum Master',
-            'member_id' => App\ProjectMembers::find(3)->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('project_member_roles')->insert([
-            'id' => 4,
-            'role' => 'Developer',
-            'member_id' => App\ProjectMembers::find(4)->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+        $project_member_no_admin_ids = App\ProjectMembers::join('users', function($join) {
+            $join->on('project_members.user_id', '=', 'users.id')
+                ->where('users.type', '!=', 'admin');
+        })->pluck('project_members.id');
+
+        foreach ($project_member_no_admin_ids as $id) {
+            DB::table('project_member_roles')->insert([
+                'role' => 'Scrum Master',
+                'member_id' => App\ProjectMembers::find($id)->id,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
     }
 }
