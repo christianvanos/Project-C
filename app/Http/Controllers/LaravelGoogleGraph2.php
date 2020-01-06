@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 
-class LaravelGoogleGraph extends Controller
+class LaravelGoogleGraph2 extends Controller
 {
     function index()
     {
@@ -20,7 +20,7 @@ class LaravelGoogleGraph extends Controller
      {
       $array[++$key] = [$value->user, $value->number];
      }
-     return view('userprojects.google_pie_chart')->with('user', json_encode($array));
+     return view('userprojects.google_pie_chart2')->with('user', json_encode($array));
     }
 }
 

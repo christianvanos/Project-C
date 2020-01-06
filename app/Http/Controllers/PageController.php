@@ -29,6 +29,11 @@ class PageController extends Controller
         return view('userprojects.userprojects');
     }
 
+    public function scruminfo() 
+    {
+        return view('userprojects.scruminfo');
+    }
+
     public function charts() 
     {
         return view('userprojects.charts');
