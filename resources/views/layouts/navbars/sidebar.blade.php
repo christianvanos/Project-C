@@ -67,6 +67,12 @@
                 </a>
             </li>
             <li>
+                <a href="/chart">
+                    <i class="tim-icons icon-chart-pie-36"></i>
+                    <p> {{ __('Burndown chart') }}</p>
+                </a>
+            </li>
+            <li>
                 <a href="/scruminfo">
                     <i class="tim-icons icon-single-copy-04"></i>
                     <p> {{ __('Scrum Definitions') }}</p>
