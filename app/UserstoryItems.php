@@ -22,9 +22,4 @@ class UserstoryItems extends Model
     {
         return $this->hasMany('App\UserstoryItemMembers', 'item_id');
     }
-
-    public function history() 
-    {
-        return $this->hasMany('App\ItemHistory', 'item_id');
-    }
 }
