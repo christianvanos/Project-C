@@ -2,8 +2,22 @@
 
 @section('content')
     <div class="card">
+        <div class="card-header">
+            <h4 class="card-title" style="float: left">Retrospectives</h4>
+            <div style="float: right">
+                <a href="{{ url('retrospective/create/' . $current_project) }}" class="btn btn-info">New Retrospective</A> 
+            </div>
+        </div>
         <div class="card-body">
-            <h1>Retrospectives</h1>
+            @if (session('status'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('status') }}
+                </div>
+            @elseif (session('error'))
+                <div class="alert alert-danger" role="alert">
+                    {{ session('error') }}
+                </div>
+            @endif
             <table class="table">
                 <thead>
                     <tr>
@@ -35,14 +49,6 @@
                         @endif
                         </tr>
                     @endforeach
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            @if($admin == true)
-                            <td></td>
-                            @endif
-                            <td><a href="{{ url('retrospective/create/' . $current_project) }}" class="btn btn-primary">New</a></td>
-                        </tr>
                 </tbody>
             </table>
         </div>

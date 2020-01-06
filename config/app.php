@@ -14,7 +14,8 @@ return [
     */
 
     'name' => env('APP_NAME', 'Scrum'),
-
+    'allowedFileTypes' => 'doc,csv,xlsx,xls,docx,ppt,txt,pdf',
+    'maxFileSize' => 2000,
     /*
     |--------------------------------------------------------------------------
     | Application Environment

@@ -10,6 +10,7 @@ use App\Sprints;
 use Illuminate\Support\Collection;
 use App\Http\Controllers\Redirect;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class RetrospectiveController extends Controller
 {
@@ -65,10 +66,23 @@ class RetrospectiveController extends Controller
         $sprintMeeting = new SprintMeetings();
         $sprintMeeting->type = 'sprint retro';
         $sprintMeeting->description = $request->outcome;
+
+        // File validation checks in the config file what are the correct values
+        $allowedFileTypes = config('app.allowedFileTypes');
+        $maxFileSize = config('app.maxFileSize');
+        $rules = [
+            'file' => 'required|mimes:'. $allowedFileTypes .'|max:'.$maxFileSize
+        ];
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()){
+            return redirect('retrospectives?id=' . $request->invisible)->with('error', 'The uploaded file is not valid');
+        }
+
         $sprintMeeting->file = $request->file('file')->store('');
         $sprintMeeting->sprint_id = $sprint_id;
         $sprintMeeting->save();
-        return redirect('retrospectives?id=' . $request->invisible);
+        return redirect('retrospectives?id=' . $request->invisible)->with('status', 'Retrospective created');
     }
 
     public function delete($id){
