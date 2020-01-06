@@ -67,6 +67,12 @@
                 </a>
             </li>
             <li>
+                <a href="/scruminfo">
+                    <i class="tim-icons icon-single-copy-04"></i>
+                    <p> {{ __('Scrum Definitions') }}</p>
+                </a>
+            </li>
+            <li>
                 <a href="https://black-dashboard-laravel.creative-tim.com/docs/getting-started/laravel-setup.html" target="_blank">
                     <i class="tim-icons icon-single-copy-04"></i>
                     <p> {{ __('Documentation') }}</p>
