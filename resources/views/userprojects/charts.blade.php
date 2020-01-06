@@ -1,14 +1,16 @@
-@extends('layouts.app', ['page' => __('charts'), 'pageSlug' => 'charts'])
+@extends('layouts.app', ['page' => __('burndownchart'), 'pageSlug' => 'charts'])
 
-@section('content')
-<html lang="en">
-  <head>
+
+
+
+@push('head')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <script>
     /**
      * Sum elements of an array up to the index provided.
      */
     function sumArrayUpTo(arrData, index) {
+      
       var total = 0;
       for (var i = 0; i <= index; i++) {
         if (arrData.length > i) {
@@ -17,11 +19,11 @@
       }
       return total;
     }
-    function showBurnDown(elementId, burndownData, scopeChange = []) {
+    function showBurnDown(elementId, total, scopeChange = []) {
       var speedCanvas = document.getElementById(elementId);
       Chart.defaults.global.defaultFontFamily = "Arial";
-      Chart.defaults.global.defaultFontSize = 14;
-      const totalPointsInProject = burndownData[0];
+      Chart.defaults.global.defaultFontSize = 16;
+      const totalPointsInProject = total[0];
       const totalPointsPerSprint = totalPointsInProject / 9;
       i = 0;
       var speedData = {
@@ -29,7 +31,7 @@
         datasets: [
           {
             label: "Burndown",
-            data: burndownData,
+            data: total,
             fill: false,
             borderColor: "#EE6868",
             backgroundColor: "#EE6868",
@@ -60,17 +62,17 @@
       var chartOptions = {
         legend: {
           display: true,
-          position: 'top',
+          position: 'right',
           labels: {
             boxWidth: 80,
-            fontColor: 'black'
+            fontColor: 'grey'
           }
         },
         scales: {
             yAxes: [{
                 ticks: {
                     min: 0,
-                    max: Math.round(burndownData[0] * 1.1)
+                    max: Math.round(total[0] * 1.1)
                 }
             }]
         }
@@ -82,19 +84,19 @@
       });
     }
     </script>
-  </head>
+  @endpush
   
-  <body>
 
-    <div style="width:800px;"><canvas id="burndown43"></canvas></div>
+  @section('content')
+
+    <div style="width:800px;"><canvas id="burndown"></canvas></div>
     <script>
     showBurnDown (
-      "burndown43",
-      [70, 63, 56, 53, 42, 38, 28, 14, 7, 0], // burndown data
+      "burndown",
+      [{{$burndowntotal[0]}}, 9, 8, 7, 6, 5, 4, 3, 2, 1], // burndown data
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]  // scope change
     );
     </script>
     
-  </body>
 
 @endsection 

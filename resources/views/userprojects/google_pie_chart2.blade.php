@@ -5,30 +5,30 @@
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" /> -->
   <script type="text/javascript">
-   var analytics = <?php echo $description; ?>
+   var analytics2 = <?php echo $user; ?>
 
    google.charts.load('current', {'packages':['corechart']});
 
-   google.charts.setOnLoadCallback(drawChart1);
-   google.charts.setOnLoadCallback(drawChart2);
+   google.charts.setOnLoadCallback(drawChart3);
+   google.charts.setOnLoadCallback(drawChart4);
 
   
-   function drawChart1()
+   function drawChart3()
    {
-    var data = google.visualization.arrayToDataTable(analytics);
+    var data = google.visualization.arrayToDataTable(analytics2);
     var options = {
-     title : 'Progress of backlog items'
+     title : 'Progress of graph3'
     };
-    var chart = new google.visualization.PieChart(document.getElementById('pie_chart1'));
+    var chart = new google.visualization.PieChart(document.getElementById('pie_chart4'));
     chart.draw(data, options);
    }
-   function drawChart2()
+   function drawChart4()
    {
-    var data = google.visualization.arrayToDataTable(analytics);
+    var data = google.visualization.arrayToDataTable(analytics2);
     var options = {
-     title : 'Progress of backlog item'
+     title : 'Progress graph4'
     };
-    var chart = new google.visualization.BarChart(document.getElementById('bar_chart2'));
+    var chart = new google.visualization.BarChart(document.getElementById('bar_chart3'));
     chart.draw(data, options);
    }
   </script>
@@ -41,8 +41,8 @@
     
     <div class="panel-body" align="left">
     <!--Draw the charts -->
-     <div id="pie_chart1" style="width:550px; height:450px; float:left">
-     <div id="bar_chart2" style="width:550px; height:450px; float:right">
+     <div id="pie_chart4" style="width:550px; height:450px; float:left">
+     <div id="bar_chart3" style="width:550px; height:450px; float:right">
      </div>
     </div>
    </div>
@@ -53,7 +53,7 @@
    <div class="panel panel-default">
     
     <div class="panel-body" align="left">
-     <div id="bar_chart2" style="width:550px; height:450px; float:right">
+     <div id="bar_chart3" style="width:550px; height:450px; float:right">
      </div>
     </div>
    </div>
