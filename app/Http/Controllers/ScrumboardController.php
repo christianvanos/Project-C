@@ -10,7 +10,9 @@ use App\Sprints;
 use App\Projects;
 use App\Userstories;
 use App\UserstoryItems;
+use App\ItemHistory;
 use App\UserstoryItemMembers;
+use Carbon\Carbon;
 
 class ScrumboardController extends Controller
 {
@@ -40,6 +42,11 @@ class ScrumboardController extends Controller
         $item_id = $request->user_story_id;
         $backlog_id = $request->backlog_id;
         UserstoryItems::where('id', $item_id)->update(['backlog_id' => $backlog_id]);
+        
+        $history = new ItemHistory;
+        $history->label = Backlogs::find($backlog_id)->label;
+        $history->item_id = $item_id;
+        $history->save();
     }
 
     public function userstory_item_added(Request $request) {
@@ -56,6 +63,11 @@ class ScrumboardController extends Controller
         $item_member->member_id = $request->member_id;
         $item_member->item_id = $item->id;
         $item_member->save();
+
+        $history = new ItemHistory;
+        $history->label = Backlogs::find($request->backlog_id)->label;
+        $history->item_id = $item->id;
+        $history->save();
     }
 
     public function userstory_item_edited(Request $request) {
@@ -114,8 +126,27 @@ public function backlog_added(Request $request) {
         $backlogs = Backlogs::where('sprint_id', $sprint_id)->orderBy('order')->get();
         $userstory_items = UserstoryItems::whereIn('backlog_id', $all_backlogs->pluck('id'))->get();
         
+        
         $project = Projects::find($project_id);
         $sprint = Sprints::find($sprint_id);
+        
+        $total_sprint_days = floor(abs(strtotime($sprint->end_date) - strtotime($sprint->start_date))/(60*60*24));
+
+        if (strtotime(new Carbon(Carbon::today()->toDateString())) > strtotime($sprint->end_date)) {
+            $percentage = 100;
+        } elseif (strtotime($sprint->start_date) > strtotime(new Carbon(Carbon::today()->toDateString()))) {
+            $percentage = 0;
+        } else {
+            $days_done = $total_sprint_days - floor(abs(strtotime($sprint->end_date) - strtotime(new Carbon(Carbon::today()->toDateString())))/(60*60*24));
+            $percentage = round($days_done / $total_sprint_days * 100, 0);
+        }
+
+        // $items_from_sprint = UserstoryItems::join('backlogs', 'userstory_items.backlog_id', '=', 'backlogs.id')
+        //                         ->join('sprints', 'backlogs.sprint_id', '=', 'sprints.id')
+        //                         ->where('sprints.id', $sprint_id)
+        //                         ->where('backlogs.is_product_backlog', False)
+        //                         ->pluck('userstory_items.id');
+        // $history_data = ItemHistory::whereIn('item_id', $items_from_sprint)->get();
 
         return view('pages.scrumboard', 
                     ['backlogs' => $backlogs, 
@@ -124,6 +155,7 @@ public function backlog_added(Request $request) {
                     "project" => $project, 
                     "current_sprint" => $sprint,
                     "all_sprints" => $all_sprints,
-                    "userstories" => $all_userstories]);
+                    "userstories" => $all_userstories,
+                    "percentage" => $percentage]);
     }
 }

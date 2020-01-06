@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Carbon\Carbon;
 
 class SprintsTableSeeder extends Seeder
 {
@@ -11,70 +12,41 @@ class SprintsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('sprints')->insert([
-            'id' => 1,
-            'number' => 1,
-            'project_id' => App\Projects::find(1)->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('sprints')->insert([
-            'id' => 2,
-            'number' => 2,
-            'project_id' => App\Projects::find(1)->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('sprints')->insert([
-            'id' => 3,
-            'number' => 3,
-            'project_id' => App\Projects::find(1)->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+        $project_ids = App\Projects::pluck('id')->all();
 
-        DB::table('sprints')->insert([
-            'id' => 4,
-            'number' => 1,
-            'project_id' => App\Projects::find(2)->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('sprints')->insert([
-            'id' => 5,
-            'number' => 2,
-            'project_id' => App\Projects::find(2)->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('sprints')->insert([
-            'id' => 6,
-            'number' => 3,
-            'project_id' => App\Projects::find(2)->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-
-        DB::table('sprints')->insert([
-            'id' => 7,
-            'number' => 1,
-            'project_id' => App\Projects::find(3)->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('sprints')->insert([
-            'id' => 8,
-            'number' => 2,
-            'project_id' => App\Projects::find(3)->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('sprints')->insert([
-            'id' => 9,
-            'number' => 3,
-            'project_id' => App\Projects::find(3)->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+        foreach ($project_ids as $id) {
+            DB::table('sprints')->insert([
+                'number' => 1,
+                'project_id' => App\Projects::find($id)->id,
+                'start_date' => Carbon::now()->subDays(45),
+                'end_date' => Carbon::now()->subDays(31),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+            DB::table('sprints')->insert([
+                'number' => 2,
+                'project_id' => App\Projects::find($id)->id,
+                'start_date' => Carbon::now()->subDays(31),
+                'end_date' => Carbon::now()->subDays(17),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+            DB::table('sprints')->insert([
+                'number' => 3,
+                'project_id' => App\Projects::find($id)->id,
+                'start_date' => Carbon::now()->subDays(17),
+                'end_date' => Carbon::now()->subDays(3),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+            DB::table('sprints')->insert([
+                'number' => 4,
+                'project_id' => App\Projects::find($id)->id,
+                'start_date' => Carbon::now()->subDays(3),
+                'end_date' => Carbon::now()->addDays(11),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
     }
 }

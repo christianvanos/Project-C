@@ -10,7 +10,7 @@ class DailyScrums extends Model
 
     public function member()
     {
-        return $this->belongsTo('App\ProjectMembers', 'members_id');
+        return $this->belongsTo('App\ProjectMembers', 'member_id');
     }
 
     public function sprint()

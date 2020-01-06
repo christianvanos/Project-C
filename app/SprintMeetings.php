@@ -10,11 +10,11 @@ class SprintMeetings extends Model
 
     public function sprint()
     {
-        return $this->belongsTo('App\Sprints', 'id');
+        return $this->belongsTo('App\Sprints', 'sprint_id');
     }
 
     public function present()
     {
-        return $this->hasMany('App\SprintMeetingPresents', 'id');
+        return $this->hasMany('App\SprintMeetingPresents', 'meeting_id');
     }
 }

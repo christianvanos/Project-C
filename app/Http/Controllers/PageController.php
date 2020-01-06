@@ -33,6 +33,11 @@ class PageController extends Controller
         return view('userprojects.userprojects', ['users' => $users, 'projects' => $projects]);
     }
 
+    public function scruminfo() 
+    {
+        return view('userprojects.scruminfo');
+    }
+
     public function charts() 
     {
         return view('userprojects.charts');

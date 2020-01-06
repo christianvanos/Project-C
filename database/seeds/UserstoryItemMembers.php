@@ -11,73 +11,16 @@ class UserstoryItemMembers extends Seeder
      */
     public function run()
     {
-        DB::table('userstory_item_members')->insert([
-            'id' => 1,
-            'member_id' => App\ProjectMembers::find(1)->id,
-            'item_id' => App\UserstoryItems::find(1)->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+        $userstory_item_ids = App\UserstoryItems::pluck('id');
 
-        DB::table('userstory_item_members')->insert([
-            'id' => 2,
-            'member_id' => App\ProjectMembers::find(1)->id,
-            'item_id' => App\UserstoryItems::find(2)->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-
-        DB::table('userstory_item_members')->insert([
-            'id' => 3,
-            'member_id' => App\ProjectMembers::find(1)->id,
-            'item_id' => App\UserstoryItems::find(3)->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-
-        DB::table('userstory_item_members')->insert([
-            'id' => 4,
-            'member_id' => App\ProjectMembers::find(2)->id,
-            'item_id' => App\UserstoryItems::find(4)->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-
-        DB::table('userstory_item_members')->insert([
-            'id' => 5,
-            'member_id' => App\ProjectMembers::find(2)->id,
-            'item_id' => App\UserstoryItems::find(5)->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('userstory_item_members')->insert([
-            'id' => 6,
-            'member_id' => App\ProjectMembers::find(2)->id,
-            'item_id' => App\UserstoryItems::find(6)->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('userstory_item_members')->insert([
-            'id' => 7,
-            'member_id' => App\ProjectMembers::find(3)->id,
-            'item_id' => App\UserstoryItems::find(7)->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('userstory_item_members')->insert([
-            'id' => 8,
-            'member_id' => App\ProjectMembers::find(3)->id,
-            'item_id' => App\UserstoryItems::find(8)->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-
-        DB::table('userstory_item_members')->insert([
-            'id' => 9,
-            'member_id' => App\ProjectMembers::find(4)->id,
-            'item_id' => App\UserstoryItems::find(9)->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+        foreach ($userstory_item_ids as $userstory_item_id) {
+            $project_member = App\UserstoryItems::find($userstory_item_id)->userstory->project->members->random();
+            DB::table('userstory_item_members')->insert([
+                'item_id' => App\UserstoryItems::find($userstory_item_id)->id,
+                'member_id' => App\ProjectMembers::find($project_member->id)->id,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
     }
 }

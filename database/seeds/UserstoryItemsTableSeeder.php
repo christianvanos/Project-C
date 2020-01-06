@@ -11,112 +11,32 @@ class UserstoryItemsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('userstory_items')->insert([
-            'id' => 1,
-            'description' => 'doing',
-            'moscow' => 'Must Have',
-            'definition_of_done' => 'bar',
-            'story_points' => 4,
-            'backlog_id' => App\Backlogs::find(2)->id,
-            'userstory_id' => App\Userstories::find(3)->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+        $backlog_ids = App\Backlogs::pluck('id');
 
-        DB::table('userstory_items')->insert([
-            'id' => 2,
-            'description' => 'foo bar',
-            'moscow' => 'Must Have',
-            'definition_of_done' => 'bar',
-            'story_points' => 4,
-            'backlog_id' => App\Backlogs::find(3)->id,
-            'userstory_id' => App\Userstories::find(2)->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+        foreach ($backlog_ids as $backlog_id) {
+            $project_id = App\Backlogs::find($backlog_id)->sprint->project->id;
+            $userstory_ids = App\Userstories::where('project_id', $project_id)->pluck('id');
+            $backlog = App\Backlogs::find($backlog_id);
 
-        DB::table('userstory_items')->insert([
-            'id' => 3,
-            'description' => 'foo bar',
-            'moscow' => 'Must Have',
-            'definition_of_done' => 'bar',
-            'story_points' => 4,
-            'backlog_id' => App\Backlogs::find(4)->id,
-            'userstory_id' => App\Userstories::find(1)->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+            foreach ($userstory_ids as $userstory_id) {
+                $item_id = DB::table('userstory_items')->insertGetId([
+                    'description' => '(dummy text)',
+                    'moscow' => 'Must Have',
+                    'definition_of_done' => 'Defenition of done (dummy text)',
+                    'story_points' => 4,
+                    'backlog_id' => App\Backlogs::find($backlog_id)->id,
+                    'userstory_id' => App\Userstories::find($userstory_id)->id,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
 
-        DB::table('userstory_items')->insert([
-            'id' => 4,
-            'description' => 'doing',
-            'moscow' => 'Must Have',
-            'definition_of_done' => 'bar',
-            'story_points' => 4,
-            'backlog_id' => App\Backlogs::find(6)->id,
-            'userstory_id' => App\Userstories::find(6)->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-
-        DB::table('userstory_items')->insert([
-            'id' => 5,
-            'description' => 'foo bar',
-            'moscow' => 'Must Have',
-            'definition_of_done' => 'bar',
-            'story_points' => 4,
-            'backlog_id' => App\Backlogs::find(7)->id,
-            'userstory_id' => App\Userstories::find(5)->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-
-        DB::table('userstory_items')->insert([
-            'id' => 6,
-            'description' => 'foo bar',
-            'moscow' => 'Must Have',
-            'definition_of_done' => 'bar',
-            'story_points' => 4,
-            'backlog_id' => App\Backlogs::find(8)->id,
-            'userstory_id' => App\Userstories::find(4)->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-
-        DB::table('userstory_items')->insert([
-            'id' => 7,
-            'description' => 'doing',
-            'moscow' => 'Must Have',
-            'definition_of_done' => 'bar',
-            'story_points' => 4,
-            'backlog_id' => App\Backlogs::find(10)->id,
-            'userstory_id' => App\Userstories::find(9)->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-
-        DB::table('userstory_items')->insert([
-            'id' => 8,
-            'description' => 'foo bar',
-            'moscow' => 'Must Have',
-            'definition_of_done' => 'bar',
-            'story_points' => 4,
-            'backlog_id' => App\Backlogs::find(11)->id,
-            'userstory_id' => App\Userstories::find(8)->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-
-        DB::table('userstory_items')->insert([
-            'id' => 9,
-            'description' => 'foo bar',
-            'moscow' => 'Must Have',
-            'definition_of_done' => 'bar',
-            'story_points' => 4,
-            'backlog_id' => App\Backlogs::find(12)->id,
-            'userstory_id' => App\Userstories::find(7)->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+                DB::table('item_history')->insert([
+                    'label' => $backlog->label,
+                    'item_id' => $item_id,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
+        }
     }
 }

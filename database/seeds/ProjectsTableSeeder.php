@@ -12,22 +12,19 @@ class ProjectsTableSeeder extends Seeder
     public function run()
     {
         DB::table('projects')->insert([
-            'id' => 1,
             'name' => 'Scrumify',
             'created_at' => now(),
-            'updated_at' => now()
+            'updated_at' => now(),
         ]);
         DB::table('projects')->insert([
-            'id' => 2,
             'name' => 'Genius App',
             'created_at' => now(),
-            'updated_at' => now()
+            'updated_at' => now(),
         ]);
         DB::table('projects')->insert([
-            'id' => 3,
-            'name' => 'Analyse 5',
+            'name' => 'Analyse 6',
             'created_at' => now(),
-            'updated_at' => now()
+            'updated_at' => now(),
         ]);
     }
 }
