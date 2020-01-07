@@ -10,11 +10,17 @@ use DB;
 
 class burndownController extends Controller
 {
-  function index()
+  function index($project_id, $sprint_number)
   {
-    $sprint_id = 4;
+    $sprint = Sprints::where('project_id', $project_id)->where("number", $sprint_number)->first();
 
-    $history_data = ItemHistory::where('sprint_id', $sprint_id)->select(DB::raw('DATE_FORMAT(DATE(created_at), "%d-%b-%Y") as date, story_points as day_points'))->oldest()->get()->toArray();
+    if ($sprint === null) {
+      abort(404);
+    } else {
+      $sprint_id = $sprint->id;
+    }
+
+    $history_data = ItemHistory::where('sprint_id', $sprint_id)->select(DB::raw('DATE_FORMAT(DATE(created_at), "%d-%b-%y") as date, story_points as day_points'))->oldest()->get()->toArray();
 
     $sprint = Sprints::find($sprint_id);
     $start_date = $sprint->start_date;
@@ -23,7 +29,7 @@ class burndownController extends Controller
     $history_to_view = array();
 
     while (strtotime($current_date) <= strtotime($end_date)) {
-      $temp_date = date_format(date_create($current_date), "d-M-Y");
+      $temp_date = date_format(date_create($current_date), "d-M-y");
 
       $found_in_history = false;
       foreach($history_data as $data) {
@@ -34,7 +40,7 @@ class burndownController extends Controller
       }
 
       if (!$found_in_history) {
-        $yesterday = date ("d-M-Y", strtotime("-1 day", strtotime($current_date)));
+        $yesterday = date ("d-M-y", strtotime("-1 day", strtotime($current_date)));
         if (array_search($yesterday, array_column($history_to_view, 'date')) === false) {
           array_push($history_to_view, array("date" => $temp_date, "day_points" => "0"));
         } else {
@@ -43,7 +49,7 @@ class burndownController extends Controller
         }
       }
 
-      $current_date = date ("Y-m-d", strtotime("+1 day", strtotime($current_date)));
+      $current_date = date ("y-m-d", strtotime("+1 day", strtotime($current_date)));
     }
 
     $dates = array_column($history_to_view, 'date');
@@ -63,7 +69,7 @@ class burndownController extends Controller
       }
     }
 
-    $key = array_search(date("d-M-Y"), $dates) + 1;
+    $key = array_search(date("d-M-y"), $dates) + 1;
     for ($key; $key <= $amount - 1; $key++) {
       $points[$key] = "null";
     }
