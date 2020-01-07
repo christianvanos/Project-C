@@ -70,6 +70,7 @@ Route::delete('/projects/{project}', 'ProjectsController@destroy');
 Route::get('/usersprojects', 'UserProjectsController@index');
 Route::get('/user_admin', 'UserController@admin');
 Route::get('/admin_edit', 'UserController@editUserAdmin');
+Route::get('/admin_delete','UserController@deleteUserAdmin');
 Route::get('/retrospectives', 'RetrospectiveController@index');
 Route::get('/retrospective/create/{id}', 'RetrospectiveController@create');
 Route::post('/retrospective/store','RetrospectiveController@store');
