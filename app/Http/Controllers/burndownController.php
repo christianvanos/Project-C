@@ -10,7 +10,7 @@ use DB;
 
 class burndownController extends Controller
 {
-  function index($sprint_id)
+  function index($project_id, $sprint_id)
   {
     $sprint = Sprints::find($sprint_id);
     $history_data = ItemHistory::where('sprint_id', $sprint->id)->select(DB::raw('DATE_FORMAT(DATE(created_at), "%d-%b-%y") as date, story_points as day_points'))->oldest()->get()->toArray();
