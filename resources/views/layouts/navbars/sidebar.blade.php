@@ -50,7 +50,7 @@
                                 </a>
                             </li>
                             <li @if ($pageSlug == 'sprints_' . $project->id) class="active " @endif>
-                                    <a href="/projects/{{$project->id}}/sprint">
+                                    <a href="/projects/{{$project->id}}/{{$project->sprints->last()->id}}/daily_scrums">
                                         <i class="tim-icons icon-components"></i>
                                         <p>Daily Scrums</p>
                                     </a>
