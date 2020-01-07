@@ -10,19 +10,11 @@ use DB;
 
 class burndownController extends Controller
 {
-  function index($project_id, $sprint_number)
+  function index($sprint_id)
   {
-    $sprint = Sprints::where('project_id', $project_id)->where("number", $sprint_number)->first();
-
-    if ($sprint === null) {
-      abort(404);
-    } else {
-      $sprint_id = $sprint->id;
-    }
-
-    $history_data = ItemHistory::where('sprint_id', $sprint_id)->select(DB::raw('DATE_FORMAT(DATE(created_at), "%d-%b-%y") as date, story_points as day_points'))->oldest()->get()->toArray();
-
     $sprint = Sprints::find($sprint_id);
+    $history_data = ItemHistory::where('sprint_id', $sprint->id)->select(DB::raw('DATE_FORMAT(DATE(created_at), "%d-%b-%y") as date, story_points as day_points'))->oldest()->get()->toArray();
+
     $start_date = $sprint->start_date;
     $end_date = $sprint->end_date;
     $current_date = $start_date;
