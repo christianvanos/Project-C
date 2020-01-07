@@ -35,7 +35,6 @@ Route::group(['middleware' => 'auth'], function () {
 
 	//Userstories
 	Route::get('/userstories/{project_id}', 'UserstoriesController@userstories_page')->middleware('project');
-	
 	Route::post('/userstories/edited', 'UserstoriesController@edited');
 	Route::post('/userstories/deleted', 'UserstoriesController@deleted');
 	Route::post('/userstories/added', 'UserstoriesController@added');
@@ -96,7 +95,7 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('upgrade', ['as' => 'pages.upgrade', 'uses' => 'PageController@upgrade']);
 		Route::get('scruminfo', ['as' => 'userproject.scruminfo', 'uses' => 'PageController@scruminfo']);
 		Route::get('userprojects1', ['as' => 'userprojects.userprojects', 'uses' => 'PageController@userprojects']);
-		Route::get('chart', ['as' => 'userprojects.charts', 'uses' => 'burndownController@index']);
+		Route::get('burndown/{project_id}/{sprint_number}', ['as' => 'userprojects.charts', 'uses' => 'burndownController@index']);
 		Route::get('charts', ['as' => 'userprojects.google_pie_chart', 'uses' => 'LaravelGoogleGraph@index']);
 		Route::get('charts2', ['as' => 'userprojects.google_pie_chart2', 'uses' => 'LaravelGoogleGraph2@index']);
 });

@@ -8,6 +8,7 @@
      */
     function sumArrayUpTo(arrData, index) {
       
+
       var total = 0;
       for (var i = 0; i <= index; i++) {
         if (arrData.length > i) {
@@ -20,11 +21,12 @@
       var speedCanvas = document.getElementById(elementId);
       Chart.defaults.global.defaultFontFamily = "Arial";
       Chart.defaults.global.defaultFontSize = 16;
-      const totalPointsInProject = total[0];
-      const totalPointsPerSprint = totalPointsInProject / 9;
+      const totalPointsInProject = @php echo max($points) @endphp;
+      const totalPointsPerSprint = totalPointsInProject / {{ $amount }};
       i = 0;
+      console.log(total);
       var speedData = {
-        labels: ["Week 1","Week 2","Week 3","Week 4","Week 5","Week 6","Week 7","Week 8","Week 9", "Week 10"],
+        labels: @php echo json_encode($dates) @endphp, // DATES
         datasets: [
           {
             label: "Burndown",
@@ -41,18 +43,7 @@
             lineTension: 0,
             borderDash: [5, 5],
             fill: false,
-            data: [
-              Math.round(totalPointsInProject - (totalPointsPerSprint * i++) + sumArrayUpTo(scopeChange, 0)), // 1
-              Math.round(totalPointsInProject - (totalPointsPerSprint * i++) + sumArrayUpTo(scopeChange, 1)), // 2
-              Math.round(totalPointsInProject - (totalPointsPerSprint * i++) + sumArrayUpTo(scopeChange, 2)), // 3
-              Math.round(totalPointsInProject - (totalPointsPerSprint * i++) + sumArrayUpTo(scopeChange, 3)), // 4
-              Math.round(totalPointsInProject - (totalPointsPerSprint * i++) + sumArrayUpTo(scopeChange, 4)), // 5
-              Math.round(totalPointsInProject - (totalPointsPerSprint * i++) + sumArrayUpTo(scopeChange, 5)), // 6
-              Math.round(totalPointsInProject - (totalPointsPerSprint * i++) + sumArrayUpTo(scopeChange, 6)), // 7
-              Math.round(totalPointsInProject - (totalPointsPerSprint * i++) + sumArrayUpTo(scopeChange, 7)), // 8
-              Math.round(totalPointsInProject - (totalPointsPerSprint * i++) + sumArrayUpTo(scopeChange, 8)), // 9
-              Math.round(totalPointsInProject - (totalPointsPerSprint * i++) + sumArrayUpTo(scopeChange, 9))  // 10
-            ]
+            data: @php echo json_encode($burndown_coordinates); @endphp            
           },
         ]
       };
@@ -69,7 +60,7 @@
             yAxes: [{
                 ticks: {
                     min: 0,
-                    max: Math.round(total[0] * 1.1)
+                    max: @php echo max($points) + 1 @endphp
                 }
             }]
         }
@@ -86,12 +77,12 @@
 
   @section('content')
 
-    <div style="width:800px;"><canvas id="burndown"></canvas></div>
+    <div style="width:70%;"><canvas id="burndown"></canvas></div>
     <script>
     showBurnDown (
       "burndown",
-      [{{$burndowntotal[0]}}, 9, 8, 7, 6, 5, 4, 3, 2, 1], // burndown data
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]  // scope change
+      @php echo json_encode($points) @endphp, // burndown data POINTS
+      @php echo json_encode($fake_points) @endphp // scope change
     );
     </script>
     
