@@ -78,6 +78,12 @@
                     </div>
                 </li>
             @endforeach
+            <li>
+                <a href="/scruminfo">
+                    <i class="tim-icons icon-single-copy-04"></i>
+                    <p> {{ __('Scrum definitions') }}</p>
+                </a>
+            </li>
         </ul>
     </div>
 </div>
