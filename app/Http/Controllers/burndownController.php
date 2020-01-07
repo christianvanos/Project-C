@@ -3,20 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
+use App\ItemHistory;
 use App\UserstoryItems;
+use DB;
 
 class burndownController extends Controller
 {
   function index()
   {
-    $burndowntotal = UserstoryItems::all()->sum("story_points");
-    dump($burndowntotal);
-    $array[] = [$burndowntotal];
-    // dd($array);
+    $sprint_id = 4;
 
+    $history_data = ItemHistory::where('sprint_id', $sprint_id)->select(DB::raw('DATE_FORMAT(DATE(created_at), "%d-%b-%Y") as date, story_points as day_points, sprint_id'))->oldest()->get();
 
-    return view('userprojects.charts')->with('burndowntotal', json_encode($array));
+    dump($history_data);
+
+    return view('userprojects.charts', [
+      "burndowntotal" => 192
+    ]);
   }
 }
 

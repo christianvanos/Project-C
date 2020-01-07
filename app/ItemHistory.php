@@ -8,8 +8,8 @@ class ItemHistory extends Model
 {
     protected $table = "item_history";
 
-    public function item() 
+    public function sprint() 
     {
-        return $this->belongsTo('App\UserstoryItems', 'item_id');
+        return $this->belongsTo('App\Sprints', 'sprint_id');
     }
 }

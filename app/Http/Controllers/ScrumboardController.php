@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use DB;
 use App\Backlogs;
 use App\ProjectMembers;
 use App\Sprints;
@@ -39,17 +40,32 @@ class ScrumboardController extends Controller
     }
 
     public function userstory_item_moved(Request $request) {
-        $item_id = $request->user_story_id;
-        $backlog_id = $request->backlog_id;
-        UserstoryItems::where('id', $item_id)->update(['backlog_id' => $backlog_id]);
+        $backlog = Backlogs::find($request->backlog_id);
+        $item = UserstoryItems::find($request->user_story_id);
+        UserstoryItems::where('id', $item->id)->update(['backlog_id' => $backlog->id]);
         
-        $history = new ItemHistory;
-        $history->label = Backlogs::find($backlog_id)->label;
-        $history->item_id = $item_id;
+        $today = ItemHistory::whereDate('created_at', Carbon::today())->where('sprint_id', $backlog->sprint->id)->first();
+        if ($today === null) {
+            $history = New ItemHistory;
+            $history->story_points = "0";
+            $history->sprint_id = $backlog->sprint->id;
+            $history->save();
+        }
+
+        $today = ItemHistory::whereDate('created_at', Carbon::today())->where('sprint_id', $backlog->sprint->id)->first();
+        $history = ItemHistory::find($today->id);
+        $history->story_points = DB::table('backlogs')
+                                    ->join('userstory_items', 'backlogs.id', '=', 'userstory_items.backlog_id')
+                                    ->where('backlogs.sprint_id', $backlog->sprint_id)
+                                    ->where('backlogs.is_product_backlog', False)
+                                    ->where('backlogs.label', '!=', "done")
+                                    ->sum('userstory_items.story_points');
         $history->save();
     }
 
     public function userstory_item_added(Request $request) {
+        $backlog = Backlogs::find($request->backlog_id);
+
         $item = new UserstoryItems;
         $item->description = $request->description;
         $item->moscow = $request->moscow;
@@ -63,10 +79,23 @@ class ScrumboardController extends Controller
         $item_member->member_id = $request->member_id;
         $item_member->item_id = $item->id;
         $item_member->save();
+        
+        $today = ItemHistory::whereDate('created_at', Carbon::today())->where('sprint_id', $backlog->sprint->id)->first();
+        if ($today === null) {
+            $history = New ItemHistory;
+            $history->story_points = "0";
+            $history->sprint_id = $backlog->sprint->id;
+            $history->save();
+        }
 
-        $history = new ItemHistory;
-        $history->label = Backlogs::find($request->backlog_id)->label;
-        $history->item_id = $item->id;
+        $today = ItemHistory::whereDate('created_at', Carbon::today())->where('sprint_id', $backlog->sprint->id)->first();
+        $history = ItemHistory::find($today->id);
+        $history->story_points = DB::table('backlogs')
+                                    ->join('userstory_items', 'backlogs.id', '=', 'userstory_items.backlog_id')
+                                    ->where('backlogs.sprint_id', $backlog->sprint_id)
+                                    ->where('backlogs.is_product_backlog', False)
+                                    ->where('backlogs.label', '!=', "done")
+                                    ->sum('userstory_items.story_points');
         $history->save();
     }
 
@@ -89,6 +118,24 @@ class ScrumboardController extends Controller
                     ['member_id' => $request->member_id, 'item_id' => $request->item_id]
                 );
                 break;
+
+                $today = ItemHistory::whereDate('created_at', Carbon::today())->where('sprint_id', $backlog->sprint->id)->first();
+                if ($today === null) {
+                    $history = New ItemHistory;
+                    $history->story_points = "0";
+                    $history->sprint_id = $backlog->sprint->id;
+                    $history->save();
+                }
+
+                $today = ItemHistory::whereDate('created_at', Carbon::today())->where('sprint_id', $backlog->sprint->id)->first();
+                $history = ItemHistory::find($today->id);
+                $history->story_points = DB::table('backlogs')
+                                            ->join('userstory_items', 'backlogs.id', '=', 'userstory_items.backlog_id')
+                                            ->where('backlogs.sprint_id', $backlog->sprint_id)
+                                            ->where('backlogs.is_product_backlog', False)
+                                            ->where('backlogs.label', '!=', "done")
+                                            ->sum('userstory_items.story_points');
+                $history->save();
         }
     }
 
@@ -141,12 +188,7 @@ public function backlog_added(Request $request) {
             $percentage = round($days_done / $total_sprint_days * 100, 0);
         }
 
-        // $items_from_sprint = UserstoryItems::join('backlogs', 'userstory_items.backlog_id', '=', 'backlogs.id')
-        //                         ->join('sprints', 'backlogs.sprint_id', '=', 'sprints.id')
-        //                         ->where('sprints.id', $sprint_id)
-        //                         ->where('backlogs.is_product_backlog', False)
-        //                         ->pluck('userstory_items.id');
-        // $history_data = ItemHistory::whereIn('item_id', $items_from_sprint)->get();
+        
 
         return view('pages.scrumboard', 
                     ['backlogs' => $backlogs, 

@@ -15,10 +15,10 @@ class CreateItemHistoryTable extends Migration
     {
         Schema::create('item_history', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('label');
-            $table->integer('item_id')->unsigned();
+            $table->string('story_points');
+            $table->integer('sprint_id')->unsigned();
             $table->timestamps(); 
-            $table->foreign('item_id')->references('id')->on('userstory_items')
+            $table->foreign('sprint_id')->references('id')->on('sprints')
             ->onDelete('cascade'); 
         });
     }

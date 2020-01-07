@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\ItemHistory;
+use App\Sprints;
+use App\UserstoryItems;
+use Carbon\Carbon;
 
 class UserstoryItemsTableSeeder extends Seeder
 {
@@ -29,13 +33,24 @@ class UserstoryItemsTableSeeder extends Seeder
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
+                
+                $today = ItemHistory::whereDate('created_at', Carbon::today())->where('sprint_id', $backlog->sprint->id)->first();
+                if ($today === null) {
+                    $history = New ItemHistory;
+                    $history->story_points = "0";
+                    $history->sprint_id = $backlog->sprint->id;
+                    $history->save();
+                }
 
-                DB::table('item_history')->insert([
-                    'label' => $backlog->label,
-                    'item_id' => $item_id,
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
+                $today = ItemHistory::whereDate('created_at', Carbon::today())->where('sprint_id', $backlog->sprint->id)->first();
+                $history = ItemHistory::find($today->id);
+                $history->story_points = DB::table('backlogs')
+                                            ->join('userstory_items', 'backlogs.id', '=', 'userstory_items.backlog_id')
+                                            ->where('backlogs.sprint_id', $backlog->sprint_id)
+                                            ->where('backlogs.is_product_backlog', False)
+                                            ->where('backlogs.label', '!=', "done")
+                                            ->sum('userstory_items.story_points');
+                $history->save();
             }
         }
     }
