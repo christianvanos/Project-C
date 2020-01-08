@@ -56,7 +56,7 @@ class RetrospectiveController extends Controller
         {
             $sprintNumbers->pull($retroNumber - 1);
         }
-        $sprintNumbers = collect();
+        
         return view('pages.retrospectivecreate', ['sprintNumbers' => $sprintNumbers, 'project' => $project, 'current_project' => $project->id]);
     }
 
@@ -71,7 +71,7 @@ class RetrospectiveController extends Controller
         $allowedFileTypes = config('app.allowedFileTypes');
         $maxFileSize = config('app.maxFileSize');
         $rules = [
-            'file' => 'required|mimes:'. $allowedFileTypes .'|max:'.$maxFileSize
+            'file' => 'required|mimes:'.$allowedFileTypes.'|max:'.$maxFileSize
         ];
         $validator = Validator::make($request->all(), $rules);
 
