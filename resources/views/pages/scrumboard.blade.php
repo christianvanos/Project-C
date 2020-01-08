@@ -10,6 +10,15 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card ">
+                <div class="alert alert-success new-sprint-inserted" role="alert" style="display: none">
+                    The sprint has been added
+                  </div>
+                  <div class="alert alert-danger date-before" role="alert" style="display: none">
+                    The end date can't be before the start date
+                  </div>
+                  <div class="alert alert-danger date-in-database" role="alert" style="display: none">
+                    The start date is already in a sprint
+                  </div>
                 <div class="card-header">
                     <h4 class="card-title" style="float: left">Scrumboard</h4>
                     <div class="dropdown" style="float: right">
@@ -22,6 +31,7 @@
                             @endforeach
                         </div>
                     </div>
+                    <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#add_sprintModal" data-userstory-project-id={{ $project->id }} style="float: right; margin-right:10px">New sprint</button>
                 </div>
                 <div class="card-body">
                     <h4 class="card-subtitle mb-2" style="float: left">{{ \Carbon\Carbon::parse($current_sprint->start_date)->format('d-m-Y')}}</h4>
@@ -73,6 +83,7 @@
                     @include('includes.add_backlog')
                     @include('includes.edit_userstory_item')
                     @include('includes.edit_backlog')
+                    @include('includes.add_sprint')
                     
                     <script src="{{ asset('js/scrumboard') }}/userstory_item_move.js"></script>
                     <script src="{{ asset('js/scrumboard') }}/backlog_move.js"></script>

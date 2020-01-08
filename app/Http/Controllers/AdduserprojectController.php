@@ -22,11 +22,11 @@ class AdduserprojectController extends Controller {
         $values = array('user_id' => $user_id,'project_id' => $project_id);
         $projectMemberCheck = ProjectMembers::where('project_id', $project_id)->where('user_id', $user_id)->get();
         if(!$projectMemberCheck->isEmpty()){
-            return redirect()->route('userprojects.userprojects')->withStatus(__('The user is already added to this project'));
+            return redirect()->route('userprojects.userprojects')->with('error','The user is already added to this project');
         } else {
             DB::table('project_members')->insert($values);
         }
 
-        return redirect()->route('userprojects.userprojects')->withStatus(__('User successfully added to project.'));
+        return redirect()->route('userprojects.userprojects')->with('status', 'User successfully added to the project');
     }
 } 

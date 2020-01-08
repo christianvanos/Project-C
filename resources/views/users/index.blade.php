@@ -12,7 +12,15 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    @include('alerts.success')
+                @if (session('status'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('status') }}
+                    </div>
+                @elseif (session('error'))
+                    <div class="alert alert-danger" role="alert">
+                        {{ session('error') }}
+                    </div>
+                @endif
 
                     <div class="">
                         <table class="table tablesorter " id="">
@@ -32,7 +40,7 @@
                                             <a href="mailto:{{ $user[1] }}">{{ $user[1] }}</a>
                                         </td>
                                         <td>{{ $user[2]->format('d/m/Y H:i') }}</td>
-                                        @if (Auth::user()->isAdmin())
+                                        @if (Auth::user()->isAdmin() && Auth::user()->getId() != $user[3])
                                         <td>
                                             <a href="{{ url('/admin_edit?id=' . $user[3]) }}" class="btn btn-info">Edit</a>
                                             @if ($user[4] != "admin")
@@ -40,8 +48,11 @@
                                             @else
                                                 <a href="{{ url('/user_admin?id=' . $user[3]) }}" class="btn btn-info">Remove admin</a>
                                             @endif
+                                            <a href="{{ url('/admin_delete?id=' . $user[5])}}" class="btn btn-danger">Remove user from project</a>
                                         </td>
-                                    @endif
+                                        @else 
+                                        <td></td>
+                                        @endif
                                     </tr>
                                 @endforeach
                             </tbody>

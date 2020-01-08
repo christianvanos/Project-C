@@ -16,21 +16,21 @@ class SprintMeetingTableSeeder extends Seeder
         foreach ($sprint_ids as $id) {
             DB::table('sprint_meetings')->insert([
                 'type' => 'sprint planning',
-                'description' => 'Beschrijving (dummy text)',
+                'description' => 'Planning (dummy text)',
                 'sprint_id' => App\Sprints::find($id)->id,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
             DB::table('sprint_meetings')->insert([
                 'type' => 'sprint retro',
-                'description' => 'Beschrijving (dummy text)',
+                'description' => 'Retro (dummy text)',
                 'sprint_id' => App\Sprints::find($id)->id,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
             DB::table('sprint_meetings')->insert([
                 'type' => 'sprint review',
-                'description' => 'Beschrijving (dummy text)',
+                'description' => 'Review (dummy text)',
                 'sprint_id' => App\Sprints::find($id)->id,
                 'created_at' => now(),
                 'updated_at' => now(),

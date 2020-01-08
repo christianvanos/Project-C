@@ -15,14 +15,13 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home')->middleware('auth');
 
 
-Route::get('/dashboard', 'HomeController@index')->name('home')
-    ->middleware('is_admin')    
-	->name('admin');
+// Route::get('/dashboard', 'HomeController@index')->name('home')
+//     ->middleware('is_admin')    
+// 	->name('admin');
 	
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 
 Route::group(['middleware' => 'auth'], function () {
-	// made: Christian
 	// Scrumboard
 	Route::get('scrumboard/{project_id?}/{sprint_id?}', 'ScrumboardController@scrumboard_page')->middleware('project');
 	
@@ -35,7 +34,6 @@ Route::group(['middleware' => 'auth'], function () {
 
 	//Userstories
 	Route::get('/userstories/{project_id}', 'UserstoriesController@userstories_page')->middleware('project');
-	
 	Route::post('/userstories/edited', 'UserstoriesController@edited');
 	Route::post('/userstories/deleted', 'UserstoriesController@deleted');
 	Route::post('/userstories/added', 'UserstoriesController@added');
@@ -70,12 +68,28 @@ Route::delete('/projects/{project}', 'ProjectsController@destroy');
 Route::get('/usersprojects', 'UserProjectsController@index');
 Route::get('/user_admin', 'UserController@admin');
 Route::get('/admin_edit', 'UserController@editUserAdmin');
+Route::get('/admin_delete','UserController@deleteUserAdmin');
 Route::get('/retrospectives', 'RetrospectiveController@index');
 Route::get('/retrospective/create/{id}', 'RetrospectiveController@create');
 Route::post('/retrospective/store','RetrospectiveController@store');
 Route::get('/retrospective/delete/{id}', 'RetrospectiveController@delete');
 Route::get('/retrospective/edit/{id}', 'RetrospectiveController@edit');
 Route::post('/retrospective/update','RetrospectiveController@update');
+
+Route::get('/reviews', 'ReviewController@index');
+Route::get('/reviews/create/{id}', 'ReviewController@create');
+Route::post('/reviews/store','ReviewController@store');
+Route::get('/reviews/delete/{id}', 'ReviewController@delete');
+Route::get('/reviews/edit/{id}', 'ReviewController@edit');
+Route::post('/reviews/update','ReviewController@update');
+
+Route::get('/sprintPlanning', 'sprint_planningController@index');
+Route::get('/sprintPlanning/create/{id}', 'sprint_planningController@create');
+Route::post('/sprintPlanning/store','sprint_planningController@store');
+Route::get('/sprintPlanning/delete/{id}', 'sprint_planningController@delete');
+Route::get('/sprintPlanning/edit/{id}', 'sprint_planningController@edit');
+Route::post('/sprintPlanning/update','sprint_planningController@update');
+
 Route::get('files/{file_name}', function($file_name = null)
 {
     $path = storage_path().'/'.'app/'.$file_name;
@@ -83,6 +97,7 @@ Route::get('files/{file_name}', function($file_name = null)
         return Response::download($path);
     }
 });
+Route::post('/sprint/new', 'ScrumBoardController@newSprint');
 
 
 Route::group(['middleware' => 'auth'], function () {
@@ -95,9 +110,8 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('upgrade', ['as' => 'pages.upgrade', 'uses' => 'PageController@upgrade']);
 		Route::get('scruminfo', ['as' => 'userproject.scruminfo', 'uses' => 'PageController@scruminfo']);
 		Route::get('userprojects1', ['as' => 'userprojects.userprojects', 'uses' => 'PageController@userprojects']);
-		Route::get('chart', ['as' => 'userprojects.charts', 'uses' => 'burndownController@index']);
-		Route::get('charts', ['as' => 'userprojects.google_pie_chart', 'uses' => 'LaravelGoogleGraph@index']);
-		Route::get('charts2', ['as' => 'userprojects.google_pie_chart2', 'uses' => 'LaravelGoogleGraph2@index']);
+		Route::get('charts/{project_id?}/{sprint_id?}', 'burndownController@index')->middleware('project');
+		Route::get('googlegraph/{project_id?}/{sprint_id?}', 'LaravelGoogleGraph@index')->middleware('project');
 });
 
 

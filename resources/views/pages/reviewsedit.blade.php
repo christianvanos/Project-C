@@ -1,15 +1,12 @@
-@extends('layouts.app', ['page' => __('Create a Retrospective'), 'pageSlug' => 'retrospectives_' . $project->id])
+@extends('layouts.app', ['page' => __('Create a reviews'), 'pageSlug' => 'reviews_' . $project->id])
 
 @section('content')
 <div class="card">
-    <div class="card-header">
-      <h4 class="card-title">Edit Retrospective</h4>
-    </div>
     <div class="card-body">
-      <form method="POST" action="/retrospective/update" enctype="multipart/form-data">
+      <form method="POST" action="/reviews/update" enctype="multipart/form-data">
         @csrf   
         <div>
-            <label for="file">Upload retrospective file</label><br/>
+            <label for="file">Upload review file</label><br/>
             <input id="file" name="file" type="file" name="..."   />
         </div>
         <br/>

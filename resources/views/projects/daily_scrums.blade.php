@@ -1,4 +1,4 @@
-@extends('layouts.app', ['page' => __('User Management'), 'pageSlug' => 'users'])
+@extends('layouts.app', ['page' => __('Daily Scrum'), 'pageSlug' => 'dailyscrum_' . $project->id])
 
 @section('content')
     <h1>{{$project->name}}</h1>

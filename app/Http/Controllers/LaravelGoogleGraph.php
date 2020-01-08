@@ -9,35 +9,28 @@ use App\User;
 use App\ProjectMembers;
 use App\UserstoryItemMembers;
 use App\UserstoryItems;
+use App\Backlogs;
 
 class LaravelGoogleGraph extends Controller
 {
-    function index()
+    function index($project_id, $sprint_id)
     {
-      $currentLoggedInUser = Auth::user();
-    $user_id = $currentLoggedInUser->id;
-    $member_id = ProjectMembers::find($user_id)->id;
+      $headers = array("description", "Number");
+      $labels = UserstoryItems::join("backlogs", "userstory_items.backlog_id", "=", "backlogs.id")
+                        ->where("backlogs.sprint_id", $sprint_id)
+                        ->select("backlogs.label", DB::raw("COUNT(backlogs.label) as amount"))
+                        ->groupBy("backlogs.label")
+                        ->orderBy("amount", "DESC")
+                        ->get()->toArray();
 
-    $userstories = UserstoryItemMembers::all()->where("member_id",$member_id);
-    $userstoriesArray[]=[];
+      $result = array($headers);
+      foreach ($labels as $label) {
+        array_push($result, array_values($label));
+      }
 
-    foreach($userstories as $userstory){
-      $userstoriesArray[$userstory->id] = UserstoryItems::find($userstory->id);
-    }
-    //dump($userstoriesArray);
-    
-     $data = $userstoriesArray[3]
-       ->select(
-        DB::raw('description as description'),
-        DB::raw('count(*) as number '))
-       ->groupBy('description')
-       ->get();
-     $array[] = ['description', 'Number'];
-     foreach($data as $key => $value)
-     {
-      $array[++$key] = [$value->description, $value->number];
-     }
-     return view('userprojects.google_pie_chart')->with('description', json_encode($array));
+     return view('userprojects.google_pie_chart', [
+       "result" => $result
+     ]);
     }
 }
 

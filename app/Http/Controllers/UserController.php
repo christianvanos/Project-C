@@ -30,7 +30,7 @@ class UserController extends Controller
         $users = collect();
         foreach($projectMembers as $projectMember) {
             $userData = $projectMember->user()->first();
-            $users->push([$userData->name,$userData->email,$userData->created_at,$userData->getId(),$userData->type]);
+            $users->push([$userData->name,$userData->email,$userData->created_at,$userData->getId(),$userData->type, $projectMember->id]);
         }
 
         return view('users.index', ['users' => $users, 'project' => $project, 'current_project' => $projectID]);
@@ -49,6 +49,12 @@ class UserController extends Controller
             $user->save();
             return \App::make('redirect')->back();
         }   
+    }
+
+    public function deleteUserAdmin(Request $request){
+        $projectMemberID = $request->id;
+        ProjectMembers::find($projectMemberID)->delete();
+        return redirect()->back()->with('status', 'Team member is deleted');
     }
 
     public function editUserAdmin(Request $request) {
