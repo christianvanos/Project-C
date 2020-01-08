@@ -1,4 +1,4 @@
-@extends('layouts.app', ['page' => __('Scrum Info'), 'pageSlug' => 'scrum Info'])
+@extends('layouts.app', ['page' => __('Scrum Info'), 'pageSlug' => 'scruminfo'])
 
 @section('content')
 <div class="info">
