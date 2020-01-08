@@ -2,6 +2,13 @@
 
 @section('content')
 	<h1 class="title">Edit Project</h1>
+	@if(count($errors)>0)
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li style="color:red">{{ $error }}</li>
+        @endforeach
+    </ul>
+@endif
 <div class="card">
   <div class="card-body">
 	<form method="POST" action="/projects/{{$project->id}}" style="margin-bottom: 1em;">
@@ -31,10 +38,6 @@
 	</form>
   </div>
 </div>
-
-		<div>
-				<button type="button" class="btn btn-success btn-sm" ><a href= "/projects/{{$project->id}}/dScrums" style="color:white"><b>Create Daily Scrum</b></a></button>
-		</div>
 
 	<form method="POST" action="/projects/{{$project->id}}" >
 		{{method_field('DELETE')}}

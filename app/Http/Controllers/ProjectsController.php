@@ -16,14 +16,17 @@ class ProjectsController extends Controller
                             ->where("user_id", auth()->user()->id)
                             ->select("projects.*")
                             ->get();
-        $current_project = $project->id;
 
-    	return view('projects.index', compact('projects', "current_project"));
+    	return view('projects.index', compact('projects', "projects"));
     }
     public function create(){
     	return view('projects.create');
     }
-    public function store(){
+    public function store(Request $request){
+        
+        $this->validate($request, [
+            'title' => 'required',
+        ]);
     	$project = new Projects();
     	$project->name = request('title');
         $project->save();
@@ -64,8 +67,12 @@ class ProjectsController extends Controller
     	
     	return view('projects.edit', compact('project'));
     }
-    public function update(Projects $project){
-    	
+    public function update(Projects $project,Request $request){
+
+    	$this->validate($request, [
+            'title' => 'required',
+        ]);
+
     	$project->name = request('title');
     	$project->save();
     	return redirect("/projects");
@@ -85,6 +92,12 @@ class ProjectsController extends Controller
 	
 	public function create_daily_scrum(Request $request,$id)
     {
+
+        $this->validate($request, [
+            'is_doing' => 'required',
+            'has_done' => 'required',
+            'errors'   => 'required'
+        ]);
 		$project = Projects::findOrFail($id);
         $currentLoggedInUser = Auth::user();
         $daily_scrum = new Daily_Scrums();
@@ -96,7 +109,7 @@ class ProjectsController extends Controller
         $daily_scrum->errors = request("errors");
         $daily_scrum->save();
 
-        return redirect("/projects");
+        return redirect()->route("daily_scrums",["project" =>$id, "sprint"=>$daily_scrum->sprint_id ]);
          
     }
     public function sprint(Projects $project){
@@ -106,12 +119,13 @@ class ProjectsController extends Controller
     	return view('projects.sprint', compact('project', "sprints", "current_project"));
     }
 
-    public function nav_daily_scrums($id){
-        $sprint = Sprints::find($id);
-        $project = Projects::find($sprint->project_id);
+    public function nav_daily_scrums($project_id = null, $sprint_id = null){
+        
+        $project = Projects::find($project_id);
+        $sprint = Sprints::find($sprint_id);
+        $sprints = $project->sprints;
         $daily_scrums = $sprint->dailyscrums;
-        $current_project = $project->id;
-
-    	return view('projects.daily_scrums', compact("sprint", "project","daily_scrums", "current_project"));
+        
+    	return view('projects.daily_scrums', compact("sprints","project","daily_scrums","sprint"));
     }
 }
