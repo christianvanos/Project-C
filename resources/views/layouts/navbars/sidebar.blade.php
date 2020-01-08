@@ -14,14 +14,14 @@
             <a href="#" class="simple-text logo-normal">{{ __('Black Dashboard') }}</a>
         </div>
         <ul class="nav">
-            <li>
+            <li @if ($pageSlug == 'projects') class="active " @endif>
                 <a href="/projects">
                     <i class="tim-icons icon-bullet-list-67"></i>
                     <p> {{ __('Projects') }}</p>
                 </a>
             </li>
             @if(auth()->user()->isAdmin())
-                <li>
+                <li @if ($pageSlug == 'userprojects') class="active " @endif>
                     <a href="/userprojects1">
                         <i class="tim-icons icon-image-02"></i>
                         <p>Add User to project</p>
@@ -51,7 +51,7 @@
                                     <p>{{ __('Userstories') }}</p>
                                 </a>
                             </li>
-                            <li @if ($pageSlug == 'sprints_' . $project->id) class="active " @endif>
+                            <li @if ($pageSlug == 'dailyscrum_' . $project->id) class="active " @endif>
                                     <a href="/projects/{{$project->id}}/sprint">
                                         <i class="tim-icons icon-components"></i>
                                         <p>Daily Scrums</p>

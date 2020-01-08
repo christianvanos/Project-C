@@ -63,7 +63,7 @@ class ProjectsController extends Controller
     	
     	return view('projects.edit', compact('project'));
     }
-    public function update(Project $project){
+    public function update(Projects $project){
     	
     	$project->name = request('title');
     	$project->save();
@@ -104,7 +104,8 @@ class ProjectsController extends Controller
 
     public function nav_daily_scrums($id){
         $sprint = Sprints::find($id);
+        $project = Projects::find($sprint->project_id);
         $daily_scrums = $sprint->dailyscrums;
-    	return view('projects.daily_scrums', compact("sprint","daily_scrums"));
+    	return view('projects.daily_scrums', compact("sprint", "project","daily_scrums"));
     }
 }

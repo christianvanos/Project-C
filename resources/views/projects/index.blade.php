@@ -1,4 +1,4 @@
-@extends('layouts.app', ['page' => __('Projects'), 'pageSlug' => 'projects'])
+@extends('layouts.app', ['page' => __('Daily Scrum'), 'pageSlug' => 'projects'])
 @section('content')
 	<h1>Projects</h1>
 	<table class="table">

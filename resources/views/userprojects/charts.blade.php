@@ -1,4 +1,4 @@
-@extends('layouts.app', ['page' => __('burndownchart'), 'pageSlug' => 'charts'])
+@extends('layouts.app', ['page' => __('burndownchart'), 'pageSlug' => 'charts_' . $project->id])
 
 @push('head')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
