@@ -71,7 +71,7 @@
                                 </a>
                             </li>
                             <li @if ($pageSlug == 'charts_' . $project->id) class="active " @endif>
-                                <a href="/charts">
+                                <a href="/charts/{{ $project->id }}/{{ $project->sprints()->latest()->first()->id}}">
                                     <i class="tim-icons icon-chart-pie-36"></i>
                                     <p> {{ __('Chart') }}</p>
                                 </a>

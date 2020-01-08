@@ -188,8 +188,6 @@ public function backlog_added(Request $request) {
             $percentage = round($days_done / $total_sprint_days * 100, 0);
         }
 
-        
-
         return view('pages.scrumboard', 
                     ['backlogs' => $backlogs, 
                     'userstory_items' => $userstory_items, 

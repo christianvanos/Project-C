@@ -93,8 +93,8 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('upgrade', ['as' => 'pages.upgrade', 'uses' => 'PageController@upgrade']);
 		Route::get('scruminfo', ['as' => 'userproject.scruminfo', 'uses' => 'PageController@scruminfo']);
 		Route::get('userprojects1', ['as' => 'userprojects.userprojects', 'uses' => 'PageController@userprojects']);
-		Route::get('burndown/{project_id?}/{sprint_id?}', 'burndownController@index')->middleware('project');
-		Route::get('charts/{project_id?}/{sprint_id?}', 'LaravelGoogleGraph@index')->middleware('project');
+		Route::get('charts/{project_id?}/{sprint_id?}', 'burndownController@index')->middleware('project');
+		Route::get('googlegraph/{project_id?}/{sprint_id?}', 'LaravelGoogleGraph@index')->middleware('project');
 });
 
 

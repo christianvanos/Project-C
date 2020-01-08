@@ -6,13 +6,17 @@ use Illuminate\Http\Request;
 use App\ItemHistory;
 use App\UserstoryItems;
 use App\Sprints;
+use App\Projects;
 use DB;
 
 class burndownController extends Controller
 {
   function index($project_id, $sprint_id)
   {
+    // Burndown
     $sprint = Sprints::find($sprint_id);
+    $project = Projects::find($project_id);
+    $all_sprints = Sprints::where("project_id", $project_id)->get();
     $history_data = ItemHistory::where('sprint_id', $sprint->id)->select(DB::raw('DATE_FORMAT(DATE(created_at), "%d-%b-%y") as date, story_points as day_points'))->oldest()->get()->toArray();
 
     $start_date = $sprint->start_date;
@@ -66,12 +70,31 @@ class burndownController extends Controller
       $points[$key] = "null";
     }
 
+
+    // Google graph
+    $headers = array("description", "Number");
+      $labels = UserstoryItems::join("backlogs", "userstory_items.backlog_id", "=", "backlogs.id")
+                        ->where("backlogs.sprint_id", $sprint_id)
+                        ->select("backlogs.label", DB::raw("COUNT(backlogs.label) as amount"))
+                        ->groupBy("backlogs.label")
+                        ->orderBy("amount", "DESC")
+                        ->get()->toArray();
+
+      $result = array($headers);
+      foreach ($labels as $label) {
+        array_push($result, array_values($label));
+      }
+
     return view('userprojects.charts', [
       "dates" => $dates,
       "points" => $points,
       "amount" => $amount,
       "fake_points" => $fake_points,
-      "burndown_coordinates" => $burndownline
+      "burndown_coordinates" => $burndownline,
+      "result" => $result,
+      "project" => $project,
+      "current_sprint" => $sprint,
+      "all_sprints" => $all_sprints
     ]);
   }
 }
