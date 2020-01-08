@@ -16,8 +16,9 @@ class ProjectsController extends Controller
                             ->where("user_id", auth()->user()->id)
                             ->select("projects.*")
                             ->get();
-        
-    	return view('projects.index', compact('projects'));
+        $current_project = $project->id;
+
+    	return view('projects.index', compact('projects', "current_project"));
     }
     public function create(){
     	return view('projects.create');
@@ -77,7 +78,9 @@ class ProjectsController extends Controller
     {
         $currentLoggedInUser = Auth::user();
         $user_name = $currentLoggedInUser->name;
-        return view('projects.dScrums', ["user_name"=>$user_name],compact("project"));
+        $current_project = $project->id;
+
+        return view('projects.dScrums', ["user_name"=>$user_name],compact("project", "current_project"));
 	}
 	
 	public function create_daily_scrum(Request $request,$id)
@@ -98,14 +101,17 @@ class ProjectsController extends Controller
     }
     public function sprint(Projects $project){
         $sprints = $project->sprints;
+        $current_project = $project->id;
     
-    	return view('projects.sprint', compact('project', "sprints"));
+    	return view('projects.sprint', compact('project', "sprints", "current_project"));
     }
 
     public function nav_daily_scrums($id){
         $sprint = Sprints::find($id);
         $project = Projects::find($sprint->project_id);
         $daily_scrums = $sprint->dailyscrums;
-    	return view('projects.daily_scrums', compact("sprint", "project","daily_scrums"));
+        $current_project = $project->id;
+
+    	return view('projects.daily_scrums', compact("sprint", "project","daily_scrums", "current_project"));
     }
 }
