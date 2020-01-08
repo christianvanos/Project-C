@@ -200,4 +200,28 @@ public function backlog_added(Request $request) {
                     "userstories" => $all_userstories,
                     "percentage" => $percentage]);
     }
+
+    public function newSprint(Request $request){
+        $project_id = $request->add_project_id;
+        $startDate =  $request->add_sprint_starting_date;
+        $endDate = $request->add_sprint_end_date;
+
+        $sprints = Sprints::where('project_id', $project_id)->get()->count();
+        $newSprintNumber = $sprints + 1;
+        $lastSprint = Sprints::where('project_id', $project_id)->latest()->first();
+        if ($startDate >= $endDate) {
+            return 'date before';
+        } else if($startDate <= $lastSprint->end_date) {
+            return 'date in database';
+        }
+
+        $newSprint = new Sprints();
+        $newSprint->number = $newSprintNumber;
+        $newSprint->project_id = $project_id;
+        $newSprint->start_date = $startDate;
+        $newSprint->end_date = $endDate;
+        $newSprint->save();
+
+        return $newSprint->id;
+    }
 }

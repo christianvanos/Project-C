@@ -83,6 +83,7 @@ Route::get('files/{file_name}', function($file_name = null)
         return Response::download($path);
     }
 });
+Route::post('/sprint/new', 'ScrumBoardController@newSprint');
 
 
 Route::group(['middleware' => 'auth'], function () {
