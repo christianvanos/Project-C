@@ -94,7 +94,8 @@ class burndownController extends Controller
       "result" => $result,
       "project" => $project,
       "current_sprint" => $sprint,
-      "all_sprints" => $all_sprints
+      "all_sprints" => $all_sprints,
+      "current_project" => $project->id
     ]);
   }
 }
