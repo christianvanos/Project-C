@@ -27,7 +27,7 @@ class Project
         if ($this->projectAndSprintExists($project_id, $sprint_id) and $this->isMember($project_id)) {
             return $next($request);
         } else {
-            abort(404);
+            abort(403);
         }
     }
 

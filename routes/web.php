@@ -15,14 +15,13 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home')->middleware('auth');
 
 
-Route::get('/dashboard', 'HomeController@index')->name('home')
-    ->middleware('is_admin')    
-	->name('admin');
+// Route::get('/dashboard', 'HomeController@index')->name('home')
+//     ->middleware('is_admin')    
+// 	->name('admin');
 	
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 
 Route::group(['middleware' => 'auth'], function () {
-	// made: Christian
 	// Scrumboard
 	Route::get('scrumboard/{project_id?}/{sprint_id?}', 'ScrumboardController@scrumboard_page')->middleware('project');
 	
@@ -96,9 +95,8 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('upgrade', ['as' => 'pages.upgrade', 'uses' => 'PageController@upgrade']);
 		Route::get('scruminfo', ['as' => 'userproject.scruminfo', 'uses' => 'PageController@scruminfo']);
 		Route::get('userprojects1', ['as' => 'userprojects.userprojects', 'uses' => 'PageController@userprojects']);
-		Route::get('burndown/{project_id}/{sprint_number}', ['as' => 'userprojects.charts', 'uses' => 'burndownController@index']);
-		Route::get('charts', ['as' => 'userprojects.google_pie_chart', 'uses' => 'LaravelGoogleGraph@index']);
-		Route::get('charts2', ['as' => 'userprojects.google_pie_chart2', 'uses' => 'LaravelGoogleGraph2@index']);
+		Route::get('charts/{project_id?}/{sprint_id?}', 'burndownController@index')->middleware('project');
+		Route::get('googlegraph/{project_id?}/{sprint_id?}', 'LaravelGoogleGraph@index')->middleware('project');
 });
 
 

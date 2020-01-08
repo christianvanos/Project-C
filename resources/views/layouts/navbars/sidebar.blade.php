@@ -14,18 +14,20 @@
             <a href="#" class="simple-text logo-normal">{{ __('Black Dashboard') }}</a>
         </div>
         <ul class="nav">
-            <li>
+            <li @if ($pageSlug == 'projects') class="active " @endif>
                 <a href="/projects">
                     <i class="tim-icons icon-bullet-list-67"></i>
                     <p> {{ __('Projects') }}</p>
                 </a>
             </li>
-            <li>
-                <a href="/userprojects1">
-                    <i class="tim-icons icon-image-02"></i>
-                    <p>Add User to project</p>
-                </a>
-            </li>
+            @if(auth()->user()->isAdmin())
+                <li @if ($pageSlug == 'userprojects') class="active " @endif>
+                    <a href="/userprojects1">
+                        <i class="tim-icons icon-image-02"></i>
+                        <p>Add User to project</p>
+                    </a>
+                </li>
+            @endif
             @foreach($my_projects as $project)
                 @php $project = $project->project; @endphp
                 <li @if($current_project == $project->id) class="active" @endif>
@@ -49,7 +51,7 @@
                                     <p>{{ __('Userstories') }}</p>
                                 </a>
                             </li>
-                            <li @if ($pageSlug == 'sprints_' . $project->id) class="active " @endif>
+                            <li @if ($pageSlug == 'dailyscrum_' . $project->id) class="active " @endif>
                                     <a href="/projects/{{$project->id}}/sprint">
                                         <i class="tim-icons icon-components"></i>
                                         <p>Daily Scrums</p>
@@ -69,7 +71,7 @@
                                 </a>
                             </li>
                             <li @if ($pageSlug == 'charts_' . $project->id) class="active " @endif>
-                                <a href="/charts">
+                                <a href="/charts/{{ $project->id }}/{{ $project->sprints()->latest()->first()->id}}">
                                     <i class="tim-icons icon-chart-pie-36"></i>
                                     <p> {{ __('Chart') }}</p>
                                 </a>
@@ -78,6 +80,12 @@
                     </div>
                 </li>
             @endforeach
+            <li @if ($pageSlug == 'scruminfo') class="active " @endif>
+                <a href="/scruminfo">
+                    <i class="tim-icons icon-single-copy-04"></i>
+                    <p> {{ __('Scrum definitions') }}</p>
+                </a>
+            </li>
         </ul>
     </div>
 </div>

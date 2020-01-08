@@ -27,10 +27,14 @@ class PageController extends Controller
 
     public function userprojects() 
     {
-        $users = User::all();
-        $projects = Projects::all();
-
-        return view('userprojects.userprojects', ['users' => $users, 'projects' => $projects]);
+        if(!auth()->user()->isAdmin()) {
+            abort("403");
+        } else {
+            $users = User::all();
+            $projects = Projects::all();
+    
+            return view('userprojects.userprojects', ['users' => $users, 'projects' => $projects]);
+        }
     }
 
     public function scruminfo() 
