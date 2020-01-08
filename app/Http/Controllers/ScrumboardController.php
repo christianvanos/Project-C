@@ -161,7 +161,7 @@ public function backlog_added(Request $request) {
                 if ($is_product_Backlog == true) {
                     $backlog = new Backlogs;
                     $backlog->name = "Product Backlog";
-                    $backlog->is_product_backlog = False;
+                    $backlog->is_product_backlog = true;
                     $backlog->order = 0.00175;
                     $backlog->label = "todo";
                     $backlog->sprint_id = $sprint_id;
