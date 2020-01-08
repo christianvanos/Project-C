@@ -154,7 +154,19 @@ public function backlog_added(Request $request) {
     public function backlog_edited(Request $request) {
         switch ($request->input('submit')) {
             case 'delete':
+                $sprint_id = Backlogs::find($request->backlog_id)->sprint_id;
+                $is_product_Backlog = Backlogs::find($request->backlog_id)->is_product_backlog;
                 Backlogs::find($request->backlog_id)->delete();
+                
+                if ($is_product_Backlog == true) {
+                    $backlog = new Backlogs;
+                    $backlog->name = "Product Backlog";
+                    $backlog->is_product_backlog = False;
+                    $backlog->order = 0.00175;
+                    $backlog->label = "todo";
+                    $backlog->sprint_id = $sprint_id;
+                    $backlog->save();
+                }
                 break;
             case 'update':
                 $backlog = Backlogs::find($request->backlog_id);
@@ -219,6 +231,14 @@ public function backlog_added(Request $request) {
         $newSprint->start_date = $startDate;
         $newSprint->end_date = $endDate;
         $newSprint->save();
+
+        $product_backlog = new Backlogs();
+        $product_backlog->name = "Product Backlog";
+        $product_backlog->is_product_backlog = true;
+        $product_backlog->order = 1;
+        $product_backlog->label = "todo";
+        $product_backlog->sprint_id = $newSprint->id;
+        $product_backlog->save();
 
         return $newSprint->id;
     }
