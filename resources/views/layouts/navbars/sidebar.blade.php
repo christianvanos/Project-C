@@ -20,12 +20,14 @@
                     <p> {{ __('Projects') }}</p>
                 </a>
             </li>
-            <li>
-                <a href="/userprojects1">
-                    <i class="tim-icons icon-image-02"></i>
-                    <p>Add User to project</p>
-                </a>
-            </li>
+            @if(auth()->user()->isAdmin())
+                <li>
+                    <a href="/userprojects1">
+                        <i class="tim-icons icon-image-02"></i>
+                        <p>Add User to project</p>
+                    </a>
+                </li>
+            @endif
             @foreach($my_projects as $project)
                 @php $project = $project->project; @endphp
                 <li @if($current_project == $project->id) class="active" @endif>

@@ -3,10 +3,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Projects;
 use App\Sprints;
+use App\Backlogs;
 use App\Daily_Scrums;
 use Illuminate\Support\Facades\Auth;
 use App\ProjectMembers;
 use App\User;
+use Carbon\Carbon;
 class ProjectsController extends Controller
 {
     public function index(){
@@ -23,7 +25,38 @@ class ProjectsController extends Controller
     public function store(){
     	$project = new Projects();
     	$project->name = request('title');
-    	$project->save();
+        $project->save();
+        
+        $admins = User::where("type", "admin")->get();
+        foreach($admins as $admin) {
+            $member = new ProjectMembers;
+            $member->project_id = $project->id;
+            $member->user_id = $admin->id;
+            $member->save();
+        }
+
+        if(auth()->user()->type == "default") {
+            $member = new ProjectMembers;
+            $member->project_id = $project->id;
+            $member->user_id = auth()->user()->id;
+            $member->save();
+        }
+
+        $sprint = new Sprints;
+        $sprint->number = "1";
+        $sprint->project_id = $project->id;
+        $sprint->start_date = Carbon::now();
+        $sprint->end_date = Carbon::now()->addDays(14);
+        $sprint->save();
+
+        $productbacklog = new Backlogs;
+        $productbacklog->name = "Product Backlog";
+        $productbacklog->is_product_backlog = true;
+        $productbacklog->order = 1;
+        $productbacklog->label = "todo";
+        $productbacklog->sprint_id = $sprint->id;
+        $productbacklog->save();
+
     	return redirect('/projects');
     }
     public function edit(Projects $project){
