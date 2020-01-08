@@ -71,9 +71,7 @@
                             </li>
                             <li @if ($pageSlug == 'reviews_' . $project->id) class="active " @endif>
                                 <a href="/reviews?id={{$project->id}}">
-                                    <i class="tim-icons icon-upload
-                                    
-                                    "></i>
+                                    <i class="tim-icons icon-upload"></i>
                                     <p>Reviews</p>
                                 </a>
                             </li>

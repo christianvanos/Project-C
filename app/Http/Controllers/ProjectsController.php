@@ -125,7 +125,8 @@ class ProjectsController extends Controller
         $sprint = Sprints::find($sprint_id);
         $sprints = $project->sprints;
         $daily_scrums = $sprint->dailyscrums;
-        
-    	return view('projects.daily_scrums', compact("sprints","project","daily_scrums","sprint"));
+        $current_project = $project->id;
+
+    	return view('projects.daily_scrums', compact("sprints","project","daily_scrums","sprint", "current_project"));
     }
 }
