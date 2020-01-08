@@ -75,6 +75,21 @@ Route::post('/retrospective/store','RetrospectiveController@store');
 Route::get('/retrospective/delete/{id}', 'RetrospectiveController@delete');
 Route::get('/retrospective/edit/{id}', 'RetrospectiveController@edit');
 Route::post('/retrospective/update','RetrospectiveController@update');
+
+Route::get('/reviews', 'ReviewController@index');
+Route::get('/reviews/create/{id}', 'ReviewController@create');
+Route::post('/reviews/store','ReviewController@store');
+Route::get('/reviews/delete/{id}', 'ReviewController@delete');
+Route::get('/reviews/edit/{id}', 'ReviewController@edit');
+Route::post('/reviews/update','ReviewController@update');
+
+Route::get('/sprintPlanning', 'sprint_planningController@index');
+Route::get('/sprintPlanning/create/{id}', 'sprint_planningController@create');
+Route::post('/sprintPlanning/store','sprint_planningController@store');
+Route::get('/sprintPlanning/delete/{id}', 'sprint_planningController@delete');
+Route::get('/sprintPlanning/edit/{id}', 'sprint_planningController@edit');
+Route::post('/sprintPlanning/update','sprint_planningController@update');
+
 Route::get('files/{file_name}', function($file_name = null)
 {
     $path = storage_path().'/'.'app/'.$file_name;

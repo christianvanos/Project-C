@@ -62,6 +62,18 @@
                                     <p>Retrospectives</p>
                                 </a>
                             </li>
+                            <li @if ($pageSlug == 'reviews_' . $project->id) class="active " @endif>
+                            <a href="/reviews?id={{$project->id}}">
+                                    <i class="tim-icons icon-notes"></i>
+                                    <p>Reviews</p>
+                                </a>
+                            </li>
+                            <li @if ($pageSlug == 'sprint_planning_' . $project->id) class="active " @endif>
+                            <a href="/sprintPlanning?id={{$project->id}}">
+                                    <i class="tim-icons icon-notes"></i>
+                                    <p>Sprint Planning</p>
+                                </a>
+                            </li>
                             <li @if ($pageSlug == 'members_' . $project->id) class="active " @endif>
                                 <a href="{{ url('/user?id='. $project->id) }}">
                                     <i class="tim-icons icon-single-02"></i>

@@ -1,9 +1,9 @@
-@extends('layouts.app', ['page' => __('Retrospectives'), 'pageSlug' => 'retrospectives_' . $project->id])
+@extends('layouts.app', ['page' => __('Review'), 'pageSlug' => 'reviews_' . $project->id])
 
 @section('content')
     <div class="card">
         <div class="card-body">
-            <h1>Retrospectives</h1>
+            <h1>Reviews</h1>
             <table class="table">
                 <thead>
                     <tr>
@@ -29,8 +29,8 @@
                             </td>
                         @if($admin == true)
                         <td>
-                            <a href="/retrospective/delete/{{ $data[3] }}" onclick="return confirm('Are you sure?')" class="btn btn-danger">Delete</a>
-                            <a href="/retrospective/edit/{{ $data[3] }}" class="btn btn-success">Edit</a>
+                            <a href="/reviews/delete/{{ $data[3] }}" onclick="return confirm('Are you sure?')" class="btn btn-danger">Delete</a>
+                            <a href="/reviews/edit/{{ $data[3] }}" class="btn btn-success">Edit</a>
                         </td>
                         @endif
                         </tr>
@@ -41,7 +41,7 @@
                             @if($admin == true)
                             <td></td>
                             @endif
-                            <td><a href="{{ url('retrospective/create/' . $current_project) }}" class="btn btn-primary">New</a></td>
+                            <td><a href="{{ url('reviews/create/' . $current_project) }}" class="btn btn-primary">New</a></td>
                         </tr>
                 </tbody>
             </table>
