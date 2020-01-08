@@ -51,41 +51,43 @@
                                     <p>{{ __('Userstories') }}</p>
                                 </a>
                             </li>
-                            <li @if ($pageSlug == 'dailyscrum_' . $project->id) class="active " @endif>
-                                    <a href="/projects/{{$project->id}}/sprint">
-                                        <i class="tim-icons icon-components"></i>
-                                        <p>Daily Scrums</p>
-                                    </a>
+                            <li @if ($pageSlug == 'charts_' . $project->id) class="active " @endif>
+                                <a href="/charts/{{ $project->id }}/{{ $project->sprints()->latest()->first()->id}}">
+                                    <i class="tim-icons icon-chart-bar-32"></i>
+                                    <p> {{ __('Chart') }}</p>
+                                </a>
+                            </li>
+                            <li @if ($pageSlug == 'sprint_planning_' . $project->id) class="active " @endif>
+                                <a href="/sprintPlanning?id={{$project->id}}">
+                                    <i class="tim-icons icon-bulb-63"></i>
+                                    <p>Plannings</p>
                                 </a>
                             </li>
                             <li @if ($pageSlug == 'retrospectives_' . $project->id) class="active " @endif>
-                            <a href="/retrospectives?id={{$project->id}}">
+                                <a href="/retrospectives?id={{$project->id}}">
                                     <i class="tim-icons icon-notes"></i>
                                     <p>Retrospectives</p>
                                 </a>
                             </li>
                             <li @if ($pageSlug == 'reviews_' . $project->id) class="active " @endif>
-                            <a href="/reviews?id={{$project->id}}">
-                                    <i class="tim-icons icon-notes"></i>
+                                <a href="/reviews?id={{$project->id}}">
+                                    <i class="tim-icons icon-upload
+                                    
+                                    "></i>
                                     <p>Reviews</p>
                                 </a>
                             </li>
-                            <li @if ($pageSlug == 'sprint_planning_' . $project->id) class="active " @endif>
-                            <a href="/sprintPlanning?id={{$project->id}}">
-                                    <i class="tim-icons icon-notes"></i>
-                                    <p>Sprint Planning</p>
+                            <li @if ($pageSlug == 'dailyscrum_' . $project->id) class="active " @endif>
+                                    <a href="/projects/{{$project->id}}/sprint">
+                                        <i class="tim-icons icon-chat-33"></i>
+                                        <p>Daily Scrums</p>
+                                    </a>
                                 </a>
                             </li>
                             <li @if ($pageSlug == 'members_' . $project->id) class="active " @endif>
                                 <a href="{{ url('/user?id='. $project->id) }}">
                                     <i class="tim-icons icon-single-02"></i>
                                     <p>Team Members</p>
-                                </a>
-                            </li>
-                            <li @if ($pageSlug == 'charts_' . $project->id) class="active " @endif>
-                                <a href="/charts/{{ $project->id }}/{{ $project->sprints()->latest()->first()->id}}">
-                                    <i class="tim-icons icon-chart-pie-36"></i>
-                                    <p> {{ __('Chart') }}</p>
                                 </a>
                             </li>
                         </ul>
