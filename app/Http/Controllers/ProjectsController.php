@@ -10,7 +10,11 @@ use App\User;
 class ProjectsController extends Controller
 {
     public function index(){
-    	$projects = Projects::all();
+        $projects = Projects::join('project_members', 'projects.id', '=', 'project_members.project_id')
+                            ->where("user_id", auth()->user()->id)
+                            ->select("projects.*")
+                            ->get();
+        
     	return view('projects.index', compact('projects'));
     }
     public function create(){
