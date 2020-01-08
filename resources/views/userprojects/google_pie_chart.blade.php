@@ -16,7 +16,10 @@
    {
     var data = google.visualization.arrayToDataTable(analytics);
     var options = {
-     title : 'Progress of backlog items'
+     title : 'Progress of backlog items',
+     titleTextStyle: { color: '#FFF'},
+     legendTextStyle: { color: '#FFF'},
+     backgroundColor: {fill:'transparent'}
     };
     var chart = new google.visualization.PieChart(document.getElementById('pie_chart1'));
     chart.draw(data, options);
