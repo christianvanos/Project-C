@@ -18,7 +18,7 @@ class ProjectMembersController extends Controller
 
     public function store(Request $request)
     {
-        $Project_Member = new ProjectMembers;
+        $Project_Member = new projectmembers;
         $project_member->user_id = request('user_id');
         $project_member->save();
         $project_member->projects_id = request('projects_id');
@@ -36,7 +36,7 @@ class ProjectMembersController extends Controller
     {
         $project_Member = ProjectMembers::findOrFail($id);
         $project_Member->user_id = request('user_id');
-        $project_Member->project_id = request('projects_id');
+        $project_Member->projects_id = request('projects_id');
     	$project_Member->save();
     	return redirect("/userprojects");
     }

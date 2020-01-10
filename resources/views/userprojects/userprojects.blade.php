@@ -23,7 +23,7 @@
                   <label for="users">Users</label>
                   <select class="form-control" name="users" id="users">
                      @foreach($users as $user)
-                        <option style="color: black;">{{ $user->name }}</option>
+                        <option>{{ $user->name }}</option>
                      @endforeach
                   </select>
             </div>
@@ -31,7 +31,7 @@
                   <label for="projects">Projects</label>
                   <select class="form-control" name="projects" id="projects">
                      @foreach($projects as $project)
-                        <option style="color: black;">{{ $project->name }}</option>
+                        <option>{{ $project->name }}</option>
                      @endforeach
                   </select>
             </div>
