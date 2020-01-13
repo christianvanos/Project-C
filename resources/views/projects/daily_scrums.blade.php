@@ -3,7 +3,7 @@
 @section('content')
     <h1>{{$project->name}}</h1>
     <div>
-				<button type="button" class="btn btn-success btn-sm" ><a href= "/projects/{{$project->id}}/dScrums" style="color:white"><b>Create Daily Scrum</b></a></button>
+    <button type="button" class="btn btn-success btn-sm" ><a href= "/projects/{{$project->id}}/{{$sprint->id}}/dScrums" style="color:white"><b>Create Daily Scrum</b></a></button>
 		</div>
 
     <div class="row">

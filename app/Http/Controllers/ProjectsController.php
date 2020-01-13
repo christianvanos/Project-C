@@ -81,35 +81,35 @@ class ProjectsController extends Controller
     	Projects::findOrFail($id)->delete();
     	return redirect("/projects");
     }
-	public function daily_scrums(Projects $project)
+	public function daily_scrums(Projects $project, $sprint_id)
     {
         $currentLoggedInUser = Auth::user();
         $user_name = $currentLoggedInUser->name;
         $current_project = $project->id;
+        $sprint = Sprints::find($sprint_id);
 
-        return view('projects.dScrums', ["user_name"=>$user_name],compact("project", "current_project"));
+        return view('projects.dScrums', ["user_name"=>$user_name, "sprint" => $sprint],compact("project", "current_project"));
 	}
 	
-	public function create_daily_scrum(Request $request,$id)
+	public function create_daily_scrum(Request $request,$project_id, $sprint_id  )
     {
-
         $this->validate($request, [
             'is_doing' => 'required',
             'has_done' => 'required',
             'errors'   => 'required'
         ]);
-		$project = Projects::findOrFail($id);
+		$project = Projects::findOrFail($project_id);
         $currentLoggedInUser = Auth::user();
         $daily_scrum = new Daily_Scrums();
 
         $daily_scrum->member_id = $currentLoggedInUser->id;
-        $daily_scrum->sprint_id = $project->sprints->last()->id;
+        $daily_scrum->sprint_id = $sprint_id;
         $daily_scrum->is_doing = request("is_doing");
         $daily_scrum->has_done = request("has_done");
         $daily_scrum->errors = request("errors");
         $daily_scrum->save();
 
-        return redirect()->route("daily_scrums",["project" =>$id, "sprint"=>$daily_scrum->sprint_id ]);
+        return redirect()->route("daily_scrums",["project" =>$project_id, "sprint"=>$daily_scrum->sprint_id ]);
          
     }
     public function sprint(Projects $project){

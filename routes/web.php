@@ -55,8 +55,8 @@ Route::delete('/userprojects/{project_member}', 'ProjectMembersController@destro
 Route::get('/projects', 'ProjectsController@index');
 Route::get('/projects/{project}/sprint', 'ProjectsController@sprint');
 Route::get('/projects/{project}/{sprint}/daily_scrums', 'ProjectsController@nav_daily_scrums')->name("daily_scrums");
-Route::get('/projects/{project}/dScrums', 'ProjectsController@daily_scrums');
-Route::post('/projects/{project}/dScrums', 'ProjectsController@create_daily_scrum');
+Route::get('/projects/{project}/{sprint}/dScrums', 'ProjectsController@daily_scrums');
+Route::post('/projects/{project}/{sprint}/dScrums', 'ProjectsController@create_daily_scrum');
 
 
 Route::get('/projects/create', 'ProjectsController@create'); 

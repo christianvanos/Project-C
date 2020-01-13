@@ -11,7 +11,7 @@
 @endif
 <div class="card">
   <div class="card-body">
-    <form method="POST" action='/projects/{{$project->id}}/dScrums'>
+  <form method="POST" action='/projects/{{$project->id}}/{{$sprint->id}}/dScrums'>
 
         {{ csrf_field() }}
 
